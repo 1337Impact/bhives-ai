@@ -42,17 +42,17 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="m-container h-[80px] max-w-[1200px] mx-auto text-slate-900 ">
+    <nav className="m-container h-[80px] max-w-[1200px] mx-auto text-slate-700 ">
       <div className="flex h-full w-full items-center justify-between">
         <Link href="/">
-          <h1 className="text-lg font-bold">Bhives.ai</h1>
+          <h1 className="text-lg font-bold text-black">Bhives.ai</h1>
         </Link>
         <div
           className={`${
             !isMenuOpen && "max-md:hidden"
           } z-10 max-md:absolute max-md:left-0 max-md:top-0 max-md:h-[100dvh] max-md:w-full max-md:backdrop-blur-xl`}
         >
-          <ul className="flex h-full items-center justify-around font-semibold max-md:pt-20 max-md:flex-col max-md:text-3xl md:gap-6 lg:gap-10">
+          <ul className="flex h-full items-center justify-around font-semibold max-md:pt-20 max-md:flex-col max-md:text-3xl md:gap-6 lg:gap-8">
             {links.map((link) => (
               <Link href={link.href} className="">
                 <li
