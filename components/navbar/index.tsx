@@ -54,7 +54,7 @@ export default function Navbar() {
         >
           <ul className="flex h-full items-center justify-around font-semibold max-md:pt-20 max-md:flex-col max-md:text-3xl md:gap-6 lg:gap-8">
             {links.map((link) => (
-              <Link href={link.href} className="">
+              <Link key={link.name} href={link.href} className="">
                 <li
                   onClick={() => setIsMenuOpen(false)}
                   className={

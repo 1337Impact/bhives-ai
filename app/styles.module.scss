@@ -1,0 +1,13 @@
+@import 'typed';
+
+.text{
+    @include typed(
+      "Innovation", "Efficiency", "Growth", "Transformation",
+      1.5,
+      (
+        iterations: infinite,
+        caret-width: 2px,
+        caret-space: 2px,
+      )
+    );
+}

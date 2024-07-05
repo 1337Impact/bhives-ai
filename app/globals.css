@@ -2,10 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer components {
-    .m-container {
-      @apply mx-auto  w-[90%] max-w-[1200px] lg:w-[80%] xl:w-[70%];
-    }
+  .m-container {
+    @apply mx-auto  w-[90%] max-w-[1200px] lg:w-[80%] xl:w-[70%];
   }
-  
+}
+
+
+.waves {
+  /* aspect-ratio: 900/600; */
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  position: absolute;
+}
+
+.layer1{
+  aspect-ratio: 900/600;
+  background-image: url('/layer1.svg');
+}
+
+.layer2{
+  aspect-ratio: 900/200;
+  background-image: url('/layer2.svg');
+}
