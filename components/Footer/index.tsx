@@ -14,13 +14,12 @@ import {
 export default function Footer() {
   return (
     <footer className="relative bg-gray-900 text-white py-10">
-      <div
-        className="absolute inset-0 opacity-50 z-0 bg-no-repeat bg-center bg-cover"
-        style={{ backgroundImage: "url('path-to-your-background-image')" }}
-      ></div>
       <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 justify-between mx-auto mb-8 lg:mb-16 max-w-[1260px] px-4">
         <div className="mb-8 min-w-[200px] pr-5 flex-1">
-            <h1 className="text-3xl font-bold mb-4">Bhives.ai</h1>
+        <Link href="#" className="flex items-center gap-1 mb-4">
+          <img src="/logo.png" alt="Bhives.ai" className="h-9" />
+          <h1 className="text-3xl font-bold text-white">Bhives.ai</h1>
+        </Link>
           <p className="leading-6 mb-4 text-sm">
             Empowering businesses with AI-driven automation solutions.
           </p>
@@ -32,8 +31,7 @@ export default function Footer() {
               aria-label="LinkedIn"
               className="text-white text-2xl transition-all duration-300 ease-in-out hover:text-orange-400"
             >
-                <FaLinkedin />
-              {/* <i className="fab fa-linkedin"></i> */}
+              <FaLinkedin />
             </a>
             <a
               href="https://twitter.com/bhives_ai"
@@ -42,8 +40,7 @@ export default function Footer() {
               aria-label="Twitter"
               className="text-white text-2xl transition-all duration-300 ease-in-out hover:text-orange-400"
             >
-                <FaTwitter />
-              {/* <i className="fab fa-twitter"></i> */}
+              <FaTwitter />
             </a>
             <a
               href="https://www.facebook.com/bhivesai"
@@ -52,8 +49,7 @@ export default function Footer() {
               aria-label="Facebook"
               className="text-white text-2xl transition-all duration-300 ease-in-out hover:text-orange-400"
             >
-                <FaFacebook/>
-            {/* <i className="fab fa-facebook"></i> */}
+              <FaFacebook />
             </a>
             <a
               href="https://www.instagram.com/bhives.ai"
@@ -62,8 +58,7 @@ export default function Footer() {
               aria-label="Instagram"
               className="text-white text-2xl transition-all duration-300 ease-in-out hover:text-orange-400"
             >
-                <FaInstagram />
-              {/* <i className="fab fa-instagram"></i> */}
+              <FaInstagram />
             </a>
           </div>
         </div>
@@ -191,15 +186,6 @@ export default function Footer() {
           </a>
         </nav>
       </div>
-      <Link href={"#"}>
-        <button
-          className="back-to-top absolute bottom-10 right-10 bg-orange-400 text-black p-2 rounded-full shadow-lg transition-all duration-300 ease-in-out hover:bg-orange-500 hover:transform hover:-translate-y-1"
-          id="back-to-top"
-          aria-label="Back to top"
-        >
-          <FaChevronUp />
-        </button>
-      </Link>
     </footer>
   );
 }

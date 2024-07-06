@@ -44,8 +44,9 @@ export default function Navbar() {
   return (
     <nav className="m-container h-[80px] max-w-[1200px] mx-auto text-slate-700 ">
       <div className="flex h-full w-full items-center justify-between">
-        <Link href="/">
-          <h1 className="text-lg font-bold text-black">Bhives.ai</h1>
+        <Link href="#" className="flex items-center gap-1">
+          <img src="/logo.png" alt="Bhives.ai" className="h-9" />
+          <h1 className="text-xl font-bold text-black">Bhives.ai</h1>
         </Link>
         <div
           className={`${
@@ -68,14 +69,14 @@ export default function Navbar() {
           </ul>
         </div>
         <div className="flex items-center gap-3">
-        <Link href={"#contact"}>
-          <div
-            onClick={() => setIsMenuOpen(false)}
-            className="float-right bg-orange-400 hover:bg-orange-500 text-white px-4 py-2 rounded-md cursor-pointer"
-          >
-            Contact
-          </div>
-        </Link>
+          <Link href={"#contact"}>
+            <div
+              onClick={() => setIsMenuOpen(false)}
+              className="float-right bg-orange-500 hover:bg-orange-400 text-white px-4 py-2 rounded-md cursor-pointer"
+            >
+              Contact
+            </div>
+          </Link>
           <button
             className={`${styles.hamburger} md:hidden z-20`}
             onClick={() => setIsMenuOpen(!isMenuOpen)}

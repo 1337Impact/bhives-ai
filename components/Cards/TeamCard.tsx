@@ -21,7 +21,7 @@ export default function TeamCard({imgSrc, name, title, bio, linkedIn}: {imgSrc: 
             {bio}
           </p>
           <Link href={linkedIn}>
-            <button className="mx-auto flex items-center gap-1 bg-blue-400 text-white px-5 py-2 rounded-md font-semibold">
+            <button className="mx-auto flex items-center gap-1 border-2 border-blue-400 bg-blue-400 text-gray-800 px-5 py-2 rounded-md font-semibold md:m-0 hover:bg-transparent hover:text-blue-400">
               <FaLinkedin />
               Connect on LinkedIn
             </button>

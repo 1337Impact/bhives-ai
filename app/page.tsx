@@ -1,6 +1,6 @@
 import Link from "next/link";
-import Card from "@/components/Card";
-import ServiceCard from "@/components/Card/ServiceCard";
+import Card from "@/components/Cards";
+import ServiceCard from "@/components/Cards/ServiceCard";
 import styles from "./styles.module.scss";
 
 // Icons
@@ -14,13 +14,14 @@ import { FaBrain } from "react-icons/fa";
 import { FaComments } from "react-icons/fa";
 import { FaShareAlt } from "react-icons/fa";
 import { FaBullhorn } from "react-icons/fa";
-import ProcessCard from "@/components/Card/ProcessCard";
+import ProcessCard from "@/components/Cards/ProcessCard";
 import { FaSearch, FaLightbulb } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
 import { FaUsers } from "react-icons/fa";
-import TeamCard from "@/components/Card/TeamCard";
+import TeamCard from "@/components/Cards/TeamCard";
 import TechStack from "@/components/TeckStack";
 import FAQComponent from "@/components/FAQComponent";
+import ContactForm from "@/components/ContactForm";
 
 const itemsData = [
   {
@@ -352,7 +353,10 @@ const contactData = [
 export default function Home() {
   return (
     <main className="relative">
-      <section id="hero-section" className="relative flex items-center flex-col h-[calc(100vh-50px)]">
+      <section
+        id="hero-section"
+        className="relative flex items-center flex-col h-[calc(100vh-50px)]"
+      >
         <h1 className="text-gray-900 font-semibold text-6xl mt-28">
           AI-Powered
         </h1>
@@ -378,12 +382,12 @@ export default function Home() {
         </ul>
         <div className="mt-7 flex flex-col justify-center items-center gap-4 md:flex-row">
           <Link href="#contact">
-            <button className="bg-orange-500 text-white px-6 py-3 rounded-md font-semibold">
+            <button className="border-2 border-orange-500 bg-orange-500 text-white px-6 py-3 rounded-md font-semibold hover:bg-orange-400 transition-all ease-in-out duration-200">
               Start Your AI Journey
             </button>
           </Link>
           <Link href="#services">
-            <button className="border-2 border-orange-500 text-orange-500 px-6 py-3 rounded-md font-semibold">
+            <button className="border-2 border-orange-500 text-orange-500 px-6 py-3 rounded-md font-semibold hover:bg-orange-100 transition-all ease-in-out duration-200">
               Explore Solutions
             </button>
           </Link>
@@ -494,7 +498,7 @@ export default function Home() {
         </div>
       </section>
       <section id="team" className="team-section py-20 bg-gray-900">
-        <div className="mx-10 max-w-[1260px] lg:mx-auto px-4">
+        <div className="max-w-[1260px] md:mx-4 lg:mx-auto px-4">
           <h2 className="text-4xl text-white font-bold text-center mb-10 underline underline-offset-8">
             Our AI Visionaries
           </h2>
@@ -509,11 +513,11 @@ export default function Home() {
               boundaries of AI technology while making it accessible and
               practical for real-world applications.
             </p>
-            <ul className="flex flex-col gap-4 items-center justify-center md:flex-row">
+            <ul className="flex flex-col gap-6 items-center justify-center md:flex-row">
               {vesionData.map((item) => (
                 <li
                   key={item.title}
-                  className="card flex flex-col items-center justify-center rounded-lg p-4 bg-gray-100 shadow-lg w-96 hover:scale-[103%] transition-gpu ease-in-out duration-500"
+                  className="card flex flex-col items-center justify-center rounded-lg p-4 bg-gray-100 shadow-lg hover:scale-[103%] transition-gpu ease-in-out duration-500"
                 >
                   <item.icon className="text-[2.5rem] text-orange-500 mt-4" />
                   <h4 className="text-xl font-semibold ml-2">{item.title}</h4>
@@ -545,13 +549,10 @@ export default function Home() {
           <FAQComponent data={faqData} />
         </div>
       </section>
-      <section
-        id="contact"
-        className="relative bg-orange-400 py-16 bg-[url('data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'56\' height=\'100\' viewBox=\'0 0 56 100\'%3E%3Cpath d=\'M28 66L0 50L0 16L28 0L56 16L56 50L28 66L28 100\' fill=\'none\' stroke=\'rgba(242,183,5,0.1)\' stroke-width=\'2\'/%3E%3Cpath d=\'M28 0L28 34L0 50L0 84L28 100L56 84L56 50L28 34\' fill=\'none\' stroke=\'rgba(242,183,5,0.1)\' stroke-width=\'2\'/%3E%3C/svg%3E')] bg-cover"
-      >
+      <section id="contact" className="relative bg-orange-400 py-16 bg-cover">
         <div className="waves layer1 absolute -top-[70px] md:-top-[100px] lg:-top-[200px]" />
         <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-4xl text-white font-bold text-center mt-20">
+          <h2 className="text-4xl text-white font-bold text-center mt-20 xl:mt-40">
             Unleash AI for Your Business
           </h2>
           <p className="text-lg text-gray-100 text-center mt-2">
@@ -563,7 +564,7 @@ export default function Home() {
                 {contactData.map((item) => (
                   <li
                     key={item.title}
-                    className="card flex flex-col items-center justify-center rounded-lg text-center p-4 bg-gray-100 shadow-lg hover:scale-[103%] transition-gpu ease-in-out duration-500"
+                    className="card flex flex-col items-center justify-center rounded-lg text-center p-4 py-6 bg-gray-100 shadow-lg hover:scale-[103%] transition-gpu ease-in-out duration-500"
                   >
                     <item.icon className="text-[2.5rem] text-orange-500 mt-4" />
                     <h4 className="text-xl font-semibold mt-1">{item.title}</h4>
@@ -572,82 +573,7 @@ export default function Home() {
                 ))}
               </ul>
             </div>
-            <form id="contact-form" className="p-8 font-[450]">
-              <div className="mb-4">
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  required
-                  placeholder="Your Full Name"
-                  className="w-full p-3 border-2 border-gray-600 rounded-lg text-lg transition-colors duration-300 focus:border-orange-500 focus:outline-none"
-                />
-              </div>
-              <div className="mb-4">
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  required
-                  placeholder="Your Email Address"
-                  className="w-full p-3 border-2 border-gray-600 rounded-lg text-lg transition-colors duration-300 focus:border-orange-500 focus:outline-none"
-                />
-              </div>
-              <div className="mb-4">
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  required
-                  placeholder="Phone Number"
-                  className="w-full p-3 border-2 border-gray-600 rounded-lg text-lg transition-colors duration-300 focus:border-orange-500 focus:outline-none"
-                />
-              </div>
-              <div className="mb-4">
-                <input
-                  type="text"
-                  id="company"
-                  name="company"
-                  required
-                  placeholder="Company Name"
-                  className="w-full p-3 border-2 border-gray-600 rounded-lg text-lg transition-colors duration-300 focus:border-orange-500 focus:outline-none"
-                />
-              </div>
-              <div className="mb-4">
-                <select
-                  id="industry"
-                  name="industry"
-                  required
-                  className="w-full p-3 border-2 border-gray-600 rounded-lg text-lg transition-colors duration-300 focus:border-orange-500 focus:outline-none"
-                >
-                  <option value="" disabled selected>
-                    Select Your Industry
-                  </option>
-                  <option value="technology">Technology</option>
-                  <option value="finance">Finance</option>
-                  <option value="healthcare">Healthcare</option>
-                  <option value="retail">Retail</option>
-                  <option value="manufacturing">Manufacturing</option>
-                  <option value="other">Other</option>
-                </select>
-              </div>
-              <div className="mb-4">
-                <textarea
-                  id="message"
-                  name="message"
-                  rows={3}
-                  required
-                  placeholder="How can AI benefit your business?"
-                  className="w-full p-3 border-2 border-gray-600 rounded-lg text-lg transition-colors duration-300 focus:border-orange-500 focus:outline-none"
-                ></textarea>
-              </div>
-              <button
-                type="submit"
-                className="w-full bg-orange-500 text-white p-3 rounded-lg text-lg transition-colors duration-300 hover:bg-orange-600"
-              >
-                Book Your Free AI Strategy Session
-              </button>
-            </form>
+            <ContactForm />
           </div>
         </div>
       </section>
