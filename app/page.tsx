@@ -17,7 +17,8 @@ import { FaBullhorn } from "react-icons/fa";
 import ProcessCard from "@/components/Card/ProcessCard";
 import { FaSearch, FaLightbulb } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
-
+import { FaUsers } from "react-icons/fa";
+import TeamCard from "@/components/Card/TeamCard";
 
 const itemsData = [
   {
@@ -198,6 +199,72 @@ const teamMembers = [
   },
 ];
 
+const vesionData = [
+  {
+    icon: FaLightbulb,
+    title: "Innovation",
+    description:
+      "Constantly exploring new frontiers in AI to bring you the latest advancements.",
+  },
+  {
+    icon: FaUsers,
+    title: "Collaboration",
+    description:
+      "Working closely with clients to develop tailored AI solutions that drive success.",
+  },
+  {
+    icon: FaRocket,
+    title: "Impact",
+    description:
+      "Committed to delivering measurable results and transformative growth for your business.",
+  },
+];
+
+const techStackData = [
+  {
+    category: 'cloud',
+    imgSrc: 'https://logo.clearbit.com/azure.com',
+    altText: 'Azure Logo',
+    title: 'Azure',
+    description: "Microsoft's cloud platform for building and deploying AI solutions."
+  },
+  {
+    category: 'cloud',
+    imgSrc: 'https://logo.clearbit.com/aws.amazon.com',
+    altText: 'AWS Logo',
+    title: 'AWS',
+    description: "Amazon's comprehensive cloud computing services."
+  },
+  {
+    category: 'ai',
+    imgSrc: 'https://logo.clearbit.com/openai.com',
+    altText: 'OpenAI Logo',
+    title: 'OpenAI',
+    description: 'Advanced language models and AI technologies.'
+  },
+  {
+    category: 'automation',
+    imgSrc: 'https://logo.clearbit.com/zapier.com',
+    altText: 'Zapier Logo',
+    title: 'Zapier',
+    description: 'No-code automation for connecting apps and workflows.'
+  },
+  {
+    category: 'automation',
+    imgSrc: 'https://logo.clearbit.com/make.com',
+    altText: 'Make Logo',
+    title: 'Make',
+    description: 'Powerful visual automation platform for complex workflows.'
+  },
+  {
+    category: 'ai',
+    imgSrc: 'https://logo.clearbit.com/huggingface.co',
+    altText: 'Hugging Face Logo',
+    title: 'Hugging Face',
+    description: 'State-of-the-art natural language processing models.'
+  }
+];
+
 export default function Home() {
   return (
     <main className="relative">
@@ -342,107 +409,48 @@ export default function Home() {
           </Link>
         </div>
       </section>
-      {/* <section id="team" className="team-section py-20 bg-gray-100">
-      <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center mb-10">Our AI Visionaries</h2>
-        <div className="bg-white p-10 rounded-lg shadow-md mb-10">
-          <h3 className="text-2xl font-semibold text-yellow-500 mb-4">Our Vision</h3>
-          <p className="text-lg text-gray-700 mb-6">
-            At Bhives.ai, we're driven by a singular vision: to democratize AI and empower businesses of all sizes with cutting-edge automation solutions. Our team of experts is committed to pushing the boundaries of AI technology while making it accessible and practical for real-world applications.
-          </p>
-          <div className="flex flex-wrap -mx-4">
-            <div className="w-full md:w-1/3 px-4 mb-6 md:mb-0">
-              <div className="flex items-center mb-4">
-                <i className="fas fa-lightbulb text-2xl text-yellow-500"></i>
-                <h4 className="text-xl font-semibold ml-2">Innovation</h4>
-              </div>
-              <p className="text-gray-700">Constantly exploring new frontiers in AI to bring you the latest advancements.</p>
-            </div>
-            <div className="w-full md:w-1/3 px-4 mb-6 md:mb-0">
-              <div className="flex items-center mb-4">
-                <i className="fas fa-users text-2xl text-yellow-500"></i>
-                <h4 className="text-xl font-semibold ml-2">Collaboration</h4>
-              </div>
-              <p className="text-gray-700">Working closely with clients to develop tailored AI solutions that drive success.</p>
-            </div>
-            <div className="w-full md:w-1/3 px-4">
-              <div className="flex items-center mb-4">
-                <i className="fas fa-rocket text-2xl text-yellow-500"></i>
-                <h4 className="text-xl font-semibold ml-2">Impact</h4>
-              </div>
-              <p className="text-gray-700">Committed to delivering measurable results and transformative growth for your business.</p>
-            </div>
+      <section id="team" className="team-section py-20 bg-gray-900">
+        <div className="mx-10 max-w-[1260px] lg:mx-auto px-4">
+          <h2 className="text-4xl text-white font-bold text-center mb-10 underline underline-offset-8">
+            Our AI Visionaries
+          </h2>
+          <div className="bg-white p-10 rounded-lg shadow-md mb-10 text-center">
+            <h3 className="text-3xl font-bold text-orange-400 mb-4">
+              Our Vision
+            </h3>
+            <p className="text-lg text-gray-600 mb-6">
+              At Bhives.ai, we're driven by a singular vision: to democratize AI
+              and empower businesses of all sizes with cutting-edge automation
+              solutions. Our team of experts is committed to pushing the
+              boundaries of AI technology while making it accessible and
+              practical for real-world applications.
+            </p>
+            <ul className="flex flex-col gap-4 items-center justify-center md:flex-row">
+              {vesionData.map((item) => (
+                <li
+                  key={item.title}
+                  className="card flex flex-col items-center justify-center rounded-lg p-4 bg-gray-100 shadow-lg w-96 hover:scale-[103%] transition-gpu ease-in-out duration-500"
+                >
+                  <item.icon className="text-[2.5rem] text-orange-500 mt-4" />
+                  <h4 className="text-xl font-semibold ml-2">Innovation</h4>
+                  <p className="text-gray-700 mt-2">
+                    Constantly exploring new frontiers in AI to bring you the
+                    latest advancements.
+                  </p>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
-        <h3 className="text-3xl font-bold text-center mb-10">Meet the Team</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {teamMembers.map((member, index) => (
-            <div key={index} className="team-member bg-white rounded-lg shadow-lg overflow-hidden">
-              <div className="member-card relative group">
-                <div className="member-front">
-                  <img className="w-full h-64 object-cover" src={member.image} alt={member.name} />
-                  <div className="member-overlay absolute inset-0 bg-yellow-500 bg-opacity-90 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <h4 className="text-white text-2xl mb-2">{member.name}</h4>
-                    <p className="text-white text-lg">{member.title}</p>
-                  </div>
-                </div>
-                <div className="member-back p-6 flex flex-col items-center transform rotateY-180 group-hover:rotateY-0 transition-transform duration-500">
-                  <h4 className="text-2xl font-bold text-gray-800 mb-2">{member.name}</h4>
-                  <p className="text-lg text-yellow-500 mb-4">{member.title}</p>
-                  <p className="text-gray-600 mb-4">{member.bio}</p>
-                  {member.linkedin && (
-                    <a
-                      href={member.linkedin}
-                      className="linkedin-link bg-blue-700 text-white px-4 py-2 rounded-full hover:bg-blue-800 transition-colors"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <i className="fab fa-linkedin mr-2"></i>Connect on LinkedIn
-                    </a>
-                  )}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section> */}
-      <section className="bg-white dark:bg-gray-900">
-        <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6 ">
+        <div className="mt-6 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6 ">
           <div className="mx-auto max-w-screen-sm text-center mb-8 lg:mb-16">
-            <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
-            Meet the Team
+            <h2 className="mb-4 text-3xl tracking-tight font-extrabold text-white">
+              Meet the Team
             </h2>
           </div>
           <div className="grid gap-8 mb-6 lg:mb-16 lg:grid-cols-2">
             {teamMembers.map((member, index) => (
-              <div
-                key={index}
-                className="flex flex-col max-w-[400px] md:max-w-[700px] mx-auto p-2 items-center rounded-lg shadow md:flex-row bg-gray-800 border-gray-700 lg:p-0"
-              >
-                  <img
-                    className="w-[220px] h-[220px] rounded-full mx-auto object-cover md:rounded-none md:rounded-l-lg"
-                    src={member.imgSrc}
-                    alt="Avatar"
-                  />
-                <div className="text-center p-3 md:p-5 md:text-start">
-                  <h3 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-                    <a href="#">{member.name}</a>
-                  </h3>
-                  <span className="text-gray-500 dark:text-gray-400">
-                    {member.title}
-                  </span>
-                  <p className="mt-3 mb-4 font-light text-gray-500 dark:text-gray-400">
-                    {member.bio}
-                  </p>
-                  <Link href={member.linkedIn}>
-                  <button className="flex items-center gap-1 bg-blue-400 text-white px-5 py-2 rounded-md font-semibold">
-                  <FaLinkedin />
-                    Connect on LinkedIn
-                  </button>
-                  </Link>
-                </div>
-              </div>
+              <TeamCard key={index} {...member}/>
             ))}
           </div>
         </div>
