@@ -14,7 +14,7 @@ export default function Card({
   detail: string;
 }) {
   return (
-    <div className="relative bg-white shadow-lg shadow-orange-200 rounded-3xl px-5 py-7 h-[420px] w-[300px] hover:scale-[103%] transition-all ease-in-out duration-300">
+    <div className="card relative bg-white shadow-lg shadow-orange-200 rounded-3xl px-5 py-7 h-[420px] w-[300px] hover:scale-[103%] transform-gpu ease-in-out duration-500">
       <div className="text-5xl text-orange-500 mt-5 flex items-center justify-center">
         {icon}
       </div>

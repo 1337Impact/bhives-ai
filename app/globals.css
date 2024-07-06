@@ -27,3 +27,8 @@
   aspect-ratio: 900/200;
   background-image: url('/layer2.svg');
 }
+
+.card {
+  transform: translateZ(0);
+  will-change: transform;
+}
