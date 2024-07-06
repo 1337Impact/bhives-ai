@@ -18,7 +18,7 @@ export default function Footer() {
         className="absolute inset-0 opacity-50 z-0 bg-no-repeat bg-center bg-cover"
         style={{ backgroundImage: "url('path-to-your-background-image')" }}
       ></div>
-      <div className="relative z-10 flex flex-wrap justify-between mx-auto mb-8 lg:mb-16 max-w-[1260px] px-4">
+      <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 justify-between mx-auto mb-8 lg:mb-16 max-w-[1260px] px-4">
         <div className="mb-8 min-w-[200px] pr-5 flex-1">
             <h1 className="text-3xl font-bold mb-4">Bhives.ai</h1>
           <p className="leading-6 mb-4 text-sm">

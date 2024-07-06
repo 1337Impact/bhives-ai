@@ -352,7 +352,7 @@ const contactData = [
 export default function Home() {
   return (
     <main className="relative">
-      <section className="relative flex items-center flex-col h-[calc(100vh-50px)]">
+      <section id="hero-section" className="relative flex items-center flex-col h-[calc(100vh-50px)]">
         <h1 className="text-gray-900 font-semibold text-6xl mt-28">
           AI-Powered
         </h1>
@@ -391,7 +391,7 @@ export default function Home() {
         <div className="waves layer1 absolute -bottom-1 -z-10" />
       </section>
       <section
-        id="#why-choose"
+        id="why-choose"
         className="relative bg-orange-400 min-h-screen flex items-center flex-col pb-40"
       >
         <h1 className="text-4xl font-bold text-white text-center mt-4 max-w-[600px]">
@@ -421,7 +421,7 @@ export default function Home() {
         <div className="waves layer2 absolute -bottom-[120px] xl:-bottom-[240px] z-10" />
       </section>
       <section
-        id="#services"
+        id="services"
         className="relative min-h-screen flex items-center flex-col mt-40"
       >
         <h1 className="text-4xl font-bold text-black text-center mt-4 max-w-[600px]">
@@ -537,7 +537,7 @@ export default function Home() {
         </div>
       </section>
       <TechStack />
-      <section id="q&a" className="relative bg-white text-gray-800 py-20 ">
+      <section id="faq" className="relative bg-white text-gray-800 py-20 ">
         <h2 className="text-4xl font-bold text-center mb-10">
           Frequently Asked Questions
         </h2>
