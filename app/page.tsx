@@ -20,6 +20,7 @@ import { FaLinkedin } from "react-icons/fa";
 import { FaUsers } from "react-icons/fa";
 import TeamCard from "@/components/Card/TeamCard";
 import TechStack from "@/components/TeckStack";
+import FAQComponent from "@/components/FAQComponent";
 
 const itemsData = [
   {
@@ -223,47 +224,111 @@ const vesionData = [
 
 const techStackData = [
   {
-    category: 'cloud',
-    imgSrc: 'https://logo.clearbit.com/azure.com',
-    altText: 'Azure Logo',
-    title: 'Azure',
-    description: "Microsoft's cloud platform for building and deploying AI solutions."
+    category: "cloud",
+    imgSrc: "https://logo.clearbit.com/azure.com",
+    altText: "Azure Logo",
+    title: "Azure",
+    description:
+      "Microsoft's cloud platform for building and deploying AI solutions.",
   },
   {
-    category: 'cloud',
-    imgSrc: 'https://logo.clearbit.com/aws.amazon.com',
-    altText: 'AWS Logo',
-    title: 'AWS',
-    description: "Amazon's comprehensive cloud computing services."
+    category: "cloud",
+    imgSrc: "https://logo.clearbit.com/aws.amazon.com",
+    altText: "AWS Logo",
+    title: "AWS",
+    description: "Amazon's comprehensive cloud computing services.",
   },
   {
-    category: 'ai',
-    imgSrc: 'https://logo.clearbit.com/openai.com',
-    altText: 'OpenAI Logo',
-    title: 'OpenAI',
-    description: 'Advanced language models and AI technologies.'
+    category: "ai",
+    imgSrc: "https://logo.clearbit.com/openai.com",
+    altText: "OpenAI Logo",
+    title: "OpenAI",
+    description: "Advanced language models and AI technologies.",
   },
   {
-    category: 'automation',
-    imgSrc: 'https://logo.clearbit.com/zapier.com',
-    altText: 'Zapier Logo',
-    title: 'Zapier',
-    description: 'No-code automation for connecting apps and workflows.'
+    category: "automation",
+    imgSrc: "https://logo.clearbit.com/zapier.com",
+    altText: "Zapier Logo",
+    title: "Zapier",
+    description: "No-code automation for connecting apps and workflows.",
   },
   {
-    category: 'automation',
-    imgSrc: 'https://logo.clearbit.com/make.com',
-    altText: 'Make Logo',
-    title: 'Make',
-    description: 'Powerful visual automation platform for complex workflows.'
+    category: "automation",
+    imgSrc: "https://logo.clearbit.com/make.com",
+    altText: "Make Logo",
+    title: "Make",
+    description: "Powerful visual automation platform for complex workflows.",
   },
   {
-    category: 'ai',
-    imgSrc: 'https://logo.clearbit.com/huggingface.co',
-    altText: 'Hugging Face Logo',
-    title: 'Hugging Face',
-    description: 'State-of-the-art natural language processing models.'
-  }
+    category: "ai",
+    imgSrc: "https://logo.clearbit.com/huggingface.co",
+    altText: "Hugging Face Logo",
+    title: "Hugging Face",
+    description: "State-of-the-art natural language processing models.",
+  },
+];
+
+const faqData = [
+  {
+    question: "How quickly can I see results with Bhives.ai?",
+    answer:
+      "Many clients see significant improvements within weeks. The sooner you start, the faster you'll outpace your competition. Our rapid implementation process ensures you don't miss out on AI-driven growth opportunities.",
+  },
+  {
+    question: "Is my business too small for AI?",
+    answer:
+      "Absolutely not. Our solutions scale to businesses of all sizes. In fact, AI can be the key to leveling the playing field against larger competitors. We've helped startups disrupt industries and small businesses outperform larger rivals.",
+  },
+  {
+    question: "What if I'm not tech-savvy?",
+    answer:
+      "No worries! We handle all the technical complexities. You focus on your business goals, we'll make the AI magic happen. Our team translates complex AI concepts into clear, actionable insights for your business.",
+  },
+  {
+    question: "How do I know if AI is right for my industry?",
+    answer:
+      "If your industry involves data, decisions, or customer interactions (hint: they all do), then AI can give you a competitive edge. Let's discuss your specific needs. We've successfully implemented AI solutions across diverse sectors, from healthcare to retail to manufacturing.",
+  },
+  {
+    question: "What makes Bhives.ai different from other AI consultancies?",
+    answer:
+      "Unlike larger firms, we offer personalized attention and cutting-edge solutions tailored to your unique needs. Our team of AI visionaries comes from top tech companies and leading research institutions. We're not just consultants; we're your AI partners in growth, committed to your long-term success.",
+  },
+  {
+    question: "How much does it cost to implement AI solutions?",
+    answer:
+      "Our pricing is as flexible as our solutions. We work with you to create a package that fits your budget and maximizes ROI. Remember, the question isn't whether you can afford AI, but whether you can afford to be left behind without it. Let's discuss your budget and find a solution that works for you.",
+  },
+  {
+    question: "Is my data safe with AI implementation?",
+    answer:
+      "Absolutely. We prioritize data security and privacy in all our AI implementations. Our solutions comply with industry standards and regulations like GDPR and CCPA. Your data's security is as important to us as the powerful insights we derive from it.",
+  },
+  {
+    question: "How will AI impact my current workforce?",
+    answer:
+      "AI is not about replacing humans, but empowering them. Our solutions are designed to augment your team's capabilities, allowing them to focus on higher-value tasks. Many of our clients find that AI implementation leads to increased job satisfaction and opens up new growth opportunities for their employees.",
+  },
+  {
+    question: "What if I'm not satisfied with the AI solution?",
+    answer:
+      "Your satisfaction is our top priority. We offer a satisfaction guarantee and will work tirelessly to ensure the AI solution meets your needs. Our iterative approach allows for continuous refinement based on your feedback. We're not satisfied until you're seeing real, measurable results.",
+  },
+  {
+    question: "How long does the implementation process take?",
+    answer:
+      "The timeline varies depending on the complexity of your needs and the scale of implementation. Some solutions can be up and running in a matter of weeks, while more comprehensive transformations might take a few months. We work efficiently to ensure you start seeing benefits as quickly as possible.",
+  },
+  {
+    question: "Do you offer ongoing support after implementation?",
+    answer:
+      "Yes, we provide comprehensive ongoing support and maintenance for all our AI solutions. Our team is always available to answer questions, provide updates, and ensure your AI systems continue to perform optimally as your business evolves.",
+  },
+  {
+    question: "How do I get started with Bhives.ai?",
+    answer:
+      "It's easy! Simply schedule your free AI strategy session using the form on our website. In this no-obligation consultation, we'll discuss your business goals, explore AI opportunities, and provide initial insights. It's the first step towards transforming your business with AI. Don't wait – your competitors certainly aren't!",
+  },
 ];
 
 export default function Home() {
@@ -451,12 +516,20 @@ export default function Home() {
           </div>
           <div className="grid gap-8 mb-6 lg:mb-16 lg:grid-cols-2">
             {teamMembers.map((member, index) => (
-              <TeamCard key={index} {...member}/>
+              <TeamCard key={index} {...member} />
             ))}
           </div>
         </div>
       </section>
       <TechStack />
+      <section id="q&a" className="bg-white text-gray-800 py-20 ">
+        <h2 className="text-4xl font-bold text-center mb-10">
+          Frequently Asked Questions
+        </h2>
+        <div className="mx-auto mb-8 lg:mb-16 max-w-[1260px] lg:mx-auto px-4">
+          <FAQComponent data={faqData} />
+        </div>
+      </section>
     </main>
   );
 }
