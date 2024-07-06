@@ -270,7 +270,7 @@ export default function Home() {
           </Link>
         </div>
       </section>
-      <section id="process" className="bg-gray-900 text-white pt-16">
+      <section id="process" className="relative bg-gray-900 text-white pt-16">
         <div className="mx-auto px-4">
           <h2 className="text-4xl font-bold mb-10 text-center">
             Our AI Automation Integration Process
@@ -297,16 +297,16 @@ export default function Home() {
               ))}
             </div>
           </div>
-          <div className="mt-20 py-10 w-full flex flex-col justify-center items-center bg-orange-400">
+        </div>
+        <div className="mt-20 py-10 w-full flex flex-col justify-center items-center bg-orange-400">
           <h1 className="text-4xl font-bold text-white text-center max-w-[600px]">
-          Ready to start your AI automation journey?
+            Ready to start your AI automation journey?
           </h1>
           <Link href="#contact">
             <button className="bg-white border-2 border-white text-orange-400 font-bold px-6 py-3 rounded-lg mt-4 hover:bg-orange-400 hover:text-white transition-all ease-in-out duration-300">
-            Schedule Your Free Consultation
+              Schedule Your Free Consultation
             </button>
           </Link>
-        </div>
         </div>
       </section>
     </main>
