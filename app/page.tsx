@@ -14,6 +14,8 @@ import { FaBrain } from "react-icons/fa";
 import { FaComments } from "react-icons/fa";
 import { FaShareAlt } from "react-icons/fa";
 import { FaBullhorn } from "react-icons/fa";
+import ProcessCard from "@/components/Card/ProcessCard";
+import { FaSearch, FaLightbulb } from "react-icons/fa";
 
 const itemsData = [
   {
@@ -112,6 +114,57 @@ const servicesData = [
   },
 ];
 
+const processSteps = [
+  {
+    side: "left",
+    icon: <FaSearch />,
+    title: "1. Discovery",
+    description:
+      "We dive deep into your business processes to uncover prime opportunities for AI automation.",
+    benefits: [
+      "Comprehensive business analysis",
+      "Identification of AI-ready processes",
+      "Stakeholder interviews and alignment",
+    ],
+  },
+  {
+    side: "right",
+    icon: <FaLightbulb />,
+    title: "2. Solution Design",
+    description:
+      "Our experts craft a tailored AI automation strategy aligned with your specific needs and goals.",
+    benefits: [
+      "Custom AI solution architecture",
+      "ROI projections and business case development",
+      "Detailed implementation roadmap",
+    ],
+  },
+  {
+    side: "left",
+    icon: <FaCogs />,
+    title: "3. Implementation",
+    description:
+      "We seamlessly integrate AI automations into your existing workflows and systems.",
+    benefits: [
+      "Agile development and rapid prototyping",
+      "Continuous testing and quality assurance",
+      "Comprehensive staff training and onboarding",
+    ],
+  },
+  {
+    side: "right",
+    icon: <FaChartLine />,
+    title: "4. Optimization",
+    description:
+      "We ensure your AI automations evolve with your business through continuous monitoring and refinement.",
+    benefits: [
+      "Real-time performance monitoring",
+      "Data-driven optimizations and enhancements",
+      "Scalability planning for future growth",
+    ],
+  },
+];
+
 export default function Home() {
   return (
     <main className="relative">
@@ -128,7 +181,10 @@ export default function Home() {
         </p>
         <ul className="flex gap-6 mt-6">
           {itemsData.map((item) => (
-            <li className="flex flex-col items-center justify-center">
+            <li
+              key={item.title}
+              className="flex flex-col items-center justify-center"
+            >
               <item.icon className="text-[2.5rem] text-orange-500 mt-5" />
               <h4 className="mt-2 text-center text-gray-700 font-[500]">
                 {item.title}
@@ -209,15 +265,50 @@ export default function Home() {
           </h1>
           <Link href="#contact">
             <button className="bg-white border-2 border-white text-orange-400 font-bold px-6 py-3 rounded-lg mt-4 hover:bg-orange-400 hover:text-white transition-all ease-in-out duration-300">
-            Get Started Now
+              Get Started Now
             </button>
           </Link>
         </div>
       </section>
-      <section
-        id="#contact"
-        className="relative flex items-center flex-col min-h-screen"
-      ></section>
+      <section id="process" className="bg-gray-900 text-white pt-16">
+        <div className="mx-auto px-4">
+          <h2 className="text-4xl font-bold mb-10 text-center">
+            Our AI Automation Integration Process
+          </h2>
+          <p className="text-lg mb-10 text-center max-w-[600px] mx-auto">
+            We follow a streamlined, four-step approach to seamlessly integrate
+            AI automation into your business, ensuring maximum efficiency and
+            ROI.
+          </p>
+
+          <div className="relative max-w-4xl mx-auto mt-4">
+            <div className="absolute h-full bg-orange-400 w-1 left-1/2 transform -translate-x-1/2"></div>
+
+            <div className="space-y-16">
+              {processSteps.map((step, index) => (
+                <ProcessCard
+                  key={index}
+                  index={index}
+                  icon={step.icon}
+                  title={step.title}
+                  description={step.description}
+                  benefits={step.benefits}
+                />
+              ))}
+            </div>
+          </div>
+          <div className="mt-20 py-10 w-full flex flex-col justify-center items-center bg-orange-400">
+          <h1 className="text-4xl font-bold text-white text-center max-w-[600px]">
+          Ready to start your AI automation journey?
+          </h1>
+          <Link href="#contact">
+            <button className="bg-white border-2 border-white text-orange-400 font-bold px-6 py-3 rounded-lg mt-4 hover:bg-orange-400 hover:text-white transition-all ease-in-out duration-300">
+            Schedule Your Free Consultation
+            </button>
+          </Link>
+        </div>
+        </div>
+      </section>
     </main>
   );
 }
