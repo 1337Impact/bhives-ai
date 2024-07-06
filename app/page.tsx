@@ -19,6 +19,7 @@ import { FaSearch, FaLightbulb } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
 import { FaUsers } from "react-icons/fa";
 import TeamCard from "@/components/Card/TeamCard";
+import TechStack from "@/components/TeckStack";
 
 const itemsData = [
   {
@@ -455,6 +456,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <TechStack />
     </main>
   );
 }
