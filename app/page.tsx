@@ -16,6 +16,8 @@ import { FaShareAlt } from "react-icons/fa";
 import { FaBullhorn } from "react-icons/fa";
 import ProcessCard from "@/components/Card/ProcessCard";
 import { FaSearch, FaLightbulb } from "react-icons/fa";
+import { FaLinkedin } from "react-icons/fa";
+
 
 const itemsData = [
   {
@@ -165,6 +167,37 @@ const processSteps = [
   },
 ];
 
+const teamMembers = [
+  {
+    name: "Amine",
+    title: "Co-founder",
+    imgSrc: "/images/amine.jpeg",
+    bio: `Leader in AI automation with expertise in DevOps and distributed systems, driving innovative business transformations.`,
+    linkedIn: "https://www.linkedin.com/in/medamineferhi/",
+  },
+  {
+    name: "Nader",
+    title: "Co-founder",
+    imgSrc: "/images/nader.jpeg",
+    bio: `Pioneer in AI technologies, integrating cutting-edge solutions with practical applications for impactful results.`,
+    linkedIn: "https://www.linkedin.com/in/naderghazala/",
+  },
+  {
+    name: "Iheb",
+    title: "Developer / Automation Specialist",
+    imgSrc: "/images/iheb.jpeg",
+    bio: `Skilled developer focused on efficient AI-driven automation solutions and technical implementation.`,
+    linkedIn: "https://www.linkedin.com/in/iheb-bhives",
+  },
+  {
+    name: "Mohamed Salah",
+    title: "Developer / Automation Specialist",
+    imgSrc: "/images/medsalah.jpeg",
+    bio: `Experienced developer specializing in creating seamless automation workflows to optimize business processes.`,
+    linkedIn: "https://www.linkedin.com/in/mohamed-salah-bhives",
+  },
+];
+
 export default function Home() {
   return (
     <main className="relative">
@@ -307,6 +340,111 @@ export default function Home() {
               Schedule Your Free Consultation
             </button>
           </Link>
+        </div>
+      </section>
+      {/* <section id="team" className="team-section py-20 bg-gray-100">
+      <div className="container mx-auto px-4">
+        <h2 className="text-4xl font-bold text-center mb-10">Our AI Visionaries</h2>
+        <div className="bg-white p-10 rounded-lg shadow-md mb-10">
+          <h3 className="text-2xl font-semibold text-yellow-500 mb-4">Our Vision</h3>
+          <p className="text-lg text-gray-700 mb-6">
+            At Bhives.ai, we're driven by a singular vision: to democratize AI and empower businesses of all sizes with cutting-edge automation solutions. Our team of experts is committed to pushing the boundaries of AI technology while making it accessible and practical for real-world applications.
+          </p>
+          <div className="flex flex-wrap -mx-4">
+            <div className="w-full md:w-1/3 px-4 mb-6 md:mb-0">
+              <div className="flex items-center mb-4">
+                <i className="fas fa-lightbulb text-2xl text-yellow-500"></i>
+                <h4 className="text-xl font-semibold ml-2">Innovation</h4>
+              </div>
+              <p className="text-gray-700">Constantly exploring new frontiers in AI to bring you the latest advancements.</p>
+            </div>
+            <div className="w-full md:w-1/3 px-4 mb-6 md:mb-0">
+              <div className="flex items-center mb-4">
+                <i className="fas fa-users text-2xl text-yellow-500"></i>
+                <h4 className="text-xl font-semibold ml-2">Collaboration</h4>
+              </div>
+              <p className="text-gray-700">Working closely with clients to develop tailored AI solutions that drive success.</p>
+            </div>
+            <div className="w-full md:w-1/3 px-4">
+              <div className="flex items-center mb-4">
+                <i className="fas fa-rocket text-2xl text-yellow-500"></i>
+                <h4 className="text-xl font-semibold ml-2">Impact</h4>
+              </div>
+              <p className="text-gray-700">Committed to delivering measurable results and transformative growth for your business.</p>
+            </div>
+          </div>
+        </div>
+        <h3 className="text-3xl font-bold text-center mb-10">Meet the Team</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {teamMembers.map((member, index) => (
+            <div key={index} className="team-member bg-white rounded-lg shadow-lg overflow-hidden">
+              <div className="member-card relative group">
+                <div className="member-front">
+                  <img className="w-full h-64 object-cover" src={member.image} alt={member.name} />
+                  <div className="member-overlay absolute inset-0 bg-yellow-500 bg-opacity-90 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <h4 className="text-white text-2xl mb-2">{member.name}</h4>
+                    <p className="text-white text-lg">{member.title}</p>
+                  </div>
+                </div>
+                <div className="member-back p-6 flex flex-col items-center transform rotateY-180 group-hover:rotateY-0 transition-transform duration-500">
+                  <h4 className="text-2xl font-bold text-gray-800 mb-2">{member.name}</h4>
+                  <p className="text-lg text-yellow-500 mb-4">{member.title}</p>
+                  <p className="text-gray-600 mb-4">{member.bio}</p>
+                  {member.linkedin && (
+                    <a
+                      href={member.linkedin}
+                      className="linkedin-link bg-blue-700 text-white px-4 py-2 rounded-full hover:bg-blue-800 transition-colors"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <i className="fab fa-linkedin mr-2"></i>Connect on LinkedIn
+                    </a>
+                  )}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section> */}
+      <section className="bg-white dark:bg-gray-900">
+        <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6 ">
+          <div className="mx-auto max-w-screen-sm text-center mb-8 lg:mb-16">
+            <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
+            Meet the Team
+            </h2>
+          </div>
+          <div className="grid gap-8 mb-6 lg:mb-16 lg:grid-cols-2">
+            {teamMembers.map((member, index) => (
+              <div
+                key={index}
+                className="flex flex-col max-w-[400px] md:max-w-[700px] mx-auto p-2 items-center rounded-lg shadow md:flex-row bg-gray-800 border-gray-700 lg:p-0"
+              >
+                  <img
+                    className="w-[220px] h-[220px] rounded-full mx-auto object-cover md:rounded-none md:rounded-l-lg"
+                    src={member.imgSrc}
+                    alt="Avatar"
+                  />
+                <div className="text-center p-3 md:p-5 md:text-start">
+                  <h3 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+                    <a href="#">{member.name}</a>
+                  </h3>
+                  <span className="text-gray-500 dark:text-gray-400">
+                    {member.title}
+                  </span>
+                  <p className="mt-3 mb-4 font-light text-gray-500 dark:text-gray-400">
+                    {member.bio}
+                  </p>
+                  <Link href={member.linkedIn}>
+                  <button className="flex items-center gap-1 bg-blue-400 text-white px-5 py-2 rounded-md font-semibold">
+                  <FaLinkedin />
+                    Connect on LinkedIn
+                  </button>
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
     </main>
