@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import Card from "@/components/Cards";
 import ServiceCard from "@/components/Cards/ServiceCard";
@@ -22,6 +23,8 @@ import TechStack from "@/components/TeckStack";
 import FAQComponent from "@/components/FAQComponent";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
+import { useEffect, useState } from "react";
+import Loading from "./loading";
 
 const itemsData = [
   {
@@ -305,7 +308,18 @@ const contactData = [
 ];
 
 export default async function Home() {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1500);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return <Loading />;
+  }
   return (
     <main className="relative">
       <section

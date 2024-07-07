@@ -1,6 +1,6 @@
 export default function Loading() {
   return (
-    <div className="socket">
+    <div className={`socket`}>
       <div className="gel center-gel">
         <div className="hex-brick h1"></div>
         <div className="hex-brick h2"></div>

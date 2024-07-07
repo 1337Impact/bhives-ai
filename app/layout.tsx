@@ -22,10 +22,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${inter.className} relative`}>
-        <Suspense fallback={<Loading />}>
+        {/* <Suspense fallback={<Loading />}> */}
           <Navbar /> {children}
           <ScrollToTop />
-          </Suspense>
+        {/* </Suspense> */}
       </body>
     </html>
   );
