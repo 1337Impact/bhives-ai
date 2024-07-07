@@ -16,7 +16,6 @@ import { FaShareAlt } from "react-icons/fa";
 import { FaBullhorn } from "react-icons/fa";
 import ProcessCard from "@/components/Cards/ProcessCard";
 import { FaSearch, FaLightbulb } from "react-icons/fa";
-import { FaLinkedin } from "react-icons/fa";
 import { FaUsers } from "react-icons/fa";
 import TeamCard from "@/components/Cards/TeamCard";
 import TechStack from "@/components/TeckStack";
@@ -309,7 +308,7 @@ export default function Home() {
     <main className="relative">
       <section
         id="hero-section"
-        className="relative flex items-center flex-col min-h-[calc(100vh-80px)]"
+        className="relative flex items-center flex-col min-h-[calc(100vh-80px)] pt-6 md:pt-10"
       >
         <h1 className="text-gray-900 font-semibold text-5xl md:text-6xl mt-28">
           AI-Powered

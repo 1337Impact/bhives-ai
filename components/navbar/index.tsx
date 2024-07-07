@@ -6,14 +6,6 @@ import Link from "next/link";
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  useEffect(() => {
-    if (isMenuOpen) {
-      document.body.classList.add("max-md:overflow-y-hidden");
-    } else {
-      document.body.classList.remove("max-md:overflow-y-hidden");
-    }
-  }, [isMenuOpen]);
-
   const links = [
     {
       name: "Why Us",
@@ -42,41 +34,39 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="m-container h-[80px] max-w-[1200px] mx-auto text-slate-700 ">
-      <div className="flex h-full w-full items-center justify-between">
+    <header className="fixed bg-white z-[100] w-full h-[80px] mx-auto text-slate-700">
+      <div className="relative flex h-full w-full items-center justify-between px-4 max-w-[1200px] mx-auto">
         <Link href="#" className="flex items-center gap-1">
           <img src="/logo.png" alt="Bhives.ai" className="h-9" />
           <h1 className="text-xl font-bold text-black">Bhives.ai</h1>
         </Link>
-        <div
+        <nav
           className={`${
             !isMenuOpen && "max-md:hidden"
-          } z-40 max-md:absolute max-md:left-0 max-md:top-0 max-md:h-[100dvh] max-md:w-full max-md:backdrop-blur-xl`}
+          } max-md:absolute z-40 flex right-0 top-[70px] max-md:w-full max-md:h-[400px] max-md:shadow-md max-md:bg-gray-100 max-md:rounded-md items-center max-md:justify-around font-semibold max-md:flex-col max-md:text-xl md:gap-4 lg:gap-8 xl:gap-10`}
         >
-          <ul className="flex h-full items-center justify-around font-semibold max-md:pt-20 max-md:flex-col max-md:text-3xl md:gap-6 lg:gap-8">
-            {links.map((link) => (
-              <Link key={link.name} href={link.href} className="">
-                <li
-                  onClick={() => setIsMenuOpen(false)}
-                  className={
-                    "cursor-pointer hover:text-slate-600 hover:underline hover:underline-offset-4"
-                  }
-                >
-                  {link.name}
-                </li>
-              </Link>
-            ))}
-          </ul>
-        </div>
-        <div className="flex items-center gap-3">
-          <Link href={"#contact"}>
+          {links.map((link) => (
+            <Link key={link.name} href={link.href}>
+              <div
+                onClick={() => setIsMenuOpen(false)}
+                className={
+                  "cursor-pointer hover:text-slate-600 hover:underline hover:underline-offset-4"
+                }
+              >
+                {link.name}
+              </div>
+            </Link>
+          ))}
+          <Link href={"#contact"} className="md:hidden">
             <div
               onClick={() => setIsMenuOpen(false)}
-              className="float-right bg-orange-500 hover:bg-orange-400 text-white px-4 py-2 rounded-md cursor-pointer"
+              className="float-right bg-orange-500 hover:bg-orange-400 text-white px-8 py-2 rounded-md cursor-pointer"
             >
               Contact
             </div>
           </Link>
+        </nav>
+        <div className="flex items-center gap-6">
           <button
             className={`${styles.hamburger} md:hidden z-50`}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -91,8 +81,16 @@ export default function Navbar() {
               className={`${styles.line} ${isMenuOpen && styles.open}`}
             ></div>
           </button>
+          <Link href={"#contact"} className="max-md:hidden">
+            <div
+              onClick={() => setIsMenuOpen(false)}
+              className="float-right bg-orange-500 hover:bg-orange-400 text-white px-4 py-2 rounded-md cursor-pointer"
+            >
+              Contact
+            </div>
+          </Link>
         </div>
       </div>
-    </nav>
+    </header>
   );
 }
