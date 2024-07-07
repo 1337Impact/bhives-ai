@@ -365,7 +365,7 @@ export default async function Home() {
       </section>
       <section
         id="why-choose"
-        className="relative bg-orange-400 min-h-screen flex items-center flex-col pb-40 px-4"
+        className="scroll-mt-20 relative bg-orange-400 min-h-screen flex items-center flex-col pb-40 px-4"
       >
         <h1 className="text-4xl font-bold text-white text-center mt-4 max-w-[600px]">
           Why Forward-Thinking Businesses Choose Bhives.ai?
@@ -395,7 +395,7 @@ export default async function Home() {
       </section>
       <section
         id="services"
-        className="relative min-h-screen flex items-center flex-col mt-20 lg:mt-40"
+        className="scroll-mt-20 relative min-h-screen flex items-center flex-col mt-20 lg:mt-40"
       >
         <h1 className="text-4xl font-bold text-black text-center mt-4 max-w-[600px]">
           Our AI Automation Services
@@ -427,7 +427,7 @@ export default async function Home() {
           </Link>
         </div>
       </section>
-      <section id="process" className="relative bg-gray-900 text-white py-16">
+      <section id="process" className="scroll-mt-20 relative bg-gray-900 text-white py-16">
         <div className="mx-auto px-4">
           <h2 className="text-4xl font-bold mb-10 text-center">
             Our AI Automation Integration Process
@@ -466,7 +466,7 @@ export default async function Home() {
           </Link>
         </div>
       </section>
-      <section id="team" className="team-section py-10 lg:py-20 bg-gray-900">
+      <section id="team" className="scroll-mt-20 team-section py-10 lg:py-20 bg-gray-900">
         <div className="max-w-[1260px] md:mx-4 lg:mx-auto px-4">
           <h2 className="text-4xl text-white font-bold text-center mb-10 underline underline-offset-8">
             Our AI Visionaries
@@ -510,7 +510,7 @@ export default async function Home() {
         </div>
       </section>
       <TechStack />
-      <section id="faq" className="relative bg-white text-gray-800 py-20 ">
+      <section id="faq" className="scroll-mt-20 relative bg-white text-gray-800 py-20 ">
         <h2 className="text-4xl font-bold text-center mb-10">
           Frequently Asked Questions
         </h2>
@@ -518,7 +518,7 @@ export default async function Home() {
           <FAQComponent data={faqData} />
         </div>
       </section>
-      <section id="contact" className="relative bg-orange-400 py-16 bg-cover">
+      <section id="contact" className="-scroll-mt-10 relative bg-orange-400 py-16 bg-cover">
         <div className="waves layer1 absolute -top-[60px] md:-top-[100px] lg:-top-[200px]" />
         <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-4xl text-white font-bold text-center mt-20 xl:mt-40">

@@ -54,7 +54,7 @@ const TechStack = () => {
     : techStackData.filter(tech => tech.category === selectedCategory);
 
   return (
-    <section id="tech-stack" className="tech-stack-section py-12">
+    <section id="tech-stack" className="scroll-mt-20 tech-stack-section py-12">
       <div className="mx-10 max-w-[1260px] lg:mx-auto px-4">
         <h2 className="text-3xl font-bold text-center mb-4">Our Cutting-Edge Tech Stack</h2>
         <p className="text-center mb-8 text-gray-700">We leverage industry-leading platforms and technologies to deliver unparalleled AI automation solutions.</p>
