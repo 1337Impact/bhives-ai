@@ -24,7 +24,7 @@ import FAQComponent from "@/components/FAQComponent";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
 import { useEffect, useState } from "react";
-import Loading from "./loading";
+import Loading from "../loading";
 
 const itemsData = [
   {
