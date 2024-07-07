@@ -51,7 +51,7 @@ export default function Navbar() {
         <div
           className={`${
             !isMenuOpen && "max-md:hidden"
-          } z-10 max-md:absolute max-md:left-0 max-md:top-0 max-md:h-[100dvh] max-md:w-full max-md:backdrop-blur-xl`}
+          } z-40 max-md:absolute max-md:left-0 max-md:top-0 max-md:h-[100dvh] max-md:w-full max-md:backdrop-blur-xl`}
         >
           <ul className="flex h-full items-center justify-around font-semibold max-md:pt-20 max-md:flex-col max-md:text-3xl md:gap-6 lg:gap-8">
             {links.map((link) => (
@@ -78,7 +78,7 @@ export default function Navbar() {
             </div>
           </Link>
           <button
-            className={`${styles.hamburger} md:hidden z-20`}
+            className={`${styles.hamburger} md:hidden z-50`}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             <div

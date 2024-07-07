@@ -59,7 +59,7 @@ const TechStack = () => {
         <h2 className="text-3xl font-bold text-center mb-4">Our Cutting-Edge Tech Stack</h2>
         <p className="text-center mb-8 text-gray-700">We leverage industry-leading platforms and technologies to deliver unparalleled AI automation solutions.</p>
 
-        <div className="flex justify-center mb-8 gap-2">
+        <div className="flex justify-center flex-wrap mb-8 gap-2">
           {['all', 'cloud', 'ai', 'automation'].map(category => (
             <div
               key={category}

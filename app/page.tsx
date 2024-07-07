@@ -223,52 +223,6 @@ const vesionData = [
   },
 ];
 
-const techStackData = [
-  {
-    category: "cloud",
-    imgSrc: "https://logo.clearbit.com/azure.com",
-    altText: "Azure Logo",
-    title: "Azure",
-    description:
-      "Microsoft's cloud platform for building and deploying AI solutions.",
-  },
-  {
-    category: "cloud",
-    imgSrc: "https://logo.clearbit.com/aws.amazon.com",
-    altText: "AWS Logo",
-    title: "AWS",
-    description: "Amazon's comprehensive cloud computing services.",
-  },
-  {
-    category: "ai",
-    imgSrc: "https://logo.clearbit.com/openai.com",
-    altText: "OpenAI Logo",
-    title: "OpenAI",
-    description: "Advanced language models and AI technologies.",
-  },
-  {
-    category: "automation",
-    imgSrc: "https://logo.clearbit.com/zapier.com",
-    altText: "Zapier Logo",
-    title: "Zapier",
-    description: "No-code automation for connecting apps and workflows.",
-  },
-  {
-    category: "automation",
-    imgSrc: "https://logo.clearbit.com/make.com",
-    altText: "Make Logo",
-    title: "Make",
-    description: "Powerful visual automation platform for complex workflows.",
-  },
-  {
-    category: "ai",
-    imgSrc: "https://logo.clearbit.com/huggingface.co",
-    altText: "Hugging Face Logo",
-    title: "Hugging Face",
-    description: "State-of-the-art natural language processing models.",
-  },
-];
-
 const faqData = [
   {
     question: "How quickly can I see results with Bhives.ai?",
@@ -355,15 +309,15 @@ export default function Home() {
     <main className="relative">
       <section
         id="hero-section"
-        className="relative flex items-center flex-col h-[calc(100vh-50px)]"
+        className="relative flex items-center flex-col min-h-[calc(100vh-80px)]"
       >
-        <h1 className="text-gray-900 font-semibold text-6xl mt-28">
+        <h1 className="text-gray-900 font-semibold text-5xl md:text-6xl mt-28">
           AI-Powered
         </h1>
         <div
-          className={`${styles.text} font-semibold text-5xl text-orange-600 mt-2`}
+          className={`${styles.text} font-semibold text-4xl md:text-5xl text-orange-600 mt-2`}
         ></div>
-        <p className="text-center text-xl text-gray-600 mx-4 mt-5 max-w-[600px]">
+        <p className="text-center font-semibold text-lg lg:text-xl text-gray-600 mx-4 mt-5 max-w-[600px] px-4">
           Unlock the full potential of your business with cutting-edge AI
           solutions tailored for industry leaders.
         </p>
@@ -396,12 +350,12 @@ export default function Home() {
       </section>
       <section
         id="why-choose"
-        className="relative bg-orange-400 min-h-screen flex items-center flex-col pb-40"
+        className="relative bg-orange-400 min-h-screen flex items-center flex-col pb-40 px-4"
       >
         <h1 className="text-4xl font-bold text-white text-center mt-4 max-w-[600px]">
           Why Forward-Thinking Businesses Choose Bhives.ai?
         </h1>
-        <p className="text-gray-50 text-xl font-semibold max-w-[500px] text-center mt-6">
+        <p className="text-gray-50 font-semibold text-lg lg:text-xl max-w-[500px] text-center mt-6">
           Join the elite group of businesses revolutionizing their industries
           with our AI solutions.
         </p>
@@ -418,20 +372,20 @@ export default function Home() {
           ))}
         </ul>
         <Link href="#contact">
-          <button className="bg-white border-2 border-white text-orange-500 font-bold px-6 py-3 rounded-lg mt-16 hover:bg-orange-400 hover:text-white transition-all ease-in-out duration-300">
+          <button className="bg-white border-2 border-white text-orange-500 font-bold px-6 py-3 rounded-lg mt-16 lg:mb-40 xl:mb-80 hover:bg-orange-400 hover:text-white transition-all ease-in-out duration-300">
             Start Your AI Transformation Today
           </button>
         </Link>
-        <div className="waves layer2 absolute -bottom-[120px] xl:-bottom-[240px] z-10" />
+        <div className="waves layer2 absolute -bottom-[40px] z-10" />
       </section>
       <section
         id="services"
-        className="relative min-h-screen flex items-center flex-col mt-40"
+        className="relative min-h-screen flex items-center flex-col mt-20 lg:mt-40"
       >
         <h1 className="text-4xl font-bold text-black text-center mt-4 max-w-[600px]">
           Our AI Automation Services
         </h1>
-        <p className="text-gray-600 text-xl font-semibold max-w-[700px] text-center mt-6">
+        <p className="text-gray-600 text-xl font-semibold max-w-[700px] text-center mt-6 px-4">
           Revolutionize your business operations with our cutting-edge AI
           solutions. Experience the power of intelligent automation across every
           aspect of your organization.
@@ -487,17 +441,17 @@ export default function Home() {
           </div>
         </div>
         <div className="mt-20 py-10 w-full flex flex-col justify-center items-center bg-orange-400">
-          <h1 className="text-4xl font-bold text-white text-center max-w-[600px]">
+          <h1 className="text-3xl lg:text-4xl font-bold text-white text-center max-w-[600px] px-4">
             Ready to start your AI automation journey?
           </h1>
           <Link href="#contact">
-            <button className="bg-white border-2 border-white text-orange-400 font-bold px-6 py-3 rounded-lg mt-4 hover:bg-orange-400 hover:text-white transition-all ease-in-out duration-300">
+            <button className="bg-white border-2 border-white text-orange-400 font-semibold px-6 py-3 rounded-lg mt-4 hover:bg-orange-400 hover:text-white transition-all ease-in-out duration-300">
               Schedule Your Free Consultation
             </button>
           </Link>
         </div>
       </section>
-      <section id="team" className="team-section py-20 bg-gray-900">
+      <section id="team" className="team-section py-10 lg:py-20 bg-gray-900">
         <div className="max-w-[1260px] md:mx-4 lg:mx-auto px-4">
           <h2 className="text-4xl text-white font-bold text-center mb-10 underline underline-offset-8">
             Our AI Visionaries
@@ -550,7 +504,7 @@ export default function Home() {
         </div>
       </section>
       <section id="contact" className="relative bg-orange-400 py-16 bg-cover">
-        <div className="waves layer1 absolute -top-[70px] md:-top-[100px] lg:-top-[200px]" />
+        <div className="waves layer1 absolute -top-[60px] md:-top-[100px] lg:-top-[200px]" />
         <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-4xl text-white font-bold text-center mt-20 xl:mt-40">
             Unleash AI for Your Business

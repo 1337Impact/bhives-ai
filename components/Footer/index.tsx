@@ -62,7 +62,7 @@ export default function Footer() {
             </a>
           </div>
         </div>
-        <div className="footer-section mb-8 min-w-[200px] pr-5 flex-1">
+        <div className="mb-8 min-w-[200px] pr-5 flex-1">
           <ul className="list-none p-0">
             <li className="mb-2">
               <a
@@ -121,7 +121,7 @@ export default function Footer() {
             </li>
           </ul>
         </div>
-        <div className="footer-section mb-8 min-w-[200px] pr-5 flex-1">
+        <div className="mb-8 min-w-[200px] pr-5 flex-1">
           <p className="flex items-center mb-4">
             <FaMapMarkerAlt className="text-orange-400 mr-2" />
             123 AI Street, Tech City, 12345
@@ -141,14 +141,14 @@ export default function Footer() {
             Get in Touch
           </button>
         </div>
-        <div className="footer-section mb-8 min-w-[200px] pr-5 flex-1">
+        <div className="mb-8 min-w-[180px] pr-5 flex-1">
           <p className="leading-6 mb-4 text-sm">
             Subscribe to our newsletter for the latest AI insights and updates.
           </p>
-          <form className="newsletter-form flex mt-4">
+          <form className="flex mt-4">
             <input
               type="email"
-              className="flex-grow p-2 bg-[rgba(255,255,255,0.1)] text-white placeholder-[rgba(255,255,255,0.6)] border-none rounded-l"
+              className="flex-grow w-20 p-2 bg-[rgba(255,255,255,0.1)] text-white placeholder-[rgba(255,255,255,0.6)] border-none rounded-l"
               placeholder="Your email address"
               required
             />
@@ -161,7 +161,7 @@ export default function Footer() {
           </form>
         </div>
       </div>
-      <div className="footer-bottom text-center mt-8 pt-5 border-t border-[rgba(255,255,255,0.1)] relative z-10">
+      <div className="text-center mt-8 pt-5 border-t border-[rgba(255,255,255,0.1)] relative z-10">
         <p className="mb-2 text-sm">
           &copy; 2024 Bhives.ai. All rights reserved.
         </p>
