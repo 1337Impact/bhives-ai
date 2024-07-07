@@ -365,7 +365,7 @@ export default async function Home() {
       </section>
       <section
         id="why-choose"
-        className="scroll-mt-20 relative bg-orange-400 min-h-screen flex items-center flex-col pb-40 px-4"
+        className="scroll-mt-20 relative bg-orange-400 min-h-screen flex items-center flex-col pt-14 pb-40 px-4"
       >
         <h1 className="text-4xl font-bold text-white text-center mt-4 max-w-[600px]">
           Why Forward-Thinking Businesses Choose Bhives.ai?
@@ -391,11 +391,11 @@ export default async function Home() {
             Start Your AI Transformation Today
           </button>
         </Link>
-        <div className="waves layer2 absolute -bottom-[40px] z-10" />
+        <div className="waves layer2 absolute -bottom-[40px]" />
       </section>
       <section
         id="services"
-        className="scroll-mt-20 relative min-h-screen flex items-center flex-col mt-20 lg:mt-40"
+        className="scroll-mt-20 relative min-h-screen flex items-center flex-col mt-20 md:mt-0"
       >
         <h1 className="text-4xl font-bold text-black text-center mt-4 max-w-[600px]">
           Our AI Automation Services
