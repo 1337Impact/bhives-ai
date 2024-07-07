@@ -3,7 +3,9 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/Footer";
-import ScrollButton from "@/components/ScrollToTop";
+import ScrollToTop from "@/components/ScrollToTop";
+import { Suspense } from "react";
+import Loading from "./loading";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,9 +22,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${inter.className} relative`}>
-        <Navbar /> {children}
-        <Footer />
-        <ScrollButton />
+        <Suspense fallback={<Loading />}>
+          <Navbar /> {children}
+          <ScrollToTop />
+          </Suspense>
       </body>
     </html>
   );

@@ -21,6 +21,7 @@ import TeamCard from "@/components/Cards/TeamCard";
 import TechStack from "@/components/TeckStack";
 import FAQComponent from "@/components/FAQComponent";
 import ContactForm from "@/components/ContactForm";
+import Footer from "@/components/Footer";
 
 const itemsData = [
   {
@@ -303,7 +304,8 @@ const contactData = [
   },
 ];
 
-export default function Home() {
+export default async function Home() {
+  await new Promise((resolve) => setTimeout(resolve, 1000));
   return (
     <main className="relative">
       <section
@@ -530,6 +532,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <Footer />
     </main>
   );
 }

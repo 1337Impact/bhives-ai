@@ -6,30 +6,66 @@ import Link from "next/link";
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const [activeSection, setActiveSection] = useState("");
+
+  useEffect(() => {
+    const sections = document.querySelectorAll("section");
+    const observerOptions = {
+      root: null,
+      rootMargin: "0px",
+      threshold: 0.4,
+    };
+
+    const observerCallback = (entries: any) => {
+      entries.forEach((entry: any) => {
+        if (entry.isIntersecting) {
+          console.log("section: ",  entry.target.id);
+          setActiveSection(entry.target.id);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(
+      observerCallback,
+      observerOptions
+    );
+    sections.forEach((section) => observer.observe(section));
+
+    return () => {
+      sections.forEach((section) => observer.unobserve(section));
+    };
+  }, []);
+
   const links = [
     {
       name: "Why Us",
       href: "#why-choose",
+      id: "why-choose",
     },
     {
       name: "Services",
       href: "#services",
+      id: "services",
     },
     {
       name: "Our Process",
       href: "#process",
+      id: "process",
     },
     {
       name: "Team",
       href: "#team",
+      id: "team",
     },
     {
       name: "Tech Stack",
       href: "#tech-stack",
+      id: "tech-stack",
     },
     {
       name: "FAQ",
       href: "#faq",
+      id: "faq",
     },
   ];
 
@@ -49,9 +85,9 @@ export default function Navbar() {
             <Link key={link.name} href={link.href}>
               <div
                 onClick={() => setIsMenuOpen(false)}
-                className={
-                  "cursor-pointer hover:text-slate-600 hover:underline hover:underline-offset-4"
-                }
+                className={`${
+                  activeSection === link.id && "underline underline-offset-4"
+                } cursor-pointer hover:text-slate-600 hover:underline hover:underline-offset-4`}
               >
                 {link.name}
               </div>
