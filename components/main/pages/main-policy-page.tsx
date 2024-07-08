@@ -13,7 +13,7 @@ const MainPolicyPage = () => {
             {mainPagePolicyConfig.description}
           </h2>
 
-          {mainPagePolicyConfig.paragraphs.map((item) => (
+          {mainPagePolicyConfig.paragraphs.map((item: any) => (
             <>
               <p className="mt-6 text-xl font-semibold text-gray-900">
                 {item.title}

@@ -307,7 +307,7 @@ const contactData = [
   },
 ];
 
-export default async function Home() {
+export default function Home() {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -476,7 +476,7 @@ export default async function Home() {
               Our Vision
             </h3>
             <p className="text-lg text-gray-600 mb-6">
-              At Bhives.ai, we're driven by a singular vision: to democratize AI
+              At Bhives.ai, we&apos;re driven by a singular vision: to democratize AI
               and empower businesses of all sizes with cutting-edge automation
               solutions. Our team of experts is committed to pushing the
               boundaries of AI technology while making it accessible and

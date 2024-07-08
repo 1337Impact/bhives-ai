@@ -1,4 +1,4 @@
-import MainFooter from "@/components/main/footer/main-footer";
+// import MainFooter from "@/components/main/footer/main-footer";
 import { mainCategoryConfig } from "@/config/main";
 import { sharedNotFoundConfig } from "@/config/shared";
 import { LogoIcon } from "@/icons";
@@ -52,7 +52,7 @@ const SharedNotFound = () => {
           </div>
         </div>
       </main>
-      <MainFooter />
+      {/* <MainFooter /> */}
     </div>
   );
 };

@@ -10,7 +10,7 @@ const MainTermsPage = () => {
             {mainPageTermsConfig.title}
           </p>
 
-          {mainPageTermsConfig.paragraphs.map((item) => (
+          {mainPageTermsConfig.paragraphs.map((item: any) => (
             <>
               <p className="text-md mt-8 leading-8 text-gray-600">
                 {item.description}

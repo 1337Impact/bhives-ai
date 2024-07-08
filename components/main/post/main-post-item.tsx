@@ -50,7 +50,7 @@ const MainPostItem: React.FC<MainPostItemProps> = async ({ post }) => {
 
   return (
     <div className="group max-w-md mx-auto bg-white shadow-md shadow-gray-300 border-2 border-gray-500 rounded-lg hover:bg-gray-50">
-      <Link href={`/posts/${post.slug}`}>
+      <Link href={`/blog/posts/${post.slug}`}>
         <article className="relative isolate flex flex-col gap-2 px-5 py-5">
           <div className="relative aspect-[2/1]">
             {post.image ? (
