@@ -86,7 +86,7 @@ export async function generateMetadata({
             post.title as string,
             truncateDescription as string,
             [post.categories?.title as string] as string[],
-            slug as string,
+            slug as string
           ),
           width: 1200,
           height: 630,
@@ -103,7 +103,7 @@ export async function generateMetadata({
           post.title as string,
           truncateDescription as string,
           [post.categories?.title as string] as string[],
-          slug as string,
+          slug as string
         ),
       ],
     },
@@ -184,7 +184,7 @@ export default async function PostPage({ params }: PostPageProps) {
                     title={post.title as string}
                     text={post.description as string}
                     url={`${getUrl()}${encodeURIComponent(
-                      `/posts/${post.slug}`,
+                      `/posts/${post.slug}`
                     )}`}
                     totalComments={comments?.length}
                     isBookmarked={isBookmarked}
@@ -205,7 +205,7 @@ export default async function PostPage({ params }: PostPageProps) {
                   title={post.title as string}
                   text={post.description as string}
                   url={`${getUrl()}${encodeURIComponent(
-                    `/posts/${post.slug}`,
+                    `/posts/${post.slug}`
                   )}`}
                   totalComments={comments?.length}
                   isBookmarked={isBookmarked}

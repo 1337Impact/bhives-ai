@@ -40,13 +40,18 @@ export default async function MainLayout({
     notFound();
   }
   return (
-    <>
-      <DetailPostHeader title={post.title as string} />
-      <div className="min-h-full bg-gray-100 py-3">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-4xl">{children}</div>
-        </div>
-      </div>
-    </>
+    <div className="min-h-screen bg-gray-100 py-3 pt-32">
+      <div className="mx-auto max-w-7xl px-0 sm:px-8 text-3xl text-gray-600">Comming soon...</div>
+    </div>
   );
+  // return (
+  //   <>
+  //     <DetailPostHeader title={post.title as string} />
+  //     <div className="min-h-full bg-gray-100 py-3">
+  //       <div className="mx-auto max-w-7xl px-6 lg:px-8">
+  //         <div className="mx-auto max-w-4xl">{children}</div>
+  //       </div>
+  //     </div>
+  //   </>
+  // );
 }
