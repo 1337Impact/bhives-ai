@@ -18,7 +18,8 @@ export default async function HomePage({ searchParams }: HomePageProps) {
   // Fetch total pages
   const { count } = await supabase
     .from("posts")
-    .select("*", { count: "exact", head: true });
+    .select("*", { count: "exact", head: true })
+    .eq("published", true);
 
   // Pagination
   const limit = 10;
@@ -46,8 +47,9 @@ export default async function HomePage({ searchParams }: HomePageProps) {
   }
 
   return (
-    <>
-      <div className="space-y-6">
+    <main className="max-w-[1260px] md:mx-4 lg:mx-auto px-4 lg:px-8 py-20">
+      <h1 className="text-4xl font-bold my-10 mx-auto text-center">Latest Posts</h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {data?.map((post) => (
           <Suspense key={v4()} fallback={<MainPostItemLoading />}>
             <MainPostItem post={post} />
@@ -63,6 +65,6 @@ export default async function HomePage({ searchParams }: HomePageProps) {
           pageUrl="?page="
         />
       )}
-    </>
+    </main>
   );
 }
