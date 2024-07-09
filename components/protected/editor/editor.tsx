@@ -249,7 +249,7 @@ const Editor: FC<EditorProps> = ({
 
     if (response) {
       toast.success(protectedEditorConfig.successMessage);
-      router.push(`/editor/posts?search=refresh`);
+      router.push(`/blog/posts/${response.slug}`);
     } else {
       toast.error(protectedEditorConfig.errorMessage);
     }

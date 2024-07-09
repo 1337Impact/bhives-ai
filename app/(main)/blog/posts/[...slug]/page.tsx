@@ -130,7 +130,6 @@ export default async function PostPage({ params }: PostPageProps) {
           <div className="mx-auto max-w-4xl">
             <div className="mx-auto max-w-4xl rounded-lg bg-white px-6 py-4 shadow-sm shadow-gray-300 ring-1 ring-black/5 sm:px-14 sm:py-10">
               <div className="relative mx-auto max-w-4xl py-2">
-                {/* Heading */}
                 <DetailPostHeading
                   id={post.id}
                   title={post.title as string}
@@ -141,26 +140,9 @@ export default async function PostPage({ params }: PostPageProps) {
                   category={post.categories?.title as string}
                   readTime={readTime as ReadTimeResults}
                 />
-                {/* Top Floatingbar */}
-                <div className="mx-auto">
-                  <DetailPostFloatingBar
-                    id={post.id as string}
-                    title={post.title as string}
-                    text={post.description as string}
-                    url={`${getUrl()}${encodeURIComponent(
-                      `/posts/${post.slug}`,
-                    )}`}
-                    totalComments={0}
-                    isBookmarked={false}
-                  />
-                </div>
               </div>
               {/* Content */}
               <div className="relative mx-auto max-w-3xl border-slate-500/50 py-5">
-                {/* <div
-                  className="lg:prose-md prose"
-                  dangerouslySetInnerHTML={{ __html: post.content || "" }}
-                /> */}
                 <DetailPostRender content={post.content as string} />
               </div>
               <div className="mx-auto mt-10">
