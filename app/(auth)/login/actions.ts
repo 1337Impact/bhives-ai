@@ -17,7 +17,6 @@ export async function login(formData: FormData) {
     console.error(error);
     redirect("/login?error=login-failed");
   }
-  console.log(data);
   if (data.user) {
     revalidatePath("/login");
     if (data.user.role === "admin") {

@@ -73,7 +73,7 @@ export async function generateMetadata({
             post.title as string,
             truncateDescription as string,
             [post.categories?.title as string] as string[],
-            slug as string,
+            slug as string
           ),
           width: 1200,
           height: 630,
@@ -90,7 +90,7 @@ export async function generateMetadata({
           post.title as string,
           truncateDescription as string,
           [post.categories?.title as string] as string[],
-          slug as string,
+          slug as string
         ),
       ],
     },
@@ -124,45 +124,36 @@ export default async function PostPage({ params }: PostPageProps) {
   const readTime = readingTime(post.content ? post.content : "");
 
   return (
-    <>
-      <div className="min-h-full bg-gray-100 py-3">
-        <div className="mx-auto max-w-7xl px-0 sm:px-8">
-          <div className="mx-auto max-w-4xl">
-            <div className="mx-auto max-w-4xl rounded-lg bg-white px-6 py-4 shadow-sm shadow-gray-300 ring-1 ring-black/5 sm:px-14 sm:py-10">
-              <div className="relative mx-auto max-w-4xl py-2">
-                <DetailPostHeading
-                  id={post.id}
-                  title={post.title as string}
-                  image={post.image as string}
-                  authorName={post.profiles.full_name as string}
-                  authorImage={post.profiles.avatar_url as string}
-                  date={format(parseISO(post.updated_at!), "MMMM dd, yyyy")}
-                  category={post.categories?.title as string}
-                  readTime={readTime as ReadTimeResults}
-                />
-              </div>
-              {/* Content */}
-              <div className="relative mx-auto max-w-3xl border-slate-500/50 py-5">
-                <DetailPostRender content={post.content as string} />
-              </div>
-              <div className="mx-auto mt-10">
-                {/* Bottom Floatingbar */}
-                <DetailPostFloatingBar
-                  id={post.id as string}
-                  title={post.title as string}
-                  text={post.description as string}
-                  url={`${getUrl()}${encodeURIComponent(
-                    `/posts/${post.slug}`,
-                  )}`}
-                  totalComments={0}
-                  isBookmarked={false}
-                />
-              </div>
-            </div>
-          </div>
+    <div className="min-h-full w-full">
+      <div className="mx-auto max-w-4xl rounded-lg bg-white px-6 py-4 shadow-sm shadow-gray-300 ring-1 ring-black/5 sm:px-14 sm:py-10">
+        <div className="relative mx-auto max-w-4xl py-2">
+          <DetailPostHeading
+            id={post.id}
+            title={post.title as string}
+            image={post.image as string}
+            authorName={post.profiles.full_name as string}
+            authorImage={post.profiles.avatar_url as string}
+            date={format(parseISO(post.updated_at!), "MMMM dd, yyyy")}
+            category={post.categories?.title as string}
+            readTime={readTime as ReadTimeResults}
+          />
         </div>
-        <DetailPostScrollUpButton />
+        {/* Content */}
+        <div className="relative mx-auto max-w-3xl border-slate-500/50 py-5">
+          <DetailPostRender content={post.content as string} />
+        </div>
+        <div className="mx-auto mt-10">
+          {/* Bottom Floatingbar */}
+          <DetailPostFloatingBar
+            id={post.id as string}
+            title={post.title as string}
+            text={post.description as string}
+            url={`${getUrl()}${encodeURIComponent(`/posts/${post.slug}`)}`}
+            totalComments={0}
+            isBookmarked={false}
+          />
+        </div>
       </div>
-    </>
+    </div>
   );
 }
