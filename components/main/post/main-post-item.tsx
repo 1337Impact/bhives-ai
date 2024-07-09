@@ -1,6 +1,6 @@
 import { mainPostConfig } from "@/config/main";
 import { getMinutes, shimmer, toBase64 } from "@/lib/utils";
-import { Comment, PostWithCategoryWithProfile } from "@/types/collection";
+import { PostWithCategoryWithProfile } from "@/types/collection";
 import { createClient } from "@/utils/supabase/server";
 import { format, parseISO } from "date-fns";
 import { CalendarIcon, Clock10Icon, MessageCircleIcon } from "lucide-react";
@@ -25,20 +25,7 @@ async function getPublicImageUrl(postId: string, fileName: string) {
   return "/images/not-found.jpg";
 }
 
-async function getComments(postId: string) {
-  const supabase = createClient();
-  const { data: comments, error } = await supabase
-    .from("comments")
-    .select()
-    .eq("post_id", postId)
-    .order("created_at", { ascending: true })
-    .returns<Comment[]>();
 
-  if (error) {
-    console.error(error.message);
-  }
-  return comments;
-}
 
 interface MainPostItemProps {
   post: PostWithCategoryWithProfile;
@@ -46,7 +33,6 @@ interface MainPostItemProps {
 
 const MainPostItem: React.FC<MainPostItemProps> = async ({ post }) => {
   const readTime = readingTime(post.content ? post.content : "");
-  const comments = await getComments(post.id ? post.id : "");
 
   return (
     <div className="group max-w-md mx-auto bg-white shadow-md shadow-gray-300 border-2 border-gray-500 rounded-lg hover:bg-gray-50">

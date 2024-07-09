@@ -1,7 +1,7 @@
 import Editor from "@/components/protected/editor/editor";
 import { Separator } from "@/components/ui/separator";
 import { protectedEditorConfig } from "@/config/protected";
-import { Draft } from "@/types/collection";
+import { Post } from "@/types/collection";
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
@@ -31,10 +31,10 @@ async function getUserId() {
 async function getPost(postId: string, userId: string) {
   const supabase = createClient();
   const { data, error } = await supabase
-    .from("drafts")
+    .from("posts")
     .select("*")
     .match({ id: postId, author_id: userId })
-    .single<Draft>();
+    .single<Post>();
 
   if (error) {
     console.log("Error has occured while getting post data");
@@ -153,7 +153,7 @@ export default async function PostEditorPage({ params }: PostEditorPageProps) {
   // Gallery images setup
   const galleryImageFileNames = await getGalleryImageFileNames(
     bucketNameGalleryImage,
-    userId,
+    userId || "",
     params.postId,
   );
   const galleryImagePublicUrls = await getGalleryImageUrls(

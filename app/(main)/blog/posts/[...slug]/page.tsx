@@ -1,6 +1,4 @@
-import { GetBookmark } from "@/actions/bookmark/get-bookmark";
 import {
-  DetailPostComment,
   DetailPostFloatingBar,
   DetailPostHeading,
 } from "@/components/detail/post";
@@ -25,18 +23,6 @@ interface PostPageProps {
   params: {
     slug: string[];
   };
-}
-
-async function getBookmark(postId: string, userId: string) {
-  if (postId && userId) {
-    const bookmark = {
-      id: postId,
-      user_id: userId,
-    };
-    const response = await GetBookmark(bookmark);
-
-    return response;
-  }
 }
 
 async function getPost(params: { slug: string[] }) {
@@ -110,21 +96,6 @@ export async function generateMetadata({
   };
 }
 
-async function getComments(postId: string) {
-  const supabase = createClient();
-  const { data: comments, error } = await supabase
-    .from("comments")
-    .select("*, profiles(*)")
-    .eq("post_id", postId)
-    .order("created_at", { ascending: true })
-    .returns<CommentWithProfile[]>();
-
-  if (error) {
-    console.error(error.message);
-  }
-  return comments;
-}
-
 export default async function PostPage({ params }: PostPageProps) {
   const supabase = createClient();
   // Get post data
@@ -149,14 +120,6 @@ export default async function PostPage({ params }: PostPageProps) {
       session?.user?.user_metadata.avatar_url;
   }
 
-  // Get bookmark status
-  const isBookmarked = await getBookmark(
-    post.id as string,
-    session?.user.id as string,
-  );
-
-  // Get comments
-  const comments = await getComments(post.id as string);
   const readTime = readingTime(post.content ? post.content : "");
 
   return (
@@ -186,8 +149,8 @@ export default async function PostPage({ params }: PostPageProps) {
                     url={`${getUrl()}${encodeURIComponent(
                       `/posts/${post.slug}`,
                     )}`}
-                    totalComments={comments?.length}
-                    isBookmarked={isBookmarked}
+                    totalComments={0}
+                    isBookmarked={false}
                   />
                 </div>
               </div>
@@ -207,16 +170,12 @@ export default async function PostPage({ params }: PostPageProps) {
                   url={`${getUrl()}${encodeURIComponent(
                     `/posts/${post.slug}`,
                   )}`}
-                  totalComments={comments?.length}
-                  isBookmarked={isBookmarked}
+                  totalComments={0}
+                  isBookmarked={false}
                 />
               </div>
             </div>
           </div>
-          <DetailPostComment
-            postId={post.id as string}
-            comments={comments as CommentWithProfile[]}
-          />
         </div>
         {/* <DetailPostScrollUpButton /> */}
       </div>

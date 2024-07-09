@@ -11,7 +11,7 @@ export async function UpdatePost(context: z.infer<typeof postUpdateSchema>) {
     const post = postUpdateSchema.parse(context);
 
     const { data, error } = await supabase
-      .from("drafts")
+      .from("posts")
       .update({
         id: post.id,
         title: post.title,

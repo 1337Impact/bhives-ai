@@ -41,16 +41,10 @@ export async function updateSession(request: NextRequest) {
   // refreshing the auth token
   const { data: userData } = await supabase.auth.getUser();
   if (
-    request.nextUrl.pathname.startsWith("/orders") ||
-    request.nextUrl.pathname.startsWith("/admin")
+    request.nextUrl.pathname.startsWith("/dashboard")
   ) {
     if (userData && userData.user) {
       if (userData.user?.role === "admin") {
-        return NextResponse.next();
-      } else if (
-        userData.user?.role === "waiter" &&
-        request.nextUrl.pathname.startsWith("/orders")
-      ) {
         return NextResponse.next();
       } else {
         const url = request.nextUrl.clone();

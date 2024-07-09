@@ -4,7 +4,7 @@ import PostTableTitle from "@/components/protected/post/post-table-title";
 import { columns } from "@/components/protected/post/table/columns";
 import { DataTable } from "@/components/protected/post/table/data-table";
 import { protectedPostConfig } from "@/config/protected";
-import { Draft } from "@/types/collection";
+import { Post } from "@/types/collection";
 import type { Database } from "@/types/supabase";
 import { createClient } from "@/utils/supabase/server";
 import { Metadata } from "next";
@@ -34,17 +34,14 @@ const PostsPage: FC<PostsPageProps> = async ({ searchParams }) => {
   const { data, error } = await supabase
     .from("posts")
     .select(`*, categories(*)`)
-    .order("created_at", { ascending: false });
-  if (error){
-    console.log("error: ", error);
-  }
-    console.log(data);
+    .order("created_at", { ascending: false })
+    .returns<Post[]>();
 
   if (!data || error || !data.length) {
     notFound;
   }
   return (
-    <main className="max-w-[1300px] mx-auto pt-40">
+    <>
       <div className="mx-auto max-w-5xl p-4 sm:p-6 lg:p-8">
         {data?.length && data?.length > 0 ? (
           <>
@@ -56,7 +53,7 @@ const PostsPage: FC<PostsPageProps> = async ({ searchParams }) => {
         )}
         <PostRefreshOnce />
       </div>
-    </main>
+    </>
   );
 };
 

@@ -21,7 +21,7 @@ export async function login(formData: FormData) {
   if (data.user) {
     revalidatePath("/login");
     if (data.user.role === "admin") {
-      redirect("/admin");
+      redirect("/dashboard");
     } else if (data.user.role === "waiter") {
       redirect("/orders");
     }

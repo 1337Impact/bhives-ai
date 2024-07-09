@@ -29,7 +29,7 @@ export type CategoryType = {
   id: string;
   title: string;
   slug: string;
-  icon: Icon;
+  icon?: Icon;
 };
 
 export type DashBoardType = {

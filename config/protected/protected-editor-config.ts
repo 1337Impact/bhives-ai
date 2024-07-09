@@ -37,7 +37,7 @@ const protectedEditorConfig = {
     "Please provide a short description of your blog post",
   placeholderCategory: "Please choose a category",
   placeholderContent: "Type here your blog post content",
-  defaultCategoryId: "4db30a13-2797-4c7d-a0ce-e0c127287a39", // Science
+  defaultCategoryId: "c3404e95-6be6-437d-955a-37e1b201fec2", // Ai
   successMessage: "Your post has been updated",
   errorMessage: "Error updating your post",
   chooseFile: "Upload Files",

@@ -37,7 +37,7 @@ const PostCreateButton = () => {
     return () => subscription.unsubscribe();
   }, [session?.user.id, supabase.auth]);
 
-  async function createPost() {
+  async function createPostHandler() {
     setIsLoading(true);
 
     if (session?.user.id) {
@@ -47,13 +47,14 @@ const PostCreateButton = () => {
       };
 
       const response = await CreatePost(post);
+      console.log(response);
 
       if (response) {
         toast.success(protectedPostConfig.successCreate);
         // This forces a cache invalidation.
         router.refresh();
         // Redirect to the new post
-        router.push("/editor/posts/" + response.id);
+        router.push("/dashboard/blog/posts/edit/" + response.id);
         setIsLoading(false);
       } else {
         setIsLoading(false);
@@ -69,7 +70,7 @@ const PostCreateButton = () => {
     <>
       <button
         type="button"
-        onClick={createPost}
+        onClick={createPostHandler}
         className="flex items-center rounded-md bg-gray-900 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-600"
       >
         {isLoading && <SpinnerIcon className="mr-2 h-4 w-4 animate-spin" />}

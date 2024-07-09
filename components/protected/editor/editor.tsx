@@ -30,10 +30,10 @@ import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
-import { mainCategoryConfig } from "@/config/main";
+// import { mainCategoryConfig } from "@/config/main";
 import { protectedEditorConfig, protectedPostConfig } from "@/config/protected";
 import { postEditFormSchema } from "@/lib/validation/post";
-import { Draft } from "@/types/collection";
+import { Post } from "@/types/collection";
 import { PaperClipIcon } from "@heroicons/react/20/solid";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Uppy from "@uppy/core";
@@ -43,7 +43,7 @@ import { DashboardModal } from "@uppy/react";
 import Tus from "@uppy/tus";
 import { SparklesIcon, Loader2 as SpinnerIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import slugify from "react-slugify";
@@ -56,13 +56,15 @@ import {
   EditorUploadGalleryImageTableEmpty,
 } from "./upload";
 import { defaultEditorContent } from "./wysiwyg/default-content";
+import { createClient } from "@/utils/supabase/client";
+import { CategoryType } from "@/types";
 
 export const dynamic = "force-dynamic";
 
 type FormData = z.infer<typeof postEditFormSchema>;
 
 interface EditorProps {
-  post: Draft;
+  post: Post;
   userId: string;
   coverImageFileName: string;
   coverImagePublicUrl: string;
@@ -81,6 +83,25 @@ const Editor: FC<EditorProps> = ({
   galleryImagePublicUrls,
 }) => {
   const router = useRouter();
+
+  const [categoriers, setCategoriers] = useState<CategoryType[]>([]);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const supabase = createClient();
+      const { data, error } = await supabase.from("categories").select("id, slug, title");
+
+      if (error) {
+        console.log("Error has occured while getting categories!");
+        console.log("Error message : ", error.message);
+        return;
+      }
+
+      data && setCategoriers(data);
+    };
+
+    fetchCategories();
+  }, []);
 
   // These are the values that will be used to upload the image
   const allowedNumberOfImages = 9 - galleryImagePublicUrls.length;
@@ -323,7 +344,7 @@ const Editor: FC<EditorProps> = ({
                         defaultValue={field.value}
                         className="flex flex-col space-y-1"
                       >
-                        {mainCategoryConfig.map(
+                        {categoriers.map(
                           (category) =>
                             category.slug !== "/" && (
                               <FormItem

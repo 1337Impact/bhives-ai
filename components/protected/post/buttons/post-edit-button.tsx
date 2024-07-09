@@ -94,7 +94,7 @@ const PostEditButton: FC<PostEditButtonProps> = ({ id }) => {
               className="flex w-full"
               onClick={() => {
                 setShowLoadingAlert(true);
-                router.push(`/editor/posts/${id}`);
+                router.push(`/dashboard/blog/posts/edit/${id}`);
                 setShowLoadingAlert(false);
               }}
             >

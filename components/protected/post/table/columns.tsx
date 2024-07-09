@@ -1,13 +1,13 @@
 "use client";
 
-import { Draft } from "@/types/collection";
+import { Post } from "@/types/collection";
 import { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
 import { DataTableColumnHeader } from "./data-table-column-header";
 import { DataTableRowActions } from "./data-table-row-actions";
 import { categories, statuses } from "./data/data";
 
-export const columns: ColumnDef<Draft>[] = [
+export const columns: ColumnDef<Post>[] = [
   {
     accessorKey: "title",
     header: ({ column }) => (
