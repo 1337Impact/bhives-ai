@@ -2,7 +2,7 @@ import {
   DetailPostFloatingBar,
   DetailPostHeading,
 } from "@/components/detail/post";
-// import { DetailPostScrollUpButton } from "@/components/detail/post/buttons";
+import { DetailPostScrollUpButton } from "@/components/detail/post/buttons";
 import { seoData } from "@/config/root/seo";
 import { getOgImageUrl, getUrl } from "@/lib/utils";
 import {
@@ -177,7 +177,7 @@ export default async function PostPage({ params }: PostPageProps) {
             </div>
           </div>
         </div>
-        {/* <DetailPostScrollUpButton /> */}
+        <DetailPostScrollUpButton />
       </div>
     </>
   );

@@ -1,6 +1,5 @@
 import { DetailPostHeader } from "@/components/detail/post";
 import { PostWithCategoryWithProfile } from "@/types/collection";
-import type { Database } from "@/types/supabase";
 import { createClient } from "@/utils/supabase/server";
 import { notFound } from "next/navigation";
 
