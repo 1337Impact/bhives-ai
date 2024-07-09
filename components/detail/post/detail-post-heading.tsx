@@ -43,11 +43,11 @@ const DetailPostHeading: FC<DetailPostHeadingProps> = async ({
     <section className="flex flex-col items-start justify-between">
       <div className="relative w-full">
         {image && (
-          <Image
-            src={await getPublicImageUrl(id, image)}
+          <img
+            src={image}
             alt={title}
-            width={512}
-            height={288}
+            // width={512}
+            // height={288}
             className="h-[288px] w-full rounded-2xl bg-gray-100 object-cover"
             // placeholder={`data:image/svg+xml;base64,${toBase64(
             //   shimmer(512, 288)

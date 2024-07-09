@@ -58,6 +58,7 @@ import {
 import { defaultEditorContent } from "./wysiwyg/default-content";
 import { createClient } from "@/utils/supabase/client";
 import { CategoryType } from "@/types";
+import UploadImage from "./upload-image";
 
 export const dynamic = "force-dynamic";
 
@@ -83,12 +84,11 @@ const Editor: FC<EditorProps> = ({
   galleryImagePublicUrls,
 }) => {
   const router = useRouter();
-
+  const supabase = createClient();
   const [categoriers, setCategoriers] = useState<CategoryType[]>([]);
 
   useEffect(() => {
     const fetchCategories = async () => {
-      const supabase = createClient();
       const { data, error } = await supabase.from("categories").select("id, slug, title");
 
       if (error) {
@@ -131,92 +131,6 @@ const Editor: FC<EditorProps> = ({
 
   // Uppy instance for cover photo upload
 
-  var uppyCover = new Uppy({
-    id: "cover-image",
-    autoProceed: false,
-    debug: false,
-    allowMultipleUploadBatches: true,
-    restrictions: {
-      maxFileSize: 6000000,
-      maxNumberOfFiles: 1,
-    },
-  }).use(Tus, {
-    endpoint: supabaseUploadURL,
-    headers: {
-      authorization: `Bearer ${token}`,
-    },
-    chunkSize: 6 * 1024 * 1024,
-    allowedMetaFields: [
-      "bucketName",
-      "objectName",
-      "contentType",
-      "cacheControl",
-    ],
-  });
-
-  uppyCover.on("file-added", (file) => {
-    file.meta = {
-      ...file.meta,
-      bucketName: bucketNameCoverImage,
-      objectName: `${userId}/${post.id}/${file.name}`,
-      contentType: file.type,
-    };
-  });
-
-  uppyCover.on("complete", async (result) => {
-    if (result.successful.length > 0) {
-      toast.success(protectedEditorConfig.successMessageImageUpload);
-      router.refresh();
-    } else {
-      toast.error(protectedEditorConfig.errorMessageImageUpload);
-    }
-    setShowCoverModal(false);
-  });
-
-  // Uppy instance for gallery uploads
-  var uppyGallery = new Uppy({
-    id: "gallery-image",
-    autoProceed: false,
-    debug: false,
-    allowMultipleUploadBatches: true,
-    restrictions: {
-      maxFileSize: 6000000,
-      maxNumberOfFiles: allowedNumberOfImages,
-    },
-  }).use(Tus, {
-    endpoint: supabaseUploadURL,
-    headers: {
-      authorization: `Bearer ${token}`,
-    },
-    chunkSize: 6 * 1024 * 1024,
-    allowedMetaFields: [
-      "bucketName",
-      "objectName",
-      "contentType",
-      "cacheControl",
-    ],
-  });
-
-  uppyGallery.on("file-added", (file) => {
-    file.meta = {
-      ...file.meta,
-      bucketName: bucketNameGalleryImage,
-      objectName: `${userId}/${post.id}/${file.name}`,
-      contentType: file.type,
-    };
-  });
-
-  uppyGallery.on("complete", async (result) => {
-    if (result.successful.length > 0) {
-      // Auto save post
-      toast.success(protectedEditorConfig.successMessageImageUpload);
-      router.refresh();
-    } else {
-      toast.error(protectedEditorConfig.errorMessageImageUpload);
-    }
-    setShowGalleryModal(false);
-  });
-
   // Default values for the form
   const defaultValues: Partial<EditorFormValues> = {
     title: post.title ?? "Untitled",
@@ -232,31 +146,44 @@ const Editor: FC<EditorProps> = ({
     defaultValues,
     mode: "onChange",
   });
+  
+  const [coverImg, setCoverImg] = useState<File | null>(null);
 
   async function onSubmit(data: EditorFormValues) {
     setShowLoadingAlert(true);
     setIsSaving(true);
 
-    const response = await UpdatePost({
-      id: post.id,
-      title: data.title,
-      slug: data.slug,
-      image: data.image,
-      description: data.description,
-      content: content,
-      categoryId: data.categoryId,
-    });
-
-    if (response) {
-      toast.success(protectedEditorConfig.successMessage);
-      router.push(`/blog/posts/${response.slug}`);
-    } else {
-      toast.error(protectedEditorConfig.errorMessage);
+    if (coverImg){
+      const { data: uploadedImage, error } = await supabase.storage.from("cover-image").upload(`${coverImg.name}`, coverImg);
+      if (error)
+      {
+          console.log("Error uploading file: ", error.message);
+          return ;
+      }
+      console.log("File uploaded successfully: ", uploadedImage);
+      
+      const response = await UpdatePost({
+        id: post.id,
+        title: data.title,
+        slug: data.slug,
+        image: `https://${projectId}.supabase.co/storage/v1/object/public/${uploadedImage?.fullPath}`,
+        description: data.description,
+        content: content,
+        categoryId: data.categoryId,
+      });
+      
+      if (response) {
+        toast.success(protectedEditorConfig.successMessage);
+        router.push(`/blog/posts/${response.slug}`);
+      } else {
+        toast.error(protectedEditorConfig.errorMessage);
+      }
     }
 
     setIsSaving(false);
     setShowLoadingAlert(false);
   }
+
 
   return (
     <>
@@ -370,128 +297,9 @@ const Editor: FC<EditorProps> = ({
           </Card>
 
           {/* Cover Image */}
-          <Card className="max-w-2xl">
-            <CardHeader>
-              <CardTitle>{protectedEditorConfig.coverImageTitle}</CardTitle>
-              <CardDescription>
-                {protectedEditorConfig.coverImageDescription}
-              </CardDescription>
-            </CardHeader>
-            <Separator className="mb-8" />
-            <CardContent className="space-y-4">
-              {/* Image */}
-              <FormField
-                control={form.control}
-                name="image"
-                render={({ field }) => (
-                  <FormItem className="w-full max-w-xl">
-                    <FormControl>
-                      <Input
-                        placeholder={protectedEditorConfig.placeholderImage}
-                        {...field}
-                        disabled={true}
-                        className="hidden bg-gray-50"
-                      />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
 
-              <div className="flex w-full flex-col">
-                <DashboardModal
-                  uppy={uppyCover}
-                  open={showCoverModal}
-                  onRequestClose={() => setShowCoverModal(false)}
-                  disablePageScrollWhenModalOpen={false}
-                  showSelectedFiles
-                  showRemoveButtonAfterComplete
-                  note={protectedEditorConfig.formImageNote}
-                  proudlyDisplayPoweredByUppy={false}
-                  showLinkToFileUploadResult
-                />
-                {coverImageFileName === "" && (
-                  <div className="col-span-full">
-                    <div className="mb-1 flex items-center gap-x-3">
-                      <button
-                        onClick={() => setShowCoverModal(!showCoverModal)}
-                        type="button"
-                        className="inline-flex items-center rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                      >
-                        <PaperClipIcon className="mr-1 h-4 w-4" />
-                        <span className="">
-                          {protectedEditorConfig.formCoverImageUploadFile}
-                        </span>
-                      </button>
-                    </div>
-                  </div>
-                )}
+          <UploadImage setImgFile={setCoverImg} />
 
-                {coverImageFileName !== "" ? (
-                  <EditorUploadCoverImageItem
-                    userId={userId}
-                    postId={post.id}
-                    fileName={coverImageFileName}
-                    imageUrl={coverImagePublicUrl}
-                  />
-                ) : (
-                  <EditorUploadCoverImagePlaceHolder />
-                )}
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Gallery Images */}
-          <Card className="max-w-2xl">
-            <CardHeader>
-              <CardTitle>{protectedEditorConfig.galleryImageTitle}</CardTitle>
-              <CardDescription>
-                {protectedEditorConfig.galleryImageDescription +
-                  allowedNumberOfImages +
-                  "  images."}
-              </CardDescription>
-            </CardHeader>
-            <Separator className="mb-8" />
-            <CardContent className="space-y-4">
-              <div className="flex w-full flex-col">
-                <DashboardModal
-                  uppy={uppyGallery}
-                  open={showGalleryModal}
-                  onRequestClose={() => setShowGalleryModal(false)}
-                  disablePageScrollWhenModalOpen={false}
-                  showSelectedFiles
-                  showRemoveButtonAfterComplete
-                  note={protectedEditorConfig.formImageNote}
-                  proudlyDisplayPoweredByUppy={false}
-                  showLinkToFileUploadResult
-                />
-                <div className="col-span-full">
-                  <div className="mb-3 flex items-center gap-x-3">
-                    <button
-                      onClick={() => setShowGalleryModal(!showGalleryModal)}
-                      type="button"
-                      className="inline-flex items-center rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                    >
-                      <PaperClipIcon className="mr-1 h-4 w-4" />
-                      <span className="">
-                        {protectedEditorConfig.chooseFile}
-                      </span>
-                    </button>
-                  </div>
-                </div>
-
-                {galleryImagePublicUrls.length > 0 ? (
-                  <EditorUploadGalleryImageTable
-                    userId={userId}
-                    postId={post.id}
-                    fileNames={galleryImageFileNames}
-                    imageUrls={galleryImagePublicUrls}
-                  />
-                ) : (
-                  <EditorUploadGalleryImageTableEmpty />
-                )}
-              </div>
-            </CardContent>
-          </Card>
 
           {/* Short Description */}
           <Card className="max-w-2xl">

@@ -3,7 +3,7 @@ import { DashBoardType } from "@/types";
 import { ClipboardCheck, FolderOpenDot, ScrollText, UsersIcon } from "lucide-react";
 import { FileTextIcon as PostIcon } from "lucide-react";
 
-const dashBoardMenu: DashBoardType = [
+const dashBoardMenu: DashBoardType[] = [
   {
     title: "Blog",
     slug: "/dashboard/blog/posts",

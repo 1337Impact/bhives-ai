@@ -40,15 +40,9 @@ const MainPostItem: React.FC<MainPostItemProps> = async ({ post }) => {
         <article className="relative isolate flex flex-col gap-2 px-5 py-5">
           <div className="relative aspect-[2/1]">
             {post.image ? (
-              <Image
-                src={await getPublicImageUrl(post.id, post.image || "")}
+              <img
+                src={post.image}
                 alt={post.title ?? "Cover"}
-                height={256}
-                width={256}
-                priority
-                // placeholder={`data:image/svg+xml;base64,${toBase64(
-                //   shimmer(256, 256)
-                // )}`}
                 className="absolute inset-0 h-full w-full rounded-lg bg-gray-50 object-cover"
               />
             ) : (
