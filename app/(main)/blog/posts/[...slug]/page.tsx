@@ -1,6 +1,7 @@
 import {
   DetailPostFloatingBar,
   DetailPostHeading,
+  DetailPostRender,
 } from "@/components/detail/post";
 import { DetailPostScrollUpButton } from "@/components/detail/post/buttons";
 import { seoData } from "@/config/root/seo";
@@ -156,10 +157,11 @@ export default async function PostPage({ params }: PostPageProps) {
               </div>
               {/* Content */}
               <div className="relative mx-auto max-w-3xl border-slate-500/50 py-5">
-                <div
+                {/* <div
                   className="lg:prose-md prose"
                   dangerouslySetInnerHTML={{ __html: post.content || "" }}
-                />
+                /> */}
+                <DetailPostRender content={post.content as string} />
               </div>
               <div className="mx-auto mt-10">
                 {/* Bottom Floatingbar */}
