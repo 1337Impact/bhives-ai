@@ -39,32 +39,32 @@ export default function Navbar() {
   const links = [
     {
       name: "Why Us",
-      href: "#why-choose",
+      href: "/#why-choose",
       id: "why-choose",
     },
     {
       name: "Services",
-      href: "#services",
+      href: "/#services",
       id: "services",
     },
     {
       name: "Our Process",
-      href: "#process",
+      href: "/#process",
       id: "process",
     },
     {
       name: "Team",
-      href: "#team",
+      href: "/#team",
       id: "team",
     },
     {
       name: "Tech Stack",
-      href: "#tech-stack",
+      href: "/#tech-stack",
       id: "tech-stack",
     },
     {
       name: "FAQ",
-      href: "#faq",
+      href: "/#faq",
       id: "faq",
     },
   ];
@@ -72,7 +72,7 @@ export default function Navbar() {
   return (
     <header className="fixed bg-white z-[100] w-full h-[80px] mx-auto text-slate-700">
       <div className="relative flex h-full w-full items-center justify-between px-4 max-w-[1200px] mx-auto">
-        <Link href="#" className="flex items-center gap-1">
+        <Link href="/#" className="flex items-center gap-1">
           <img src="/logo.png" alt="Bhives.ai" className="h-9" />
           <h1 className="text-xl font-bold text-black">Bhives.ai</h1>
         </Link>
@@ -93,7 +93,7 @@ export default function Navbar() {
               </div>
             </Link>
           ))}
-          <Link href={"#contact"} className="md:hidden">
+          <Link href={"/#contact"} className="md:hidden">
             <div
               onClick={() => setIsMenuOpen(false)}
               className="float-right bg-orange-500 hover:bg-orange-400 text-white px-8 py-2 rounded-md cursor-pointer"
@@ -117,7 +117,7 @@ export default function Navbar() {
               className={`${styles.line} ${isMenuOpen && styles.open}`}
             ></div>
           </button>
-          <Link href={"#contact"} className="max-md:hidden">
+          <Link href={"/#contact"} className="max-md:hidden">
             <div
               onClick={() => setIsMenuOpen(false)}
               className="float-right bg-orange-500 hover:bg-orange-400 text-white px-4 py-2 rounded-md cursor-pointer"

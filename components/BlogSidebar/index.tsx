@@ -1,6 +1,7 @@
 import { createClient } from "@/utils/supabase/server";
 import { ArrowBigRight, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import BackButton from "../backButton";
 
 const tags = [
   "artificial_intelligence",
@@ -36,6 +37,9 @@ export default async function BlogSidebar() {
   }
   return (
     <div className=" md:max-w-[330px] px-2 flex flex-col gap-4">
+      <div>
+        <BackButton />
+      </div>
       <div className="rounded-md p-5 border-orange-400 bg-gray-100 border-2">
         <h4 className="text-lg font-bold">BHIVES BLOG</h4>
         <p className="mt-1 text-gray-600 text-sm font-semibold">

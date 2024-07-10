@@ -12,8 +12,39 @@ interface HomePageProps {
   searchParams: { [key: string]: string | string[] | undefined };
 }
 
+async function getPostsData( searchParams : { [key: string]: string | string[] | undefined }, from: number, to: number) {
+  const supabase = createClient();
+  if (searchParams.category) {
+    const { data, error } = await supabase
+      .from("posts")
+      .select(`*, categories(*), profiles(*)`)
+      .eq("published", true)
+      .eq("category_id", searchParams.category as string)
+      .order("created_at", { ascending: false })
+      .range(from, to)
+      .returns<PostWithCategoryWithProfile[]>();
+    if (!data || error || !data.length) {
+      null;
+    }
+    return data;
+  } else {
+    const { data, error } = await supabase
+      .from("posts")
+      .select(`*, categories(*), profiles(*)`)
+      .eq("published", true)
+      .order("created_at", { ascending: false })
+      .range(from, to)
+      .returns<PostWithCategoryWithProfile[]>();
+    if (!data || error || !data.length) {
+      return null;
+    }
+    return data;
+  }
+}
+
 export default async function HomePage({ searchParams }: HomePageProps) {
   const supabase = createClient();
+  console.log("searchParams", searchParams.category);
 
   // Fetch total pages
   const { count } = await supabase
@@ -34,25 +65,27 @@ export default async function HomePage({ searchParams }: HomePageProps) {
   const to = page ? from + limit : limit;
 
   // Fetch posts
-  const { data, error } = await supabase
-    .from("posts")
-    .select(`*, categories(*), profiles(*)`)
-    .eq("published", true)
-    .order("created_at", { ascending: false })
-    .range(from, to)
-    .returns<PostWithCategoryWithProfile[]>();
-  if (!data || error || !data.length) {
-    notFound;
+  const data = await getPostsData(searchParams, from, to);
+  if (!data) {
+    return notFound;
   }
 
   return (
     <main className="w-full">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        {data?.map((post) => (
-          <Suspense key={v4()} fallback={<MainPostItemLoading />}>
+        {
+          data.length ?
+          data?.map((post) => (
+            <Suspense key={v4()} fallback={<MainPostItemLoading />}>
             <MainPostItem post={post} />
-          </Suspense>
-        ))}
+            </Suspense>
+          )) : 
+          (
+            <div className="w-full h-full flex justify-center items-center">
+              <h1 className="text-2xl font-bold">No posts found</h1>
+            </div>
+          )
+        }
       </div>
       {/* Pagination */}
       {totalPages > 1 && (
