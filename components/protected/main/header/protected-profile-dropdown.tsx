@@ -75,7 +75,7 @@ const ProtectedProfileDropDown = () => {
             )}`}
           />
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="w-56 font-sans">
+        <DropdownMenuContent className="w-56 font-sans bg-white">
           <Link
             href={dashBoardProfile.slug || ""}
             className="group inline-flex w-full items-center rounded-md bg-white px-3 py-2.5 hover:bg-gray-100"

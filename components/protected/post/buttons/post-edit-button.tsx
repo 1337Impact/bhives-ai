@@ -88,7 +88,7 @@ const PostEditButton: FC<PostEditButtonProps> = ({ id }) => {
           <ElipsisIcon className="h-4 w-4" />
           <span className="sr-only">Open</span>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" className="font-sans">
+        <DropdownMenuContent align="end" className="font-sans bg-white">
           <DropdownMenuItem>
             <a
               className="flex w-full"

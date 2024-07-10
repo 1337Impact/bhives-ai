@@ -24,61 +24,49 @@ export const columns: ColumnDef<Post>[] = [
     },
     enableHiding: false,
   },
-  {
-    accessorKey: "category_id",
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Category" />
-    ),
-    cell: ({ row }) => {
-      const label = categories.find(
-        (category) => category.value === row.original.category_id,
-      );
+  // {
+  //   accessorKey: "category_id",
+  //   header: ({ column }) => (
+  //     <DataTableColumnHeader column={column} title="Category" />
+  //   ),
+  //   cell: ({ row }) => {
+  //     const label = categories.find(
+  //       (category) => category.value === row.original.category_id,
+  //     );
 
-      if (!label) {
-        return null;
-      }
+  //     if (!label) {
+  //       return null;
+  //     }
 
-      return (
-        <div className="flex space-x-2">
-          <div className="max-w-[500px] justify-start truncate font-medium">
-            <span className="inline-flex items-center rounded-full border border-gray-400 px-3 py-1 text-sm text-gray-500">
-              <label.icon className="mr-1 h-4 w-4" />
-              {label.label}
-            </span>
-          </div>
-        </div>
-      );
-    },
-    enableHiding: false,
-    filterFn: (row, id, value) => {
-      return value.includes(row.getValue(id));
-    },
-  },
+  //     return (
+  //       <div className="flex space-x-2">
+  //         <div className="max-w-[500px] justify-start truncate font-medium">
+  //           <span className="inline-flex items-center rounded-full border border-gray-400 px-3 py-1 text-sm text-gray-500">
+  //             <label.icon className="mr-1 h-4 w-4" />
+  //             {label.label}
+  //           </span>
+  //         </div>
+  //       </div>
+  //     );
+  //   },
+  //   enableHiding: false,
+  //   filterFn: (row, id, value) => {
+  //     return value.includes(row.getValue(id));
+  //   },
+  // },
   {
-    accessorKey: "status",
+    accessorKey: "published",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Status" />
     ),
     cell: ({ row }) => {
-      const status = statuses.find(
-        (status) => status.value === row.getValue("status"),
-      );
-
-      if (!status) {
-        return null;
-      }
-
       return (
-        <div className="flex w-[100px] items-center">
-          {status.icon && (
-            <status.icon className="mr-2 h-4 w-4 text-muted-foreground" />
-          )}
-          <span>{status.label}</span>
+        <div className="flex space-x-2">
+          <span className="max-w-[500px] truncate font-medium">
+            {row.getValue("published") ? "Published" : "Draft"}
+          </span>
         </div>
       );
-    },
-    filterFn: (row, id, value) => {
-      return value.includes(row.getValue(id));
     },
   },
   {
