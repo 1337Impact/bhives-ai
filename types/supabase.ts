@@ -9,155 +9,26 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      bookmarks: {
-        Row: {
-          created_at: string | null
-          id: string
-          user_id: string | null
-        }
-        Insert: {
-          created_at?: string | null
-          id: string
-          user_id?: string | null
-        }
-        Update: {
-          created_at?: string | null
-          id?: string
-          user_id?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "bookmarks_id_fkey"
-            columns: ["id"]
-            isOneToOne: true
-            referencedRelation: "posts"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "bookmarks_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
       categories: {
         Row: {
-          created_at: string | null
+          created_at: string
           id: string
-          slug: string | null
-          title: string | null
+          slug: string
+          title: string
         }
         Insert: {
-          created_at?: string | null
+          created_at?: string
           id?: string
-          slug?: string | null
-          title?: string | null
+          slug: string
+          title?: string
         }
         Update: {
-          created_at?: string | null
+          created_at?: string
           id?: string
-          slug?: string | null
-          title?: string | null
+          slug?: string
+          title?: string
         }
         Relationships: []
-      }
-      comments: {
-        Row: {
-          comment: string | null
-          created_at: string | null
-          id: string
-          post_id: string | null
-          user_id: string | null
-        }
-        Insert: {
-          comment?: string | null
-          created_at?: string | null
-          id?: string
-          post_id?: string | null
-          user_id?: string | null
-        }
-        Update: {
-          comment?: string | null
-          created_at?: string | null
-          id?: string
-          post_id?: string | null
-          user_id?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "comments_post_id_fkey"
-            columns: ["post_id"]
-            isOneToOne: false
-            referencedRelation: "posts"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "comments_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      drafts: {
-        Row: {
-          author_id: string | null
-          category_id: string | null
-          content: string | null
-          created_at: string
-          description: string | null
-          id: string
-          image: string | null
-          published: boolean | null
-          slug: string | null
-          title: string | null
-          updated_at: string | null
-        }
-        Insert: {
-          author_id?: string | null
-          category_id?: string | null
-          content?: string | null
-          created_at?: string
-          description?: string | null
-          id?: string
-          image?: string | null
-          published?: boolean | null
-          slug?: string | null
-          title?: string | null
-          updated_at?: string | null
-        }
-        Update: {
-          author_id?: string | null
-          category_id?: string | null
-          content?: string | null
-          created_at?: string
-          description?: string | null
-          id?: string
-          image?: string | null
-          published?: boolean | null
-          slug?: string | null
-          title?: string | null
-          updated_at?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "drafts_author_id_fkey"
-            columns: ["author_id"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "drafts_category_id_fkey"
-            columns: ["category_id"]
-            isOneToOne: false
-            referencedRelation: "categories"
-            referencedColumns: ["id"]
-          },
-        ]
       }
       posts: {
         Row: {
@@ -170,6 +41,7 @@ export type Database = {
           image: string | null
           published: boolean | null
           slug: string | null
+          tags: string[] | null
           title: string | null
           updated_at: string | null
         }
@@ -183,6 +55,7 @@ export type Database = {
           image?: string | null
           published?: boolean | null
           slug?: string | null
+          tags?: string[] | null
           title?: string | null
           updated_at?: string | null
         }
@@ -196,6 +69,7 @@ export type Database = {
           image?: string | null
           published?: boolean | null
           slug?: string | null
+          tags?: string[] | null
           title?: string | null
           updated_at?: string | null
         }

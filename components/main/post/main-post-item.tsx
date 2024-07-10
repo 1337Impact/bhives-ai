@@ -1,6 +1,6 @@
 import { mainPostConfig } from "@/config/main";
 import { getMinutes, shimmer, toBase64 } from "@/lib/utils";
-import { Comment, PostWithCategoryWithProfile } from "@/types/collection";
+import { PostWithCategoryWithProfile } from "@/types/collection";
 import { createClient } from "@/utils/supabase/server";
 import { format, parseISO } from "date-fns";
 import { CalendarIcon, Clock10Icon, MessageCircleIcon } from "lucide-react";
@@ -12,33 +12,12 @@ import readingTime from "reading-time";
 
 export const dynamic = "force-dynamic";
 
-async function getPublicImageUrl(postId: string, fileName: string) {
-  const supabase = createClient();
-  const bucketName =
-    process.env.NEXT_PUBLIC_SUPABASE_STORAGE_BUCKET_POSTS || "posts";
-  const { data } = supabase.storage
-    .from(bucketName)
-    .getPublicUrl(`${postId}/${fileName}`);
-
-  if (data && data.publicUrl) return data.publicUrl;
-
-  return "/images/not-found.jpg";
+function getPublicImageUrl(image: string) {
+  if (!image || !image.length) return "";
+  return `${process.env.NEXT_PUBLIC_SUPABASE_STORAGE_BUCKET_COVER_IMAGE_URL}/${image}`;
 }
 
-async function getComments(postId: string) {
-  const supabase = createClient();
-  const { data: comments, error } = await supabase
-    .from("comments")
-    .select()
-    .eq("post_id", postId)
-    .order("created_at", { ascending: true })
-    .returns<Comment[]>();
 
-  if (error) {
-    console.error(error.message);
-  }
-  return comments;
-}
 
 interface MainPostItemProps {
   post: PostWithCategoryWithProfile;
@@ -46,7 +25,6 @@ interface MainPostItemProps {
 
 const MainPostItem: React.FC<MainPostItemProps> = async ({ post }) => {
   const readTime = readingTime(post.content ? post.content : "");
-  const comments = await getComments(post.id ? post.id : "");
 
   return (
     <div className="group max-w-md mx-auto bg-white shadow-md shadow-gray-300 border-2 border-gray-500 rounded-lg hover:bg-gray-50">
@@ -54,15 +32,9 @@ const MainPostItem: React.FC<MainPostItemProps> = async ({ post }) => {
         <article className="relative isolate flex flex-col gap-2 px-5 py-5">
           <div className="relative aspect-[2/1]">
             {post.image ? (
-              <Image
-                src={await getPublicImageUrl(post.id, post.image || "")}
+              <img
+                src={getPublicImageUrl(post.image)}
                 alt={post.title ?? "Cover"}
-                height={256}
-                width={256}
-                priority
-                // placeholder={`data:image/svg+xml;base64,${toBase64(
-                //   shimmer(256, 256)
-                // )}`}
                 className="absolute inset-0 h-full w-full rounded-lg bg-gray-50 object-cover"
               />
             ) : (

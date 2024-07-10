@@ -1,5 +1,4 @@
 export { default as BookMarkOutlineIcon } from "./bookmark-outline-icon";
-export { default as BookMarkSolidIcon } from "./bookmark-solid-icon";
 export { default as GithubIcon } from "./github-icon";
 export { default as GoogleIcon } from "./google-icon";
 export { default as IconWrapperRounded } from "./icon-wrapper-rounded";

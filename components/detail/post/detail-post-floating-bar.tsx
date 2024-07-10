@@ -1,8 +1,6 @@
 "use client";
 
 import {
-  DetailPostBookMarkButton,
-  DetailPostCommentButton,
   DetailPostShareButton,
 } from "@/components/detail/post/buttons";
 import React from "react";
@@ -27,8 +25,6 @@ const DetailPostFloatingBar: React.FC<DetailPostFloatingBarProps> = ({
   return (
     <>
       <div className="grid w-full grid-cols-3 justify-start gap-4 rounded-md">
-        <DetailPostCommentButton totalComments={totalComments} />
-        <DetailPostBookMarkButton id={id} isBookmarked={isBookmarked} />
         <DetailPostShareButton title={title} text={text} url={url} />
       </div>
     </>

@@ -5,18 +5,6 @@ import Image from "next/image";
 import { FC } from "react";
 import { ReadTimeResults } from "reading-time";
 
-async function getPublicImageUrl(postId: string, fileName: string) {
-  const supabase = createClient();
-  const bucketName =
-    process.env.NEXT_PUBLIC_SUPABASE_STORAGE_BUCKET_POSTS || "posts";
-  const { data } = supabase.storage
-    .from(bucketName)
-    .getPublicUrl(`${postId}/${fileName}`);
-
-  if (data && data.publicUrl) return data.publicUrl;
-
-  return "/images/not-found.jpg";
-}
 
 interface DetailPostHeadingProps {
   id: string;
@@ -43,11 +31,11 @@ const DetailPostHeading: FC<DetailPostHeadingProps> = async ({
     <section className="flex flex-col items-start justify-between">
       <div className="relative w-full">
         {image && (
-          <Image
-            src={await getPublicImageUrl(id, image)}
+          <img
+            src={image}
             alt={title}
-            width={512}
-            height={288}
+            // width={512}
+            // height={288}
             className="h-[288px] w-full rounded-2xl bg-gray-100 object-cover"
             // placeholder={`data:image/svg+xml;base64,${toBase64(
             //   shimmer(512, 288)

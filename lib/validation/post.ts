@@ -53,6 +53,7 @@ export const postEditFormSchema = z.object({
       message: "Description must not be longer than 300 characters.",
     }),
   content: z.any().optional(),
+  tags: z.any().optional(),
 });
 
 export const postUpdateSchema = z.object({
@@ -63,4 +64,5 @@ export const postUpdateSchema = z.object({
   image: z.string().optional(),
   description: z.string().optional(),
   content: z.any().optional(),
+  tags: z.any().optional(),
 });
