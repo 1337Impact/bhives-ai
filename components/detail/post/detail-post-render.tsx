@@ -1,24 +1,13 @@
 "use client";
-import React, { useState } from "react";
-import { useEditor, EditorContent } from "@tiptap/react";
-import { defaultExtensions } from "@/components/protected/editor/wysiwyg/extensions";
+import MarkdownPreview from '@uiw/react-markdown-preview';
 
-const TiptapEditor = ({ content }: { content: string }) => {
-  const editor = useEditor({
-    extensions: [...defaultExtensions],
-    content: JSON.parse(content),
-    editable: false,
-  });
-
-  if (!editor) {
-    return null;
-  }
+const MarkdownRender = ({ content }: { content: string }) => {
 
   return (
     <div>
-      <EditorContent editor={editor} />
+      <MarkdownPreview wrapperElement={{"data-color-mode": "light"}} source={content} />
     </div>
   );
 };
 
-export default TiptapEditor;
+export default MarkdownRender;

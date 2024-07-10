@@ -60,6 +60,7 @@ import { createClient } from "@/utils/supabase/client";
 import { CategoryType } from "@/types";
 import UploadImage from "./upload-image";
 import { randomUUID } from "crypto";
+import MarkdownRender from "@/components/detail/post/detail-post-render";
 
 export const dynamic = "force-dynamic";
 
@@ -171,7 +172,7 @@ const Editor: FC<EditorProps> = ({
       if (error) {
         console.log("Error uploading file: ", error.message);
       }
-      if (uploadedImage){
+      if (uploadedImage) {
         coverImageUrl = uploadedImage.path;
       }
       console.log("File uploaded successfully: ", uploadedImage);
@@ -313,12 +314,15 @@ const Editor: FC<EditorProps> = ({
             <CardHeader>
               <CardTitle>Cover Image</CardTitle>
               <CardDescription>
-               Chose a cover image for your post
+                Chose a cover image for your post
               </CardDescription>
             </CardHeader>
             <Separator className="mb-8" />
             <CardContent className="space-y-4">
-              <UploadImage image={getPublicImageUrl(post?.image as string)} setImgFile={setCoverImg} />
+              <UploadImage
+                image={getPublicImageUrl(post?.image as string)}
+                setImgFile={setCoverImg}
+              />
             </CardContent>
           </Card>
 
@@ -356,12 +360,40 @@ const Editor: FC<EditorProps> = ({
             </CardContent>
           </Card>
 
-          <WysiwygEditor
-            defaultValue={content ? JSON.parse(content) : defaultEditorContent}
-            onDebouncedUpdate={(editor) => {
-              setContent(JSON.stringify(editor?.getJSON()));
-            }}
-          />
+          <Card className="max-w-2xl">
+            <CardHeader>
+              <CardTitle>
+                Post Content
+              </CardTitle>
+              <CardDescription>
+                Update content using Markdown
+              </CardDescription>
+            </CardHeader>
+            <Separator className="mb-8" />
+            <CardContent className="space-y-4">
+              {/* Description */}
+              <Textarea
+                value={content || ""}
+                onChange={(e) => {
+                  console.log(e.target.value);
+                  setContent(e.target.value);
+                }}
+                className="min-h-60"
+              />
+            </CardContent>
+          </Card>
+
+          <Card className="max-w-2xl">
+            <CardHeader>
+              <CardTitle>
+                Post Preview
+              </CardTitle>
+            </CardHeader>
+            <Separator className="mb-8" />
+            <CardContent className="space-y-4">
+              <MarkdownRender content={content || ""} />
+            </CardContent>
+          </Card>
 
           <div className="infline-flex flex items-center justify-start space-x-3">
             <Button

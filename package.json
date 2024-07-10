@@ -47,6 +47,7 @@
     "@types/node": "20.9.0",
     "@types/react": "18.2.37",
     "@types/react-dom": "18.2.15",
+    "@uiw/react-markdown-preview": "^5.1.2",
     "@uppy/core": "^3.13.1",
     "@uppy/dashboard": "^3.9.1",
     "@uppy/drag-drop": "^3.0.3",

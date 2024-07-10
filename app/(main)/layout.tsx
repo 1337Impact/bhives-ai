@@ -1,4 +1,5 @@
 import Navbar from "@/components/navbar";
+import ScrollToTop from "@/components/ScrollToTop";
 
 export default function RootLayout({
   children,
@@ -8,6 +9,7 @@ export default function RootLayout({
   return (
     <>
       <Navbar /> {children}
+      <ScrollToTop />
     </>
   );
 }
