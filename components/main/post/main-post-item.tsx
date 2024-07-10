@@ -12,17 +12,9 @@ import readingTime from "reading-time";
 
 export const dynamic = "force-dynamic";
 
-async function getPublicImageUrl(postId: string, fileName: string) {
-  const supabase = createClient();
-  const bucketName =
-    process.env.NEXT_PUBLIC_SUPABASE_STORAGE_BUCKET_POSTS || "posts";
-  const { data } = supabase.storage
-    .from(bucketName)
-    .getPublicUrl(`${postId}/${fileName}`);
-
-  if (data && data.publicUrl) return data.publicUrl;
-
-  return "/images/not-found.jpg";
+function getPublicImageUrl(image: string) {
+  if (!image || !image.length) return "";
+  return `${process.env.NEXT_PUBLIC_SUPABASE_STORAGE_BUCKET_COVER_IMAGE_URL}/${image}`;
 }
 
 
@@ -41,7 +33,7 @@ const MainPostItem: React.FC<MainPostItemProps> = async ({ post }) => {
           <div className="relative aspect-[2/1]">
             {post.image ? (
               <img
-                src={post.image}
+                src={getPublicImageUrl(post.image)}
                 alt={post.title ?? "Cover"}
                 className="absolute inset-0 h-full w-full rounded-lg bg-gray-50 object-cover"
               />

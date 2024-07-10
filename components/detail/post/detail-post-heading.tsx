@@ -5,18 +5,6 @@ import Image from "next/image";
 import { FC } from "react";
 import { ReadTimeResults } from "reading-time";
 
-async function getPublicImageUrl(postId: string, fileName: string) {
-  const supabase = createClient();
-  const bucketName =
-    process.env.NEXT_PUBLIC_SUPABASE_STORAGE_BUCKET_POSTS || "posts";
-  const { data } = supabase.storage
-    .from(bucketName)
-    .getPublicUrl(`${postId}/${fileName}`);
-
-  if (data && data.publicUrl) return data.publicUrl;
-
-  return "/images/not-found.jpg";
-}
 
 interface DetailPostHeadingProps {
   id: string;

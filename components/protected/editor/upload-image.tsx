@@ -7,10 +7,14 @@ interface AddProductImageProps {
   image?: string | null;
 }
 
-export default function UploadImage({ setImgFile, image }: AddProductImageProps) {
+export default function UploadImage({
+  setImgFile,
+  image,
+}: AddProductImageProps) {
   const [productImage, setProductImage] = useState<string | null>(null);
 
   useEffect(() => {
+    console.log("image", image);
     if (image) {
       setProductImage(image);
     }
@@ -34,17 +38,23 @@ export default function UploadImage({ setImgFile, image }: AddProductImageProps)
   };
 
   return (
-    <div className="w-24 h-24 flex justify-center items-center border border-gray-300 rounded-lg overflow-hidden relative">
+    <div className="w-full min-h-28 flex flex-col justify-center items-center border border-gray-300 rounded-lg overflow-hidden relative">
       {productImage ? (
-        <div onClick={handleResetClick} className="w-full h-full cursor-pointer">
+        <>
           <Image
-            width={100}
-            height={100}
+            width={400}
+            height={400}
             src={productImage}
             alt="product image"
             className="w-full h-full object-cover"
           />
-        </div>
+          <button
+            onClick={handleResetClick}
+            className="w-full h-full cursor-pointer text-center bg-red-500 py-2 text-white font-semibold"
+          >
+            Remove
+          </button>
+        </>
       ) : (
         <label className="w-full h-full flex justify-center items-center cursor-pointer relative">
           <input

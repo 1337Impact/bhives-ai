@@ -59,6 +59,7 @@ import { defaultEditorContent } from "./wysiwyg/default-content";
 import { createClient } from "@/utils/supabase/client";
 import { CategoryType } from "@/types";
 import UploadImage from "./upload-image";
+import { randomUUID } from "crypto";
 
 export const dynamic = "force-dynamic";
 
@@ -71,6 +72,11 @@ interface EditorProps {
   coverImagePublicUrl: string;
   galleryImageFileNames: string[];
   galleryImagePublicUrls: string[];
+}
+
+function getPublicImageUrl(image: string) {
+  if (!image || !image.length) return "";
+  return `${process.env.NEXT_PUBLIC_SUPABASE_STORAGE_BUCKET_COVER_IMAGE_URL}/${image}`;
 }
 
 type EditorFormValues = z.infer<typeof postEditFormSchema>;
@@ -89,7 +95,9 @@ const Editor: FC<EditorProps> = ({
 
   useEffect(() => {
     const fetchCategories = async () => {
-      const { data, error } = await supabase.from("categories").select("id, slug, title");
+      const { data, error } = await supabase
+        .from("categories")
+        .select("id, slug, title");
 
       if (error) {
         console.log("Error has occured while getting categories!");
@@ -115,6 +123,7 @@ const Editor: FC<EditorProps> = ({
   const [saveStatus, setSaveStatus] = useState("Saved");
 
   const [content, setContent] = useState<string | null>(post?.content || null);
+  const [coverImg, setCoverImg] = useState<File | null>(null);
 
   // Setup Uppy with Supabase
   const bucketNamePosts =
@@ -146,44 +155,47 @@ const Editor: FC<EditorProps> = ({
     defaultValues,
     mode: "onChange",
   });
-  
-  const [coverImg, setCoverImg] = useState<File | null>(null);
 
   async function onSubmit(data: EditorFormValues) {
     setShowLoadingAlert(true);
     setIsSaving(true);
+    let coverImageUrl = "";
 
-    if (coverImg){
-      const { data: uploadedImage, error } = await supabase.storage.from("cover-image").upload(`${coverImg.name}`, coverImg);
-      if (error)
-      {
-          console.log("Error uploading file: ", error.message);
-          return ;
+    if (coverImg) {
+      if (data.image) {
+        await supabase.storage.from("cover-image").remove([data.image]);
+      }
+      const { data: uploadedImage, error } = await supabase.storage
+        .from("cover-image")
+        .upload(v4(), coverImg);
+      if (error) {
+        console.log("Error uploading file: ", error.message);
+      }
+      if (uploadedImage){
+        coverImageUrl = uploadedImage.path;
       }
       console.log("File uploaded successfully: ", uploadedImage);
-      
-      const response = await UpdatePost({
-        id: post.id,
-        title: data.title,
-        slug: data.slug,
-        image: `https://${projectId}.supabase.co/storage/v1/object/public/${uploadedImage?.fullPath}`,
-        description: data.description,
-        content: content,
-        categoryId: data.categoryId,
-      });
-      
-      if (response) {
-        toast.success(protectedEditorConfig.successMessage);
-        router.push(`/blog/posts/${response.slug}`);
-      } else {
-        toast.error(protectedEditorConfig.errorMessage);
-      }
     }
 
+    const response = await UpdatePost({
+      id: post.id,
+      title: data.title,
+      slug: data.slug,
+      image: coverImageUrl,
+      description: data.description,
+      content: content,
+      categoryId: data.categoryId,
+    });
+
+    if (response) {
+      toast.success(protectedEditorConfig.successMessage);
+      router.push(`/blog/posts/${data.slug}`);
+    } else {
+      toast.error(protectedEditorConfig.errorMessage);
+    }
     setIsSaving(false);
     setShowLoadingAlert(false);
   }
-
 
   return (
     <>
@@ -285,7 +297,7 @@ const Editor: FC<EditorProps> = ({
                                   {category.title}
                                 </FormLabel>
                               </FormItem>
-                            ),
+                            )
                         )}
                       </RadioGroup>
                     </FormControl>
@@ -297,9 +309,18 @@ const Editor: FC<EditorProps> = ({
           </Card>
 
           {/* Cover Image */}
-
-          <UploadImage setImgFile={setCoverImg} />
-
+          <Card className="max-w-2xl">
+            <CardHeader>
+              <CardTitle>Cover Image</CardTitle>
+              <CardDescription>
+               Chose a cover image for your post
+              </CardDescription>
+            </CardHeader>
+            <Separator className="mb-8" />
+            <CardContent className="space-y-4">
+              <UploadImage image={getPublicImageUrl(post?.image as string)} setImgFile={setCoverImg} />
+            </CardContent>
+          </Card>
 
           {/* Short Description */}
           <Card className="max-w-2xl">
