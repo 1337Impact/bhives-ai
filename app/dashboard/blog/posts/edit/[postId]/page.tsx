@@ -12,6 +12,7 @@ interface PostEditorPageProps {
   params: { postId: string };
 }
 
+
 async function getUserId() {
   const supabase = createClient();
   const {

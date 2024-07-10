@@ -12,7 +12,11 @@ interface HomePageProps {
   searchParams: { [key: string]: string | string[] | undefined };
 }
 
-async function getPostsData( searchParams : { [key: string]: string | string[] | undefined }, from: number, to: number) {
+async function getPostsData(
+  searchParams: { [key: string]: string | string[] | undefined },
+  from: number,
+  to: number
+) {
   const supabase = createClient();
   if (searchParams.category) {
     const { data, error } = await supabase
@@ -27,6 +31,20 @@ async function getPostsData( searchParams : { [key: string]: string | string[] |
       null;
     }
     return data;
+  } else if (searchParams.tags) {
+    const { data, error } = await supabase
+      .from("posts")
+      .select(`*, categories(*), profiles(*)`)
+      .eq("published", true)
+      .order("created_at", { ascending: false })
+      .range(from, to)
+      .returns<PostWithCategoryWithProfile[]>();
+    if (!data || error || !data.length) {
+      return null;
+    }
+    return data.filter((post) => {
+      return post.tags?.includes(searchParams.tags as string);
+    });
   } else {
     const { data, error } = await supabase
       .from("posts")
@@ -73,19 +91,17 @@ export default async function HomePage({ searchParams }: HomePageProps) {
   return (
     <main className="w-full">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        {
-          data.length ?
+        {data.length ? (
           data?.map((post) => (
             <Suspense key={v4()} fallback={<MainPostItemLoading />}>
-            <MainPostItem post={post} />
+              <MainPostItem post={post} />
             </Suspense>
-          )) : 
-          (
-            <div className="w-full h-full flex justify-center items-center">
-              <h1 className="text-2xl font-bold">No posts found</h1>
-            </div>
-          )
-        }
+          ))
+        ) : (
+          <div className="w-full h-full flex justify-center items-center">
+            <h1 className="text-2xl text-gray-700 font-bold">No posts found</h1>
+          </div>
+        )}
       </div>
       {/* Pagination */}
       {totalPages > 1 && (

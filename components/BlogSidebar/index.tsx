@@ -3,7 +3,7 @@ import { ArrowBigRight, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import BackButton from "../backButton";
 
-const tags = [
+const tagsList = [
   "artificial_intelligence",
   "machine_learning",
   "deep_learning",
@@ -63,11 +63,11 @@ export default async function BlogSidebar() {
       <div className="rounded-md p-5 border-orange-400 bg-gray-100 border-2">
         <h4 className="text-lg font-bold">RECOMMENDED TAGS</h4>
         <div className="flex flex-wrap gap-1 -ml-1 mt-2">
-        {tags?.map((tag) => (
+        {tagsList?.map((tag) => (
           <Link
           key={tag}
-          href={`/blog?category=${tag}`}
-          className="rounded-md bg-orange-300 py-[2px] px-[3px] text-sm font-semibold text-gray-600 hover:text-gray-800 ml-1"
+          href={`/blog?tags=${tag}`}
+          className="rounded-md bg-orange-300 py-[1.4px] px-[5px] text-sm font-semibold text-gray-600 hover:text-gray-800 ml-1"
           >
             #{tag}
           </Link>

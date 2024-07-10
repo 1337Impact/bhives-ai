@@ -36,11 +36,8 @@ import { postEditFormSchema } from "@/lib/validation/post";
 import { Post } from "@/types/collection";
 import { PaperClipIcon } from "@heroicons/react/20/solid";
 import { zodResolver } from "@hookform/resolvers/zod";
-import Uppy from "@uppy/core";
 import "@uppy/core/dist/style.min.css";
 import "@uppy/dashboard/dist/style.min.css";
-import { DashboardModal } from "@uppy/react";
-import Tus from "@uppy/tus";
 import { SparklesIcon, Loader2 as SpinnerIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { FC, useEffect, useState } from "react";
@@ -49,18 +46,11 @@ import { toast } from "react-hot-toast";
 import slugify from "react-slugify";
 import { v4 } from "uuid";
 import * as z from "zod";
-import {
-  EditorUploadCoverImageItem,
-  EditorUploadCoverImagePlaceHolder,
-  EditorUploadGalleryImageTable,
-  EditorUploadGalleryImageTableEmpty,
-} from "./upload";
-import { defaultEditorContent } from "./wysiwyg/default-content";
 import { createClient } from "@/utils/supabase/client";
 import { CategoryType } from "@/types";
 import UploadImage from "./upload-image";
-import { randomUUID } from "crypto";
 import MarkdownRender from "@/components/detail/post/detail-post-render";
+import ReactSelect from "react-select";
 
 export const dynamic = "force-dynamic";
 
@@ -74,6 +64,33 @@ interface EditorProps {
   galleryImageFileNames: string[];
   galleryImagePublicUrls: string[];
 }
+
+const tagsList = [
+  { value: "artificial_intelligence", label: "#artificial_intelligence" },
+  { value: "machine_learning", label: "#machine_learning" },
+  { value: "deep_learning", label: "#deep_learning" },
+  { value: "neural_networks", label: "#neural_networks" },
+  {
+    value: "natural_language_processing",
+    label: "#natural_language_processing",
+  },
+  { value: "computer_vision", label: "#computer_vision" },
+  { value: "data_science", label: "#data_science" },
+  { value: "big_data", label: "#big_data" },
+  { value: "cloud", label: "#cloud" },
+  { value: "cloud_infrastructure", label: "#cloud_infrastructure" },
+  { value: "cloud_security", label: "#cloud_security" },
+  { value: "aws", label: "#aws" },
+  { value: "azure", label: "#azure" },
+  { value: "google_cloud", label: "#google_cloud" },
+  { value: "serverless_computing", label: "#serverless_computing" },
+  { value: "devops", label: "#devops" },
+  { value: "ci_cd", label: "#ci_cd" },
+  { value: "rpa", label: "#rpa" },
+  { value: "infrastructure_as_code", label: "#infrastructure_as_code" },
+  { value: "automation_tools", label: "#automation_tools" },
+  { value: "test_automation", label: "#test_automation" },
+];
 
 function getPublicImageUrl(image: string) {
   if (!image || !image.length) return "";
@@ -93,6 +110,7 @@ const Editor: FC<EditorProps> = ({
   const router = useRouter();
   const supabase = createClient();
   const [categoriers, setCategoriers] = useState<CategoryType[]>([]);
+  const [tags, setTags] = useState<string[]>([]);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -112,34 +130,12 @@ const Editor: FC<EditorProps> = ({
     fetchCategories();
   }, []);
 
-  // These are the values that will be used to upload the image
-  const allowedNumberOfImages = 9 - galleryImagePublicUrls.length;
   // States
   const [isSaving, setIsSaving] = useState(false);
   const [showLoadingAlert, setShowLoadingAlert] = useState<boolean>(false);
-  const [showCoverModal, setShowCoverModal] = useState<boolean>(false);
-  const [showGalleryModal, setShowGalleryModal] = useState<boolean>(false);
-
-  // Editor
-  const [saveStatus, setSaveStatus] = useState("Saved");
 
   const [content, setContent] = useState<string | null>(post?.content || null);
   const [coverImg, setCoverImg] = useState<File | null>(null);
-
-  // Setup Uppy with Supabase
-  const bucketNamePosts =
-    process.env.NEXT_PUBLIC_SUPABASE_STORAGE_BUCKET_POSTS || "posts";
-  const bucketNameCoverImage =
-    process.env.NEXT_PUBLIC_SUPABASE_STORAGE_BUCKET_COVER_IMAGE ||
-    "cover-image";
-  const bucketNameGalleryImage =
-    process.env.NEXT_PUBLIC_SUPABASE_STORAGE_BUCKET_GALLERY_IMAGE ||
-    "gallery-image";
-  const token = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-  const projectId = process.env.NEXT_PUBLIC_SUPABASE_PROJECT_ID;
-  const supabaseUploadURL = `https://${projectId}.supabase.co/storage/v1/upload/resumable`;
-
-  // Uppy instance for cover photo upload
 
   // Default values for the form
   const defaultValues: Partial<EditorFormValues> = {
@@ -186,16 +182,40 @@ const Editor: FC<EditorProps> = ({
       description: data.description,
       content: content,
       categoryId: data.categoryId,
+      tags: tags,
     });
 
     if (response) {
       toast.success(protectedEditorConfig.successMessage);
-      router.push(`/blog/posts/${data.slug}`);
+      router.push(`/dashboard/blog/posts`);
     } else {
       toast.error(protectedEditorConfig.errorMessage);
     }
     setIsSaving(false);
     setShowLoadingAlert(false);
+  }
+
+  async function handlePublish(){
+    const { data, error } = await supabase
+    .from("posts")
+    .update({
+      id: post.id,
+      published: true,
+    })
+    .match({ id: post.id })
+    .select()
+    .single();
+    if (error) {
+      console.log("Error has occured while publishing post");
+      console.log("Error message : ", error.message);
+      return;
+    }
+    if (data) {
+      toast.success(protectedEditorConfig.successMessage);
+      router.push(`/blog/posts/${data.slug}`);
+    } else {
+      toast.error(protectedEditorConfig.errorMessage);
+    }
   }
 
   return (
@@ -308,6 +328,20 @@ const Editor: FC<EditorProps> = ({
               />
             </CardContent>
           </Card>
+          <Card className="max-w-2xl">
+            <CardHeader>
+              <CardTitle>Tags</CardTitle>
+              <CardDescription>Choose Tags</CardDescription>
+            </CardHeader>
+            <Separator className="mb-8" />
+            <CardContent className="space-y-4">
+              <ReactSelect
+                onChange={(e) => setTags(e.map((tag) => tag.value))}
+                options={tagsList}
+                isMulti
+              />
+            </CardContent>
+          </Card>
 
           {/* Cover Image */}
           <Card className="max-w-2xl">
@@ -362,12 +396,8 @@ const Editor: FC<EditorProps> = ({
 
           <Card className="max-w-2xl">
             <CardHeader>
-              <CardTitle>
-                Post Content
-              </CardTitle>
-              <CardDescription>
-                Update content using Markdown
-              </CardDescription>
+              <CardTitle>Post Content</CardTitle>
+              <CardDescription>Update content using Markdown</CardDescription>
             </CardHeader>
             <Separator className="mb-8" />
             <CardContent className="space-y-4">
@@ -385,9 +415,7 @@ const Editor: FC<EditorProps> = ({
 
           <Card className="max-w-2xl">
             <CardHeader>
-              <CardTitle>
-                Post Preview
-              </CardTitle>
+              <CardTitle>Post Preview</CardTitle>
             </CardHeader>
             <Separator className="mb-8" />
             <CardContent className="space-y-4">
@@ -402,6 +430,14 @@ const Editor: FC<EditorProps> = ({
               disabled={isSaving}
             >
               {protectedEditorConfig.submit}
+            </Button>
+            <Button
+              type="button"
+              onClick={handlePublish}
+              className="flex !bg-gray-900 px-10 !text-white hover:!bg-gray-800"
+              disabled={isSaving}
+            >
+              Publish
             </Button>
             <Button
               type="button"
