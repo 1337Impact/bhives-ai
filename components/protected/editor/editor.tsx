@@ -58,11 +58,6 @@ type FormData = z.infer<typeof postEditFormSchema>;
 
 interface EditorProps {
   post: Post;
-  userId: string;
-  coverImageFileName: string;
-  coverImagePublicUrl: string;
-  galleryImageFileNames: string[];
-  galleryImagePublicUrls: string[];
 }
 
 const tagsList = [
@@ -100,17 +95,13 @@ function getPublicImageUrl(image: string) {
 type EditorFormValues = z.infer<typeof postEditFormSchema>;
 
 const Editor: FC<EditorProps> = ({
-  post,
-  userId,
-  coverImageFileName,
-  coverImagePublicUrl,
-  galleryImageFileNames,
-  galleryImagePublicUrls,
+  post
 }) => {
   const router = useRouter();
   const supabase = createClient();
   const [categoriers, setCategoriers] = useState<CategoryType[]>([]);
   const [tags, setTags] = useState<string[]>([]);
+  const [isImage, setIsImage] = useState<boolean>(!!post.image);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -156,29 +147,32 @@ const Editor: FC<EditorProps> = ({
   async function onSubmit(data: EditorFormValues) {
     setShowLoadingAlert(true);
     setIsSaving(true);
-    let coverImageUrl = "";
+    let coverImageUrl = post.image as string;
 
     if (coverImg) {
       if (data.image) {
         await supabase.storage.from("cover-image").remove([data.image]);
       }
       const { data: uploadedImage, error } = await supabase.storage
-        .from("cover-image")
-        .upload(v4(), coverImg);
+      .from("cover-image")
+      .upload(v4(), coverImg);
       if (error) {
         console.log("Error uploading file: ", error.message);
       }
       if (uploadedImage) {
         coverImageUrl = uploadedImage.path;
+        setIsImage(true);
       }
       console.log("File uploaded successfully: ", uploadedImage);
+    } else {
+      setIsImage(false);
     }
 
     const response = await UpdatePost({
       id: post.id,
       title: data.title,
       slug: data.slug,
-      image: coverImageUrl,
+      image: isImage ? coverImageUrl : "",
       description: data.description,
       content: content,
       categoryId: data.categoryId,
@@ -193,29 +187,6 @@ const Editor: FC<EditorProps> = ({
     }
     setIsSaving(false);
     setShowLoadingAlert(false);
-  }
-
-  async function handlePublish(){
-    const { data, error } = await supabase
-    .from("posts")
-    .update({
-      id: post.id,
-      published: true,
-    })
-    .match({ id: post.id })
-    .select()
-    .single();
-    if (error) {
-      console.log("Error has occured while publishing post");
-      console.log("Error message : ", error.message);
-      return;
-    }
-    if (data) {
-      toast.success(protectedEditorConfig.successMessage);
-      router.push(`/blog/posts/${data.slug}`);
-    } else {
-      toast.error(protectedEditorConfig.errorMessage);
-    }
   }
 
   return (
@@ -430,14 +401,6 @@ const Editor: FC<EditorProps> = ({
               disabled={isSaving}
             >
               {protectedEditorConfig.submit}
-            </Button>
-            <Button
-              type="button"
-              onClick={handlePublish}
-              className="flex !bg-gray-900 px-10 !text-white hover:!bg-gray-800"
-              disabled={isSaving}
-            >
-              Publish
             </Button>
             <Button
               type="button"

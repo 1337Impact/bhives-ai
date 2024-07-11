@@ -15,17 +15,11 @@ const ProtectedDesktopSideBar = () => {
       <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
         {/* Sidebar component, swap this element with another sidebar if you like */}
         <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6 pb-4">
-          <Link href={getUrl()} className="flex h-16 shrink-0 items-center">
-            <Image
-              className="h-[40px]w-[40px]w-auto"
-              src="/images/logo.png"
-              alt="Logo"
-              height={40}
-              width={40}
-              priority
-            />
-          </Link>
-          <nav className="flex flex-1 flex-col">
+        <Link href="/" className="flex items-center gap-1 mt-4">
+          <img src="/logo.png" alt="Bhives.ai" className="h-9" />
+          <h1 className="text-xl font-bold text-black">Bhives.ai</h1>
+        </Link>
+          <nav className="flex flex-1 flex-col mt-8">
             <ul role="list" className="flex flex-1 flex-col gap-y-7">
               <li>
                 <ul role="list" className="-mx-2 space-y-1">
@@ -38,7 +32,7 @@ const ProtectedDesktopSideBar = () => {
                             (path.length > 3 && pathSlug === menu.slug)
                             ? "bg-gray-50 text-orange-600"
                             : "text-gray-700 hover:bg-gray-50 hover:text-orange-600",
-                          "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6",
+                          "group flex gap-x-3 rounded-md p-4 font-semibold leading-6",
                         )}
                       >
                         <menu.icon

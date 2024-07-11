@@ -17,8 +17,6 @@ function getPublicImageUrl(image: string) {
   return `${process.env.NEXT_PUBLIC_SUPABASE_STORAGE_BUCKET_COVER_IMAGE_URL}/${image}`;
 }
 
-
-
 interface MainPostItemProps {
   post: PostWithCategoryWithProfile;
 }
@@ -27,10 +25,10 @@ const MainPostItem: React.FC<MainPostItemProps> = async ({ post }) => {
   const readTime = readingTime(post.content ? post.content : "");
 
   return (
-    <div className="group max-w-md mx-auto bg-white shadow-md shadow-gray-300 border-2 border-gray-500 rounded-lg hover:bg-gray-50">
+    <div className="group max-w-md mx-auto bg-white shadow-md shadow-gray-300 border-2 rounded-lg hover:bg-gray-50 lg:max-w-full lg:w-full">
       <Link href={`/blog/posts/${post.slug}`}>
         <article className="relative isolate flex flex-col gap-2 px-5 py-5">
-          <div className="relative aspect-[2/1]">
+          <div className="relative aspect-[2/1] md:hidden">
             {post.image ? (
               <img
                 src={getPublicImageUrl(post.image)}
@@ -55,14 +53,9 @@ const MainPostItem: React.FC<MainPostItemProps> = async ({ post }) => {
           </div>
           <div>
             {/* Desktop category view */}
-            {/* <div className="hidden items-center gap-x-3 text-sm sm:flex">
-            <span className="relative z-10 rounded-full bg-gray-100 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-200">
-              {post.categories?.title}
-            </span>
-          </div> */}
 
             <div className="relative max-w-xl">
-              <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600 group-hover:underline">
+              <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600 group-hover:underline lg:text-xl lg:font-bold">
                 <span className="absolute inset-0" />
                 {post.title}
               </h3>
@@ -90,18 +83,23 @@ const MainPostItem: React.FC<MainPostItemProps> = async ({ post }) => {
                 {post.description}
               </p>
               {/* Desktop toolbar view */}
-              {/* <div className="mt-3 hidden items-center gap-x-3 text-sm sm:flex">
-              <div className="inline-flex items-center text-gray-500">
-                <CalendarIcon className="h-4 w-4" />
-                <span className="ml-1">
-                  {format(parseISO(post.updated_at!), "MMMM dd, yyyy")}
-                </span>
+              <div className="mt-3 hidden items-center gap-x-3 text-sm sm:flex">
+                <div className="hidden items-center gap-x-3 text-sm sm:flex">
+                  <span className="relative z-10 rounded-full bg-gray-100 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-200">
+                    {post.categories?.title}
+                  </span>
+                </div>
+                <div className="inline-flex items-center text-gray-500">
+                  <CalendarIcon className="h-4 w-4" />
+                  <span className="ml-1">
+                    {format(parseISO(post.updated_at!), "MMMM dd, yyyy")}
+                  </span>
+                </div>
+                <div className="inline-flex items-center text-gray-500">
+                  <Clock10Icon className="h-4 w-4" />
+                  <span className="ml-1">{getMinutes(readTime.minutes)}</span>
+                </div>
               </div>
-              <div className="inline-flex items-center text-gray-500">
-                <Clock10Icon className="h-4 w-4" />
-                <span className="ml-1">{getMinutes(readTime.minutes)}</span>
-              </div>
-            </div> */}
             </div>
 
             <div className="mt-3 flex border-t border-gray-900/5 pt-2">

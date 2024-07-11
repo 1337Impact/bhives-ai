@@ -90,7 +90,7 @@ export default async function HomePage({ searchParams }: HomePageProps) {
 
   return (
     <main className="w-full">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 gap-4">
         {data.length ? (
           data?.map((post) => (
             <Suspense key={v4()} fallback={<MainPostItemLoading />}>

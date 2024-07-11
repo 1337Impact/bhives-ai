@@ -78,18 +78,9 @@ const ProtectedMobileSideBar: FC<ProtectedMobileSideBarProps> = ({
                 </Transition.Child>
                 {/* Sidebar component, swap this element with another sidebar if you like */}
                 <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-4">
-                  <Link
-                    href={getUrl()}
-                    className="flex h-16 shrink-0 items-center"
-                  >
-                    <Image
-                      className="h-[40px] w-[40px]"
-                      src="/images/logo.png"
-                      alt="Logo"
-                      height={40}
-                      width={40}
-                      priority
-                    />
+                  <Link href="/" className="flex items-center gap-1 mt-4">
+                    <img src="/logo.png" alt="Bhives.ai" className="h-9" />
+                    <h1 className="text-xl font-bold text-black">Bhives.ai</h1>
                   </Link>
                   <nav className="flex flex-1 flex-col">
                     <ul role="list" className="flex flex-1 flex-col gap-y-7">
@@ -103,7 +94,7 @@ const ProtectedMobileSideBar: FC<ProtectedMobileSideBarProps> = ({
                                   currentPath === menu.slug
                                     ? "bg-gray-50 text-orange-600"
                                     : "text-gray-700 hover:bg-gray-50 hover:text-orange-600",
-                                  "group flex gap-x-3 rounded-md p-2 font-sans text-sm font-semibold leading-6",
+                                  "group flex gap-x-3 rounded-md p-2 font-sans text-sm font-semibold leading-6"
                                 )}
                               >
                                 <menu.icon
@@ -111,7 +102,7 @@ const ProtectedMobileSideBar: FC<ProtectedMobileSideBarProps> = ({
                                     currentPath === menu.slug
                                       ? "text-orange-600"
                                       : "text-gray-400 group-hover:text-orange-600",
-                                    "h-6 w-6 shrink-0 font-sans",
+                                    "h-6 w-6 shrink-0 font-sans"
                                   )}
                                   aria-hidden="true"
                                 />
