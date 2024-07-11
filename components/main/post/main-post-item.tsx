@@ -25,7 +25,7 @@ const MainPostItem: React.FC<MainPostItemProps> = async ({ post }) => {
   const readTime = readingTime(post.content ? post.content : "");
 
   return (
-    <div className="group max-w-md mx-auto bg-white shadow-md shadow-gray-300 border-2 rounded-lg hover:bg-gray-50 lg:max-w-full lg:w-full">
+    <div className="group max-w-md mx-auto bg-white shadow-md shadow-gray-300 border-2 rounded-lg hover:bg-gray-50 lg:max-w-full w-full">
       <Link href={`/blog/posts/${post.slug}`}>
         <article className="relative isolate flex flex-col gap-2 px-5 py-5">
           <div className="relative aspect-[2/1] md:hidden">
