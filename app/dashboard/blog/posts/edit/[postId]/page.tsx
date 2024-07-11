@@ -62,7 +62,7 @@ export default async function PostEditorPage({ params }: PostEditorPageProps) {
             {protectedEditorConfig.description}
           </p>
         </div>
-        <PublishButton postId={post.id} />
+        <PublishButton postId={post.id} isPublished={!!post.published} />
       </div>
       <Separator className="mb-5 max-w-2xl" />
       <Editor post={post} />

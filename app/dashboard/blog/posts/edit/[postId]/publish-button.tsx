@@ -5,14 +5,13 @@ import { useRouter } from "next/navigation";
 import { createClient } from "@/utils/supabase/client";
 import { protectedEditorConfig, protectedPostConfig } from "@/config/protected";
 
-async function handlePublish(postId: string) {
-  const router = useRouter();
+async function handlePostPublish(postId: string, published: boolean) {
   const supabase = createClient();
   const { data, error } = await supabase
     .from("posts")
     .update({
       id: postId,
-      published: true,
+      published: !published,
     })
     .match({ id: postId })
     .select()
@@ -20,25 +19,48 @@ async function handlePublish(postId: string) {
   if (error) {
     console.log("Error has occured while publishing post");
     console.log("Error message : ", error.message);
-    return;
+    return null;
   }
-  if (data) {
-    toast.success(protectedEditorConfig.successMessage);
-    router.push(`/blog/posts/${data.slug}`);
-  } else {
-    toast.error(protectedEditorConfig.errorMessage);
-  }
+  return data;
 }
 
+export default function PublishButton({
+  isPublished,
+  postId,
+}: {
+  isPublished: boolean;
+  postId: string;
+}) {
+  const router = useRouter();
+  const handlePublish = async (postId: string, isPublished: boolean) => {
+    const data = await handlePostPublish(postId, isPublished);
+    if (data) {
+      toast.success(protectedEditorConfig.successMessage);
+      if (isPublished) {
+        router.push(`/dashboard/blog/posts`);
+      } else {
+        router.push(`/blog/posts/${data.slug}`);
+      }
+    } else {
+      toast.error(protectedEditorConfig.errorMessage);
+    }
+  };
 
-export default function PublishButton({ postId }: { postId: string}) {
-    return (
-        <Button
-        type="button"
-        onClick={()=>handlePublish(postId)}
-        className="flex !bg-gray-900 px-10 !text-white hover:!bg-gray-800"
-      >
-        Publish
-      </Button>
-    )
+  return !isPublished ? (
+    <Button
+      type="button"
+      onClick={() => handlePublish(postId, isPublished)}
+      className="flex !bg-gray-900 px-10 !text-white hover:!bg-gray-800"
+    >
+      Publish
+    </Button>
+  ) : (
+    <Button
+      type="button"
+      onClick={() => handlePublish(postId, isPublished)}
+      className="flex !bg-red-500 px-10 !text-white hover:!bg-red-400"
+    >
+      Draft
+    </Button>
+  );
 }
