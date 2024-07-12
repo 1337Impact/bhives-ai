@@ -112,7 +112,7 @@ const PostEditButton: FC<PostEditButtonProps> = ({ id }) => {
       </DropdownMenu>
       {/* Delete alert */}
       <AlertDialog open={showDeleteAlert} onOpenChange={setShowDeleteAlert}>
-        <AlertDialogContent className="text-md font-sans">
+        <AlertDialogContent className="text-md font-sans bg-white">
           <AlertDialogHeader>
             <AlertDialogTitle>
               {protectedPostConfig.questionDelete}
