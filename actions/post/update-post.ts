@@ -9,6 +9,7 @@ export async function UpdatePost(context: z.infer<typeof postUpdateSchema>) {
   const supabase = createClient();
   try {
     const post = postUpdateSchema.parse(context);
+    console.log("data:", post.image);
 
     const { data, error } = await supabase
       .from("posts")
@@ -20,6 +21,7 @@ export async function UpdatePost(context: z.infer<typeof postUpdateSchema>) {
         description: post.description,
         image: post.image,
         content: post.content,
+        tags: post.tags,
       })
       .match({ id: post.id })
       .select()

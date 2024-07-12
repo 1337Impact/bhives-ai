@@ -100,7 +100,7 @@ const Editor: FC<EditorProps> = ({
   const router = useRouter();
   const supabase = createClient();
   const [categoriers, setCategoriers] = useState<CategoryType[]>([]);
-  const [tags, setTags] = useState<string[]>([]);
+  const [tags, setTags] = useState<string[]>(post.tags || []);
   const [isImage, setIsImage] = useState<boolean>(!!post.image);
 
   useEffect(() => {
@@ -167,7 +167,7 @@ const Editor: FC<EditorProps> = ({
     } else {
       setIsImage(false);
     }
-
+    console.log("image: ",isImage, coverImageUrl);
     const response = await UpdatePost({
       id: post.id,
       title: data.title,
@@ -307,6 +307,7 @@ const Editor: FC<EditorProps> = ({
             <Separator className="mb-8" />
             <CardContent className="space-y-4">
               <ReactSelect
+              defaultValue={tagsList.filter((tag) => post.tags?.includes(tag.value))}
                 onChange={(e) => setTags(e.map((tag) => tag.value))}
                 options={tagsList}
                 isMulti

@@ -60,7 +60,7 @@ export default function PublishButton({
       onClick={() => handlePublish(postId, isPublished)}
       className="flex !bg-red-500 px-10 !text-white hover:!bg-red-400"
     >
-      Draft
+      Unpublish
     </Button>
   );
 }
