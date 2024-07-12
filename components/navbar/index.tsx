@@ -47,60 +47,34 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
   const pathname = usePathname();
-  // const router = useRouter();
-
-  // useEffect(() => {
-  //   const handleHashChange = () => {
-  //     console.log("hashchange");
-  //     if (window.location.hash) {
-  //       const sectionId = window.location.hash.substring(1);
-  //       const section = document.getElementById(sectionId);
-  //       if (section) {
-  //         section.scrollIntoView({ behavior: "smooth" });
-  //       }
-  //     }
-  //   };
-  //   setTimeout(() => {
-  //     handleHashChange();
-  //     window.addEventListener("hashchange", handleHashChange);
-
-  //     return () => {
-  //       window.removeEventListener("hashchange", handleHashChange);
-  //     };
-  //   }, 2000);
-  // }, [router]);
 
   useEffect(() => {
     if (pathname.includes("/blog")) {
       setActiveSection("blog");
-      return ;
-    } else {
-      setActiveSection("");
-      setTimeout(() => {
-        const sections = document.querySelectorAll("section");
-        console.log("sections: ", sections);
-        const observerOptions = {
-          root: null,
-          rootMargin: "0px",
-          threshold: 0.4,
-        };
-
-        const observerCallback = (entries: any) => {
-          entries.forEach((entry: any) => {
-            if (entry.isIntersecting) {
-              console.log("section: ", entry.target.id);
-              setActiveSection(entry.target.id);
-            }
-          });
-        };
-
-        const observer = new IntersectionObserver(
-          observerCallback,
-          observerOptions
-        );
-        sections.forEach((section) => observer.observe(section));
-      }, 2000);
+      return;
     }
+    const sections = document.querySelectorAll("section");
+    console.log("sections: ", sections);
+    const observerOptions = {
+      root: null,
+      rootMargin: "0px",
+      threshold: 0.4,
+    };
+
+    const observerCallback = (entries: any) => {
+      entries.forEach((entry: any) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(
+      observerCallback,
+      observerOptions
+    );
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
   }, [pathname]);
 
   return (
