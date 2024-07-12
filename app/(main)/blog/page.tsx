@@ -60,9 +60,24 @@ async function getPostsData(
   }
 }
 
+async function getCategoryTitle(categoryId: string) {
+  const supabase = createClient();
+  const { data, error } = await supabase
+    .from("categories")
+    .select("title")
+    .eq("id", categoryId)
+    .single();
+  if (!data || error) {
+    return null;
+  }
+  return data.title;
+}
+
 export default async function HomePage({ searchParams }: HomePageProps) {
   const supabase = createClient();
   console.log("searchParams", searchParams.category);
+
+  const categoryTitle = await getCategoryTitle(searchParams.category as string);
 
   // Fetch total pages
   const { count } = await supabase
@@ -90,7 +105,14 @@ export default async function HomePage({ searchParams }: HomePageProps) {
 
   return (
     <main className="w-full">
-      <div className="grid grid-cols-1 gap-4">
+      <h1 className="font-bold text-xl text-gray-700">
+        {searchParams.category
+          ? `${categoryTitle || "Category Not found"}`
+          : searchParams.tags
+          ? `#${searchParams.tags}`
+          : ""}
+      </h1>
+      <div className="mt-4 grid grid-cols-1 gap-3">
         {data.length ? (
           data?.map((post) => (
             <Suspense key={v4()} fallback={<MainPostItemLoading />}>

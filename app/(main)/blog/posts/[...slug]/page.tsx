@@ -3,18 +3,13 @@ import {
   DetailPostHeading,
   DetailPostRender,
 } from "@/components/detail/post";
-import { DetailPostScrollUpButton } from "@/components/detail/post/buttons";
 import { seoData } from "@/config/root/seo";
 import { getOgImageUrl, getUrl } from "@/lib/utils";
-import {
-  CommentWithProfile,
-  PostWithCategoryWithProfile,
-} from "@/types/collection";
-import type { Database } from "@/types/supabase";
+import { PostWithCategoryWithProfile } from "@/types/collection";
 import { createClient } from "@/utils/supabase/server";
 import { format, parseISO } from "date-fns";
 import { Metadata } from "next";
-import { cookies } from "next/headers";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import readingTime, { ReadTimeResults } from "reading-time";
 
@@ -142,6 +137,17 @@ export default async function PostPage({ params }: PostPageProps) {
             category={post.categories?.title as string}
             readTime={readTime as ReadTimeResults}
           />
+          <div>
+            {post.tags?.map((tag) => (
+              <Link
+                key={tag}
+                href={`/blog?tags=${tag}`}
+                className="rounded-md bg-gray-200 py-1 px-2 text-sm font-semibold text-gray-600 hover:text-gray-800 ml-1"
+              >
+                #{tag}
+              </Link>
+            ))}
+          </div>
         </div>
         {/* Content */}
         <div className="relative mx-auto max-w-3xl border-slate-500/50 py-5">

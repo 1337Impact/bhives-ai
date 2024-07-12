@@ -36,7 +36,6 @@ const PostsPage: FC<PostsPageProps> = async ({ searchParams }) => {
     .select(`*, categories(*)`)
     .order("created_at", { ascending: false })
     .returns<Post[]>();
-    console.log(data)
 
   if (!data || error || !data.length) {
     notFound;
