@@ -25,9 +25,9 @@ const MainPostItem: React.FC<MainPostItemProps> = async ({ post }) => {
   const readTime = readingTime(post.content ? post.content : "");
 
   return (
-    <div className="group max-w-md mx-auto bg-white shadow-md shadow-gray-300 border-2 rounded-lg hover:bg-gray-50 lg:max-w-full w-full">
+    <div className="group max-w-md mx-auto border-2 border-x-0 border-y-[2px] border-orange-400 lg:max-w-full w-full -mt-[2px]">
       <Link href={`/blog/posts/${post.slug}`}>
-        <article className="relative isolate flex flex-col gap-2 px-5 py-5">
+        <article className="relative isolate flex flex-col gap-2 py-5">
           <div className="relative aspect-[2/1] md:hidden">
             {post.image ? (
               <img
@@ -52,40 +52,18 @@ const MainPostItem: React.FC<MainPostItemProps> = async ({ post }) => {
             <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10" />
           </div>
           <div>
-            {/* Desktop category view */}
 
-            <div className="relative max-w-xl">
-              <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600 group-hover:underline lg:text-xl lg:font-bold">
+            <div className="relative max-w-3xl">
+              <h3 className="mt-1 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600 group-hover:underline lg:text-xl lg:font-bold">
                 <span className="absolute inset-0" />
                 {post.title}
               </h3>
-              {/* Mobile category and toolbar view*/}
-              <div className="mt-2 items-center gap-x-3 text-sm hidden">
-                <div className="inline-flex items-center text-gray-500">
-                  <span className="relative z-10 rounded-full bg-gray-100 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-200">
-                    {post.categories?.title}
-                  </span>
-                </div>
-                <div className="inline-flex items-center text-gray-500">
-                  <CalendarIcon className="h-4 w-4" />
-                  <span className="ml-1">
-                    {format(parseISO(post.updated_at!), "dd/MM/yyyy")}
-                  </span>
-                </div>
-                <div className="inline-flex items-center text-gray-500">
-                  <Clock10Icon className="h-4 w-4" />
-                  <span className="ml-1">
-                    {getMinutes(readTime.minutes ? readTime.minutes : 0)}
-                  </span>
-                </div>
-              </div>
               <p className="mt-3 text-sm leading-6 text-gray-600 line-clamp-3">
                 {post.description}
               </p>
-              {/* Desktop toolbar view */}
               <div className="mt-3 hidden items-center gap-x-3 text-sm sm:flex">
                 <div className="hidden items-center gap-x-3 text-sm sm:flex">
-                  <span className="relative z-10 rounded-full bg-gray-100 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-200">
+                  <span className="relative z-10 rounded-full bg-orange-300 px-3 py-1 font-medium text-gray-600 hover:bg-orange-400">
                     {post.categories?.title}
                   </span>
                 </div>

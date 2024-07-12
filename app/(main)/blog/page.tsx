@@ -104,15 +104,18 @@ export default async function HomePage({ searchParams }: HomePageProps) {
   }
 
   return (
-    <main className="w-full">
-      <h1 className="font-bold text-xl text-gray-700">
-        {searchParams.category
-          ? `${categoryTitle || "Category Not found"}`
-          : searchParams.tags
-          ? `#${searchParams.tags}`
-          : ""}
-      </h1>
-      <div className="mt-4 grid grid-cols-1 gap-3">
+    <main className="w-full lg:ml-4">
+      <div className="flex items-center gap-2">
+        <h1 className="font-bold text-xl text-gray-700">
+          {searchParams.category
+            ? `${categoryTitle || "Category Not found"}`
+            : searchParams.tags
+            ? `#${searchParams.tags}`
+            : "All"}
+        </h1>
+        <h1 className="font-semibold text-sm text-gray-600 mt-1">{data.length} posts in total</h1>
+      </div>
+      <div className="mt-4 grid grid-cols-1">
         {data.length ? (
           data?.map((post) => (
             <Suspense key={v4()} fallback={<MainPostItemLoading />}>
