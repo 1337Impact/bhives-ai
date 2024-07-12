@@ -19,12 +19,12 @@ export async function CreatePost(context: z.infer<typeof postCreateSchema>) {
       .single();
 
     if (error) {
-      console.log(error);
+      //console.log(error);
       return null;
     }
     return data;
   } catch (error) {
-    console.log(error);
+    //console.log(error);
     return null;
   }
 }

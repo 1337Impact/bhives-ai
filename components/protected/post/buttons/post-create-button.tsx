@@ -47,7 +47,7 @@ const PostCreateButton = () => {
       };
 
       const response = await CreatePost(post);
-      console.log(response);
+      //console.log(response);
 
       if (response) {
         toast.success(protectedPostConfig.successCreate);

@@ -17,7 +17,7 @@ export async function DeletePost(context: z.infer<typeof postDeleteSchema>) {
       .select();
 
     if (error) {
-      console.log(error);
+      //console.log(error);
       return false;
     }
     if (data && data.length > 0) {
@@ -26,7 +26,7 @@ export async function DeletePost(context: z.infer<typeof postDeleteSchema>) {
     return false;
   } catch (error) {
     if (error instanceof z.ZodError) {
-      console.log(error);
+      //console.log(error);
       return false;
     }
     return false;

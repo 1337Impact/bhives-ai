@@ -19,7 +19,7 @@ export default function Navbar() {
     const observerCallback = (entries: any) => {
       entries.forEach((entry: any) => {
         if (entry.isIntersecting) {
-          console.log("section: ",  entry.target.id);
+          //console.log("section: ",  entry.target.id);
           setActiveSection(entry.target.id);
         }
       });

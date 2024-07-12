@@ -20,13 +20,13 @@ export async function UpdateSettings(context: z.infer<typeof profileSchema>) {
       .eq("id", profile.id);
 
     if (error) {
-      console.log(error);
+      //console.log(error);
       return false;
     }
     return true;
   } catch (error) {
     if (error instanceof z.ZodError) {
-      console.log(error);
+      //console.log(error);
       return false;
     }
     return false;

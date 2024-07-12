@@ -5,7 +5,7 @@ export default function LoginPage({
 }: {
   searchParams?: { [key: string]: string | string[] | undefined };
 }) {
-  console.log(searchParams);
+  //console.log(searchParams);
   return (
     <div className="h-[calc(100vh-200px)] flex flex-col items-center justify-center">
         {searchParams?.error === "login-failed" && (

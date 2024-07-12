@@ -14,7 +14,7 @@ export default function UploadImage({
   const [productImage, setProductImage] = useState<string | null>(null);
 
   useEffect(() => {
-    console.log("image", image);
+    //console.log("image", image);
     if (image) {
       setProductImage(image);
     }

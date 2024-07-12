@@ -75,7 +75,7 @@ async function getCategoryTitle(categoryId: string) {
 
 export default async function HomePage({ searchParams }: HomePageProps) {
   const supabase = createClient();
-  console.log("searchParams", searchParams.category);
+  //console.log("searchParams", searchParams.category);
 
   const categoryTitle = await getCategoryTitle(searchParams.category as string);
 

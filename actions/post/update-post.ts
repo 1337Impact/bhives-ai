@@ -9,7 +9,7 @@ export async function UpdatePost(context: z.infer<typeof postUpdateSchema>) {
   const supabase = createClient();
   try {
     const post = postUpdateSchema.parse(context);
-    console.log("data:", post.image);
+    //console.log("data:", post.image);
 
     const { data, error } = await supabase
       .from("posts")
@@ -28,12 +28,12 @@ export async function UpdatePost(context: z.infer<typeof postUpdateSchema>) {
       .single();
 
     if (error) {
-      console.log(error);
+      //console.log(error);
       return null;
     }
     return data;
   } catch (error) {
-    console.log(error);
+    //console.log(error);
     return null;
   }
 }

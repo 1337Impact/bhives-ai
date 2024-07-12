@@ -20,8 +20,8 @@ async function getUserId() {
   } = await supabase.auth.getSession();
 
   if (error) {
-    console.log("Error has occured while getting UserId!");
-    console.log("Error message : ", error.message);
+    //console.log("Error has occured while getting UserId!");
+    //console.log("Error message : ", error.message);
     return null;
   }
 
@@ -37,8 +37,8 @@ async function getPost(postId: string, userId: string) {
     .single<Post>();
 
   if (error) {
-    console.log("Error has occured while getting post data");
-    console.log("Error message : ", error.message);
+    //console.log("Error has occured while getting post data");
+    //console.log("Error message : ", error.message);
     return null;
   }
 

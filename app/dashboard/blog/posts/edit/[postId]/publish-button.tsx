@@ -17,8 +17,8 @@ async function handlePostPublish(postId: string, published: boolean) {
     .select()
     .single();
   if (error) {
-    console.log("Error has occured while publishing post");
-    console.log("Error message : ", error.message);
+    //console.log("Error has occured while publishing post");
+    //console.log("Error message : ", error.message);
     return null;
   }
   return data;

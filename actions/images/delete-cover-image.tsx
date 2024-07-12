@@ -20,7 +20,7 @@ export async function DeleteCoverImage(
       .remove([`${userId}/${postId}/${fileName}`]);
 
     if (error) {
-      console.log(error);
+      //console.log(error);
     }
     if (data?.length && data?.length > 0) {
       return true;
@@ -29,7 +29,7 @@ export async function DeleteCoverImage(
     }
   } catch (error) {
     if (error instanceof z.ZodError) {
-      console.log(error);
+      //console.log(error);
       return false;
     }
     return false;

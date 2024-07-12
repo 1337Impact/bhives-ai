@@ -109,8 +109,8 @@ const Editor: FC<EditorProps> = ({
         .select("id, slug, title");
 
       if (error) {
-        console.log("Error has occured while getting categories!");
-        console.log("Error message : ", error.message);
+        //console.log("Error has occured while getting categories!");
+        //console.log("Error message : ", error.message);
         return;
       }
 
@@ -157,17 +157,17 @@ const Editor: FC<EditorProps> = ({
       .from("cover-image")
       .upload(v4(), coverImg);
       if (error) {
-        console.log("Error uploading file: ", error.message);
+        //console.log("Error uploading file: ", error.message);
       }
       if (uploadedImage) {
         coverImageUrl = uploadedImage.path;
         isImage = true;
       }
-      console.log("File uploaded successfully: ", uploadedImage);
+      //console.log("File uploaded successfully: ", uploadedImage);
     } else {
       isImage = false;
     }
-    console.log("image: ",isImage, coverImageUrl);
+    //console.log("image: ",isImage, coverImageUrl);
     const response = await UpdatePost({
       id: post.id,
       title: data.title,
@@ -377,7 +377,7 @@ const Editor: FC<EditorProps> = ({
               <Textarea
                 value={content || ""}
                 onChange={(e) => {
-                  console.log(e.target.value);
+                  //console.log(e.target.value);
                   setContent(e.target.value);
                 }}
                 className="min-h-60"
