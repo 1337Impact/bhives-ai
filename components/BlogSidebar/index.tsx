@@ -41,14 +41,14 @@ export default async function BlogSidebar() {
         <BackButton />
       </div>
       <div className="rounded-md p-5 border-orange-400 bg-gray-100 border-2">
-        <h4 className="text-lg font-bold">BHIVES BLOG</h4>
+        <h1 className="text-lg font-bold">BHIVES BLOG</h1>
         <p className="mt-1 text-gray-600 text-sm font-semibold">
           Blog posts, articles, and tutorials about Cloud, Ai and Machine
           Learning.
         </p>
       </div>
       <div className="rounded-md p-5 border-orange-400 bg-gray-100 border-2">
-        <h4 className="text-lg font-bold">RECOMMENDED TOPICS</h4>
+        <h1 className="text-lg font-bold">RECOMMENDED TOPICS</h1>
         {categories?.map((category) => (
           <Link
             key={category.id}
@@ -61,7 +61,7 @@ export default async function BlogSidebar() {
         ))}
       </div>
       <div className="rounded-md p-5 border-orange-400 bg-gray-100 border-2">
-        <h4 className="text-lg font-bold">RECOMMENDED TAGS</h4>
+        <h1 className="text-lg font-bold">RECOMMENDED TAGS</h1>
         <div className="flex flex-wrap gap-1 -ml-1 mt-2">
         {tagsList?.map((tag) => (
           <Link

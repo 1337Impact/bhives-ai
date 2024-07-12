@@ -61,15 +61,13 @@ export default function ContactForm() {
         />
       </div>
       <div className="mb-4">
+      <label htmlFor="industry" className="text-lg mb-2">Select Your Industry:</label>
         <select
           id="industry"
           name="industry"
           required
           className="w-full p-3 border-2 border-gray-500 rounded-lg text-lg transition-colors duration-300 focus:border-orange-500 focus:outline-none"
         >
-          <option value="" disabled selected>
-            Select Your Industry
-          </option>
           <option value="technology">Technology</option>
           <option value="finance">Finance</option>
           <option value="healthcare">Healthcare</option>
@@ -89,7 +87,7 @@ export default function ContactForm() {
         ></textarea>
       </div>
       <div className="mb-4">
-        <label className="text-lg mb-2">Preferred Consultation Date:</label>
+        <label htmlFor="preferred-date" className="text-lg mb-2">Preferred Consultation Date:</label>
         <input
           type="date"
           id="preferred-date"
@@ -99,7 +97,7 @@ export default function ContactForm() {
         />
       </div>
       <div className="mb-4">
-        <label className="text-lg mb-2">Preferred Time Slot:</label>
+        <label htmlFor="preferred-time" className="text-lg mb-2">Preferred Time Slot:</label>
         <select
           id="preferred-time"
           name="preferred-time"

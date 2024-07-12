@@ -17,9 +17,9 @@ export default function ServiceCard({
     <div className="card relative bg-white shadow-xl shadow-gray-400 rounded-3xl px-5 py-7 h-[520px] w-[300px] hover:scale-[103%] transition-gpu ease-in-out duration-500">
       <div className="flex flex-col items-center">
         <div className="text-5xl text-orange-500 mt-5">{icon}</div>
-        <h4 className="mt-3 text-xl text-center text-gray-700 font-semibold">
+        <h1 className="mt-3 text-xl text-center text-gray-700 font-semibold">
           {title}
-        </h4>
+        </h1>
         <p className="text-center text-gray-600 flex-1 mt-4">{description}</p>
       </div>
       <ul className="mt-5 flex flex-col justify-between text-gray-600">

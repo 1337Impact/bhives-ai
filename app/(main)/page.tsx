@@ -341,9 +341,9 @@ export default async function Home() {
               className="flex flex-col items-center justify-center"
             >
               <item.icon className="text-[2.5rem] text-orange-500 mt-5" />
-              <h4 className="mt-2 text-center text-gray-700 font-[500]">
+              <h1 className="mt-2 text-center text-gray-700 font-[500]">
                 {item.title}
-              </h4>
+              </h1>
             </li>
           ))}
         </ul>
@@ -372,7 +372,7 @@ export default async function Home() {
           Join the elite group of businesses revolutionizing their industries
           with our AI solutions.
         </p>
-        <ul className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {cardsData.map((card) => (
             <Card
               key={card.title}
@@ -383,7 +383,7 @@ export default async function Home() {
               detail={card.detail}
             />
           ))}
-        </ul>
+        </div>
         <Link href="#contact">
           <button className="bg-white border-2 border-white text-orange-500 font-bold px-6 py-3 rounded-lg mt-16 lg:mb-40 xl:mb-80 hover:bg-orange-400 hover:text-white transition-all ease-in-out duration-300">
             Start Your AI Transformation Today
@@ -403,7 +403,7 @@ export default async function Home() {
           solutions. Experience the power of intelligent automation across every
           aspect of your organization.
         </p>
-        <ul className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {servicesData.map((card) => (
             <ServiceCard
               key={card.title}
@@ -413,7 +413,7 @@ export default async function Home() {
               benefits={card.benefits}
             />
           ))}
-        </ul>
+        </div>
         <div className="mt-20 py-10 w-full flex flex-col justify-center items-center bg-orange-400">
           <h1 className="text-4xl font-bold text-white text-center max-w-[600px]">
             Ready to transform your business with AI?
@@ -427,9 +427,9 @@ export default async function Home() {
       </section>
       <section id="process" className="scroll-mt-20 relative bg-gray-900 text-white py-16">
         <div className="mx-auto px-4">
-          <h2 className="text-4xl font-bold mb-10 text-center">
+          <h1 className="text-4xl font-bold mb-10 text-center">
             Our AI Automation Integration Process
-          </h2>
+          </h1>
           <p className="text-lg mb-10 text-center max-w-[600px] mx-auto">
             We follow a streamlined, four-step approach to seamlessly integrate
             AI automation into your business, ensuring maximum efficiency and
@@ -466,13 +466,13 @@ export default async function Home() {
       </section>
       <section id="team" className="scroll-mt-20 team-section py-10 lg:py-20 bg-gray-900">
         <div className="max-w-[1260px] md:mx-4 lg:mx-auto px-4">
-          <h2 className="text-4xl text-white font-bold text-center mb-10 underline underline-offset-8">
+          <h1 className="text-4xl text-white font-bold text-center mb-10 underline underline-offset-8">
             Our AI Visionaries
-          </h2>
+          </h1>
           <div className="bg-white p-10 rounded-lg shadow-md mb-10 text-center">
-            <h3 className="text-3xl font-bold text-orange-400 mb-4">
+            <h1 className="text-3xl font-bold text-orange-400 mb-4">
               Our Vision
-            </h3>
+            </h1>
             <p className="text-lg text-gray-600 mb-6">
               At Bhives.ai, we&apos;re driven by a singular vision: to democratize AI
               and empower businesses of all sizes with cutting-edge automation
@@ -487,7 +487,7 @@ export default async function Home() {
                   className="card flex flex-col items-center justify-center rounded-lg p-4 bg-gray-100 shadow-lg hover:scale-[103%] transition-gpu ease-in-out duration-500"
                 >
                   <item.icon className="text-[2.5rem] text-orange-500 mt-4" />
-                  <h4 className="text-xl font-semibold ml-2">{item.title}</h4>
+                  <h1 className="text-xl font-semibold ml-2">{item.title}</h1>
                   <p className="text-gray-700 mt-2">{item.description}</p>
                 </li>
               ))}
@@ -496,9 +496,9 @@ export default async function Home() {
         </div>
         <div className="mt-6 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6 ">
           <div className="mx-auto max-w-screen-sm text-center mb-8 lg:mb-16">
-            <h2 className="mb-4 text-3xl tracking-tight font-extrabold text-white">
+            <h1 className="mb-4 text-3xl tracking-tight font-extrabold text-white">
               Meet the Team
-            </h2>
+            </h1>
           </div>
           <div className="grid gap-8 mb-6 lg:mb-16 lg:grid-cols-2">
             {teamMembers.map((member, index) => (
@@ -509,9 +509,9 @@ export default async function Home() {
       </section>
       <TechStack />
       <section id="faq" className="scroll-mt-20 relative bg-white text-gray-800 py-20 ">
-        <h2 className="text-4xl font-bold text-center mb-10">
+        <h1 className="text-4xl font-bold text-center mb-10">
           Frequently Asked Questions
-        </h2>
+        </h1>
         <div className="mx-auto mb-8 lg:mb-16 max-w-[1260px] lg:mx-auto px-4">
           <FAQComponent data={faqData} />
         </div>
@@ -519,9 +519,9 @@ export default async function Home() {
       <section id="contact" className="-scroll-mt-10 relative bg-orange-400 py-16 bg-cover">
         <div className="waves layer1 absolute -top-[60px] md:-top-[100px] lg:-top-[200px]" />
         <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-4xl text-white font-bold text-center mt-20 xl:mt-40">
+          <h1 className="text-4xl text-white font-bold text-center mt-20 xl:mt-40">
             Unleash AI for Your Business
-          </h2>
+          </h1>
           <p className="text-lg text-gray-100 text-center mt-2">
             Book your free 30-minute AI strategy session
           </p>
@@ -534,7 +534,7 @@ export default async function Home() {
                     className="card flex flex-col items-center justify-center rounded-lg text-center p-4 py-6 bg-gray-100 shadow-lg hover:scale-[103%] transition-gpu ease-in-out duration-500"
                   >
                     <item.icon className="text-[2.5rem] text-orange-500 mt-4" />
-                    <h4 className="text-xl font-semibold mt-1">{item.title}</h4>
+                    <h1 className="text-xl font-semibold mt-1">{item.title}</h1>
                     <p className="text-gray-700 mt-2">{item.description}</p>
                   </li>
                 ))}
