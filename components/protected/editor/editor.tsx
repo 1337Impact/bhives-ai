@@ -101,7 +101,6 @@ const Editor: FC<EditorProps> = ({
   const supabase = createClient();
   const [categoriers, setCategoriers] = useState<CategoryType[]>([]);
   const [tags, setTags] = useState<string[]>(post.tags || []);
-  const [isImage, setIsImage] = useState<boolean>(!!post.image);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -148,6 +147,7 @@ const Editor: FC<EditorProps> = ({
     setShowLoadingAlert(true);
     setIsSaving(true);
     let coverImageUrl = post.image as string;
+    let isImage = !!post.image
 
     if (coverImg) {
       if (data.image) {
@@ -161,11 +161,11 @@ const Editor: FC<EditorProps> = ({
       }
       if (uploadedImage) {
         coverImageUrl = uploadedImage.path;
-        setIsImage(true);
+        isImage = true;
       }
       console.log("File uploaded successfully: ", uploadedImage);
     } else {
-      setIsImage(false);
+      isImage = false;
     }
     console.log("image: ",isImage, coverImageUrl);
     const response = await UpdatePost({
