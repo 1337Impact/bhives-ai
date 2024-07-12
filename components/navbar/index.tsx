@@ -1,73 +1,107 @@
 "use client";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import styles from "./navbar.module.scss";
 import Link from "next/link";
+import NavbarNavigation from "./navbar-navigation";
+import { usePathname, useRouter } from "next/navigation";
+
+const links = [
+  {
+    name: "Why Us",
+    href: "/#why-choose",
+    id: "why-choose",
+  },
+  {
+    name: "Services",
+    href: "/#services",
+    id: "services",
+  },
+  {
+    name: "Our Process",
+    href: "/#process",
+    id: "process",
+  },
+  {
+    name: "Team",
+    href: "/#team",
+    id: "team",
+  },
+  {
+    name: "Tech Stack",
+    href: "/#tech-stack",
+    id: "tech-stack",
+  },
+  {
+    name: "FAQ",
+    href: "/#faq",
+    id: "faq",
+  },
+  {
+    name: "Blog",
+    href: "/blog",
+    id: "blog",
+  },
+];
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   const [activeSection, setActiveSection] = useState("");
+  const pathname = usePathname();
+  // const router = useRouter();
+
+  // useEffect(() => {
+  //   const handleHashChange = () => {
+  //     console.log("hashchange");
+  //     if (window.location.hash) {
+  //       const sectionId = window.location.hash.substring(1);
+  //       const section = document.getElementById(sectionId);
+  //       if (section) {
+  //         section.scrollIntoView({ behavior: "smooth" });
+  //       }
+  //     }
+  //   };
+  //   setTimeout(() => {
+  //     handleHashChange();
+  //     window.addEventListener("hashchange", handleHashChange);
+
+  //     return () => {
+  //       window.removeEventListener("hashchange", handleHashChange);
+  //     };
+  //   }, 2000);
+  // }, [router]);
 
   useEffect(() => {
-    const sections = document.querySelectorAll("section");
-    const observerOptions = {
-      root: null,
-      rootMargin: "0px",
-      threshold: 0.4,
-    };
+    if (pathname.includes("/blog")) {
+      setActiveSection("blog");
+      return ;
+    } else {
+      setActiveSection("");
+      setTimeout(() => {
+        const sections = document.querySelectorAll("section");
+        console.log("sections: ", sections);
+        const observerOptions = {
+          root: null,
+          rootMargin: "0px",
+          threshold: 0.4,
+        };
 
-    const observerCallback = (entries: any) => {
-      entries.forEach((entry: any) => {
-        if (entry.isIntersecting) {
-          //console.log("section: ",  entry.target.id);
-          setActiveSection(entry.target.id);
-        }
-      });
-    };
+        const observerCallback = (entries: any) => {
+          entries.forEach((entry: any) => {
+            if (entry.isIntersecting) {
+              console.log("section: ", entry.target.id);
+              setActiveSection(entry.target.id);
+            }
+          });
+        };
 
-    const observer = new IntersectionObserver(
-      observerCallback,
-      observerOptions
-    );
-    sections.forEach((section) => observer.observe(section));
-
-    return () => {
-      sections.forEach((section) => observer.unobserve(section));
-    };
-  }, []);
-
-  const links = [
-    {
-      name: "Why Us",
-      href: "/#why-choose",
-      id: "why-choose",
-    },
-    {
-      name: "Services",
-      href: "/#services",
-      id: "services",
-    },
-    {
-      name: "Our Process",
-      href: "/#process",
-      id: "process",
-    },
-    {
-      name: "Team",
-      href: "/#team",
-      id: "team",
-    },
-    {
-      name: "Tech Stack",
-      href: "/#tech-stack",
-      id: "tech-stack",
-    },
-    {
-      name: "FAQ",
-      href: "/#faq",
-      id: "faq",
-    },
-  ];
+        const observer = new IntersectionObserver(
+          observerCallback,
+          observerOptions
+        );
+        sections.forEach((section) => observer.observe(section));
+      }, 2000);
+    }
+  }, [pathname]);
 
   return (
     <header className="fixed bg-white z-[100] w-full h-[80px] mx-auto text-slate-700">
@@ -86,11 +120,16 @@ export default function Navbar() {
               <div
                 onClick={() => setIsMenuOpen(false)}
                 className={`${
-                  activeSection === link.id && "underline underline-offset-4"
-                } cursor-pointer hover:text-slate-600 hover:underline hover:underline-offset-4`}
+                  activeSection === link.id && "text-orange-500"
+                } cursor-pointer hover:text-orange-400`}
               >
                 {link.name}
               </div>
+              <div
+                className={`${
+                  activeSection !== link.id && "hidden"
+                } w-full h-[2.4px] bg-orange-500 hover:bg-orange-400`}
+              />
             </Link>
           ))}
           <Link href={"/#contact"} className="md:hidden">

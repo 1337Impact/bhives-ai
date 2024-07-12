@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 import Link from "next/link";
 import Card from "@/components/Cards";
 import ServiceCard from "@/components/Cards/ServiceCard";
@@ -23,8 +23,9 @@ import TechStack from "@/components/TeckStack";
 import FAQComponent from "@/components/FAQComponent";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import Loading from "../loading";
+import {v4} from "uuid";
 
 const itemsData = [
   {
@@ -307,19 +308,16 @@ const contactData = [
   },
 ];
 
-export default function Home() {
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 1500);
+//this code is neccessay to simulate a delay to show loading state
+const getUid = async () => {
+  await new Promise(resolve => setTimeout(resolve, 1500));
+  return v4();
+}
+export const dynamic = 'force-dynamic';
 
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (loading) {
-    return <Loading />;
-  }
+export default async function Home() {
+  const uid = await getUid();
+  console.log('uid', uid);
   return (
     <main className="relative">
       <section
