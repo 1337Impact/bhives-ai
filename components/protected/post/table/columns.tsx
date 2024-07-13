@@ -24,36 +24,6 @@ export const columns: ColumnDef<Post>[] = [
     },
     enableHiding: false,
   },
-  // {
-  //   accessorKey: "category_id",
-  //   header: ({ column }) => (
-  //     <DataTableColumnHeader column={column} title="Category" />
-  //   ),
-  //   cell: ({ row }) => {
-  //     const label = categories.find(
-  //       (category) => category.value === row.original.category_id,
-  //     );
-
-  //     if (!label) {
-  //       return null;
-  //     }
-
-  //     return (
-  //       <div className="flex space-x-2">
-  //         <div className="max-w-[500px] justify-start truncate font-medium">
-  //           <span className="inline-flex items-center rounded-full border border-gray-400 px-3 py-1 text-sm text-gray-500">
-  //             <label.icon className="mr-1 h-4 w-4" />
-  //             {label.label}
-  //           </span>
-  //         </div>
-  //       </div>
-  //     );
-  //   },
-  //   enableHiding: false,
-  //   filterFn: (row, id, value) => {
-  //     return value.includes(row.getValue(id));
-  //   },
-  // },
   {
     accessorKey: "published",
     header: ({ column }) => (
