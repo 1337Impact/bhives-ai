@@ -39,10 +39,12 @@ export function DataTableToolbar<TData>({
           className="h-10 w-[150px] lg:w-[250px] border-2 border-gray-500 rounded-md"
         />
 
-        {isFiltered && (
+        {!!table.getColumn("title")?.getFilterValue() && (
           <Button
             variant="ghost"
-            onClick={() => table.resetColumnFilters()}
+            onClick={() => {
+              table.getColumn("title")?.setFilterValue("")
+            }}
             className="h-8 px-2 lg:px-3"
           >
             Reset

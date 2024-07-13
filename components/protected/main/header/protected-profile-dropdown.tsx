@@ -64,7 +64,7 @@ const ProtectedProfileDropDown = () => {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Image
-            src={avatarUrl || "/images/user-placeholder.png"}
+            src={avatarUrl}
             alt="Avatar"
             height={40}
             width={40}
