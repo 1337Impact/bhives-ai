@@ -28,7 +28,11 @@ const MainPostItem: React.FC<MainPostItemProps> = async ({ post }) => {
     <div className="group max-w-md mx-auto border-2 border-x-0 border-y-[2px] border-orange-400 lg:max-w-full w-full -mt-[2px]">
       <Link href={`/blog/posts/${post.slug}`}>
         <article className="relative isolate flex flex-col gap-2 py-5">
-          <div className="relative aspect-[2/1] md:hidden">
+          <div
+            className={`relative aspect-[2/1] md:aspect-[4/1] ${
+              !post.image && "md:hidden"
+            }`}
+          >
             {post.image ? (
               <img
                 src={getPublicImageUrl(post.image)}
@@ -52,7 +56,6 @@ const MainPostItem: React.FC<MainPostItemProps> = async ({ post }) => {
             <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10" />
           </div>
           <div>
-
             <div className="relative max-w-3xl">
               <h3 className="mt-1 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600 group-hover:underline lg:text-xl lg:font-bold">
                 <span className="absolute inset-0" />
