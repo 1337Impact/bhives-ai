@@ -92,11 +92,6 @@ export async function generateMetadata({
   };
 }
 
-function getPublicImageUrl(image: string) {
-  if (!image || !image.length) return "";
-  return `${process.env.NEXT_PUBLIC_SUPABASE_STORAGE_BUCKET_COVER_IMAGE_URL}/${image}`;
-}
-
 export default async function PostPage({ params }: PostPageProps) {
   const supabase = createClient();
   // Get post data
@@ -130,7 +125,7 @@ export default async function PostPage({ params }: PostPageProps) {
           <DetailPostHeading
             id={post.id}
             title={post.title as string}
-            image={getPublicImageUrl(post.image as string)}
+            image={post.image as string}
             authorName={post.profiles.full_name as string}
             authorImage={post.profiles.avatar_url as string}
             date={format(parseISO(post.updated_at!), "MMMM dd, yyyy")}

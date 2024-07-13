@@ -12,11 +12,6 @@ import readingTime from "reading-time";
 
 export const dynamic = "force-dynamic";
 
-function getPublicImageUrl(image: string) {
-  if (!image || !image.length) return "";
-  return `${process.env.NEXT_PUBLIC_SUPABASE_STORAGE_BUCKET_COVER_IMAGE_URL}/${image}`;
-}
-
 interface MainPostItemProps {
   post: PostWithCategoryWithProfile;
 }
@@ -35,7 +30,7 @@ const MainPostItem: React.FC<MainPostItemProps> = async ({ post }) => {
           >
             {post.image ? (
               <img
-                src={getPublicImageUrl(post.image)}
+                src={post.image}
                 alt={post.title ?? "Cover"}
                 className="absolute inset-0 h-full w-full rounded-lg bg-gray-50 object-cover"
               />

@@ -92,11 +92,14 @@ function getPublicImageUrl(image: string) {
   return `${process.env.NEXT_PUBLIC_SUPABASE_STORAGE_BUCKET_COVER_IMAGE_URL}/${image}`;
 }
 
+function getBaseImage(image: string) {
+  if (!image || !image.length) return "";
+  return image.split("/").pop() || "";
+}
+
 type EditorFormValues = z.infer<typeof postEditFormSchema>;
 
-const Editor: FC<EditorProps> = ({
-  post
-}) => {
+const Editor: FC<EditorProps> = ({ post }) => {
   const router = useRouter();
   const supabase = createClient();
   const [categoriers, setCategoriers] = useState<CategoryType[]>([]);
@@ -147,20 +150,22 @@ const Editor: FC<EditorProps> = ({
     setShowLoadingAlert(true);
     setIsSaving(true);
     let coverImageUrl = post.image as string;
-    let isImage = !!post.image
+    let isImage = !!post.image;
 
     if (coverImg) {
       if (data.image) {
-        await supabase.storage.from("cover-image").remove([data.image]);
+        await supabase.storage.from("cover-image").remove([getBaseImage(data.image)]);
       }
       const { data: uploadedImage, error } = await supabase.storage
-      .from("cover-image")
-      .upload(v4(), coverImg);
+        .from("cover-image")
+        .upload(v4(), coverImg);
       if (error) {
         //console.log("Error uploading file: ", error.message);
       }
       if (uploadedImage) {
-        coverImageUrl = uploadedImage.path;
+        coverImageUrl = uploadedImage.path
+          ? getPublicImageUrl(uploadedImage.path)
+          : "";
         isImage = true;
       }
       //console.log("File uploaded successfully: ", uploadedImage);
@@ -307,7 +312,9 @@ const Editor: FC<EditorProps> = ({
             <Separator className="mb-8" />
             <CardContent className="space-y-4">
               <ReactSelect
-              defaultValue={tagsList.filter((tag) => post.tags?.includes(tag.value))}
+                defaultValue={tagsList.filter((tag) =>
+                  post.tags?.includes(tag.value)
+                )}
                 onChange={(e) => setTags(e.map((tag) => tag.value))}
                 options={tagsList}
                 isMulti
@@ -325,10 +332,7 @@ const Editor: FC<EditorProps> = ({
             </CardHeader>
             <Separator className="mb-8" />
             <CardContent className="space-y-4">
-              <UploadImage
-                image={getPublicImageUrl(post?.image as string)}
-                setImgFile={setCoverImg}
-              />
+              <UploadImage image={post?.image} setImgFile={setCoverImg} />
             </CardContent>
           </Card>
 
