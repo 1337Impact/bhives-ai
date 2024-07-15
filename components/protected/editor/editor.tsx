@@ -126,7 +126,7 @@ const Editor: FC<EditorProps> = ({ post }) => {
   const [showLoadingAlert, setShowLoadingAlert] = useState<boolean>(false);
 
   const [content, setContent] = useState<string | null>(post?.content || null);
-  const [coverImg, setCoverImg] = useState<File | null>(null);
+  const [imageFile, setImageFile] = useState<File | null>(null);
 
   // Default values for the form
   const defaultValues: Partial<EditorFormValues> = {
@@ -144,38 +144,36 @@ const Editor: FC<EditorProps> = ({ post }) => {
     mode: "onChange",
   });
 
+  const [image, setImage] = useState<string | null>(post.image || null);
+
   async function onSubmit(data: EditorFormValues) {
     setShowLoadingAlert(true);
     setIsSaving(true);
     let coverImageUrl = post.image as string;
-    let isImage = !!post.image;
 
-    if (coverImg) {
+    if (imageFile) {
       if (data.image) {
         await supabase.storage.from("cover-image").remove([getBaseImage(data.image)]);
       }
       const { data: uploadedImage, error } = await supabase.storage
         .from("cover-image")
-        .upload(v4(), coverImg);
+        .upload(v4(), imageFile);
       if (error) {
-        //console.log("Error uploading file: ", error.message);
+        console.log("Error uploading file: ", error.message);
+        toast.error(protectedEditorConfig.errorMessage);
       }
       if (uploadedImage) {
         coverImageUrl = uploadedImage.path
           ? getPublicImageUrl(uploadedImage.path)
           : "";
-        isImage = true;
       }
-      //console.log("File uploaded successfully: ", uploadedImage);
-    } else {
-      isImage = false;
     }
     //console.log("image: ",isImage, coverImageUrl);
     const response = await UpdatePost({
       id: post.id,
       title: data.title,
       slug: data.slug,
-      image: isImage ? coverImageUrl : "",
+      image: image ? coverImageUrl : "",
       description: data.description,
       content: content,
       categoryId: data.categoryId,
@@ -330,7 +328,7 @@ const Editor: FC<EditorProps> = ({ post }) => {
             </CardHeader>
             <Separator className="mb-8" />
             <CardContent className="space-y-4">
-              <UploadImage image={post?.image} setImgFile={setCoverImg} />
+              <UploadImage image={image} setImage={setImage} setImgFile={setImageFile} />
             </CardContent>
           </Card>
 

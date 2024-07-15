@@ -5,20 +5,14 @@ import { Plus } from "lucide-react";
 interface AddProductImageProps {
   setImgFile: (imgFile: File | null) => void;
   image?: string | null;
+  setImage: (img: string | null) => void;
 }
 
 export default function UploadImage({
   setImgFile,
   image,
+  setImage,
 }: AddProductImageProps) {
-  const [productImage, setProductImage] = useState<string | null>(null);
-
-  useEffect(() => {
-    //console.log("image", image);
-    if (image) {
-      setProductImage(image);
-    }
-  }, [image]);
 
   const handleUploadClick = async (event: any) => {
     const file = event.target.files[0];
@@ -27,24 +21,24 @@ export default function UploadImage({
       setImgFile(file);
       reader.readAsDataURL(file);
       reader.onloadend = function () {
-        setProductImage(reader.result as string);
+        setImage(reader.result as string);
       };
     }
   };
 
   const handleResetClick = () => {
-    setProductImage(null);
+    setImage(null);
     setImgFile(null);
   };
 
   return (
     <div className="w-full min-h-28 flex flex-col justify-center items-center border border-gray-300 rounded-lg overflow-hidden relative">
-      {productImage ? (
+      {image ? (
         <>
           <Image
             width={400}
             height={400}
-            src={productImage}
+            src={image}
             alt="product image"
             className="w-full h-full object-cover"
           />

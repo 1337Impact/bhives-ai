@@ -99,9 +99,6 @@ export default async function HomePage({ searchParams }: HomePageProps) {
 
   // Fetch posts
   const data = await getPostsData(searchParams, from, to);
-  if (!data) {
-    return notFound;
-  }
 
   return (
     <main className="w-full lg:ml-4">
@@ -113,10 +110,10 @@ export default async function HomePage({ searchParams }: HomePageProps) {
             ? `#${searchParams.tags}`
             : "All"}
         </h1>
-        <h1 className="font-semibold text-sm text-gray-600 mt-1">{data.length} posts in total</h1>
+        <h1 className="font-semibold text-sm text-gray-600 mt-1">{data ? data.length : 0} posts in total</h1>
       </div>
       <div className="mt-4 grid grid-cols-1">
-        {data.length ? (
+        {data && data.length ? (
           data?.map((post) => (
             <Suspense key={v4()} fallback={<MainPostItemLoading />}>
               <MainPostItem post={post} />
